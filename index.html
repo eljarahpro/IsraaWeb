@@ -1,0 +1,396 @@
+
+<script type="module">
+  // استدعاء مكتبات فايربيز
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  // ⚠️ حط بيانات مشروعك اللي أخدتها من فايربيز هنا
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC0nIkeCvKqGWggs59FEpvKrorNhjk35_w",
+  authDomain: "israa-app-18357.firebaseapp.com",
+  projectId: "israa-app-18357",
+  storageBucket: "israa-app-18357.firebasestorage.app",
+  messagingSenderId: "836830301295",
+  appId: "1:836830301295:web:5560911cc49d8e6268119a",
+  measurementId: "G-0ECLHX51KK"
+};
+
+  // تهيئة قاعدة البيانات
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // ---------- Icons ----------
+  const ICONS = {
+    phone:'<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>',
+    pin:'<svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>',
+    clock:'<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.6l4.2 2.5-.7 1.2-5-3V6.5h1.5v6.1z"/></svg>',
+    note:'<svg viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm2 5h12v2H6V8zm0 4h12v2H6v-2zm0 4h8v2H6v-2z"/></svg>',
+    edit:'<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+    trash:'<svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2zm0 6h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg>',
+    search:'<svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>',
+    up:'<svg viewBox="0 0 24 24"><path d="M12 6l7 8h-4v6h-6v-6H5z"/></svg>',
+    down:'<svg viewBox="0 0 24 24"><path d="M12 18l-7-8h4V4h6v6h4z"/></svg>',
+    mapEmpty:'<svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>'
+  };
+
+  // ---------- State ----------
+  let areas = [];
+  let doctors = [];
+  let editingId = null;
+
+  // ---------- Helpers ----------
+  function uid(prefix){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  function esc(str){
+    const d = document.createElement('div');
+    d.textContent = str == null ? '' : String(str);
+    return d.innerHTML;
+  }
+  function showToast(msg){
+    const wrap = document.getElementById('toast-wrap');
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = msg;
+    wrap.appendChild(t);
+    setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 2200);
+  }
+
+  // ---------- Storage (Firebase Cloud) ----------
+  async function loadAll(){
+    try{
+      const docRef = doc(db, "israa_app", "main_data");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        areas = data.areas || [];
+        doctors = data.doctors || [];
+      } else {
+        areas = []; doctors = [];
+      }
+    }catch(e){ console.error(e); areas = []; doctors = []; }
+  }
+
+  async function syncToCloud(){
+    try{
+      await setDoc(doc(db, "israa_app", "main_data"), { areas, doctors });
+    }catch(e){ 
+      console.error(e); 
+      showToast('حصل خطأ في حفظ البيانات على السحابة'); 
+    }
+  }
+
+  async function saveAreas(){ await syncToCloud(); }
+  async function saveDoctors(){ await syncToCloud(); }
+
+  // ---------- Render Functions ----------
+  function renderStats(){ document.getElementById('statsLine').textContent = `${areas.length} منطقة · ${doctors.length} دكتور`; }
+
+  function renderAreaSelect(){
+    const sel = document.getElementById('docArea');
+    const current = sel.value;
+    if(areas.length === 0){
+      sel.innerHTML = '<option value="">لسه مفيش مناطق مضافة</option>';
+      sel.disabled = true;
+      return;
+    }
+    sel.disabled = false;
+    sel.innerHTML = '<option value="" disabled>اختار المنطقة</option>' +
+      areas.map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('');
+    if(current) sel.value = current;
+  }
+
+  function renderRoute(){
+    const container = document.getElementById('routeContainer');
+    const query = document.getElementById('searchInput').value.trim().toLowerCase();
+
+    if(areas.length === 0){
+      container.innerHTML = `
+        <div class="big-empty">
+          ${ICONS.mapEmpty}
+          <p>لسه مفيش مناطق مضافة. ابدأ بإضافة أول منطقة عشان تقدر تسجل الدكاترة.</p>
+          <button class="btn btn-primary" id="goToAreasBtn">روح لتبويب المناطق</button>
+        </div>`;
+      const btn = document.getElementById('goToAreasBtn');
+      if(btn) btn.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="areas"]').click());
+      return;
+    }
+
+    function matches(doc){
+      if(!query) return true;
+      return (doc.name||'').toLowerCase().includes(query) ||
+             (doc.phone||'').toLowerCase().includes(query) ||
+             (doc.address||'').toLowerCase().includes(query);
+    }
+
+    let html = '<div class="route-list">';
+    let anyShown = false;
+
+    areas.forEach((area, idx) => {
+      const areaDocs = doctors.filter(d => d.areaId === area.id && matches(d));
+      if(query && areaDocs.length === 0) return;
+      anyShown = true;
+      html += `<div class="route-stop">
+        <div class="stop-badge">${idx+1}</div>
+        <div class="stop-head"><h3>${esc(area.name)}</h3><span class="count">(${areaDocs.length} دكتور)</span></div>`;
+      if(areaDocs.length === 0){
+        html += `<div class="empty-msg">لسه مفيش دكاترة في المنطقة دي. ضيف واحد من تبويب "ضيف دكتور".</div>`;
+      }else{
+        html += doctorsTableHtml(areaDocs);
+      }
+      html += `</div>`;
+    });
+
+    const unclassified = doctors.filter(d => !areas.some(a => a.id === d.areaId) && matches(d));
+    if(unclassified.length){
+      anyShown = true;
+      html += `<div class="route-stop">
+        <div class="stop-badge unclassified">؟</div>
+        <div class="stop-head"><h3>دكاترة من غير منطقة محددة</h3><span class="count">(${unclassified.length})</span></div>`;
+      html += doctorsTableHtml(unclassified);
+      html += `</div>`;
+    }
+
+    html += '</div>';
+
+    if(!anyShown){ html = `<div class="big-empty"><p>مفيش نتائج مطابقة للبحث.</p></div>`; }
+    
+    if(doctors.length === 0 && !query){
+      container.innerHTML = `<div class="big-empty">
+          ${ICONS.mapEmpty}
+          <p>لسه مفيش دكاترة مسجلين. يلا نبدأ بإضافة أول دكتور.</p>
+          <button class="btn btn-primary" id="goToAddBtn">ضيف دكتور</button>
+        </div>`;
+      const btn2 = document.getElementById('goToAddBtn');
+      if(btn2) btn2.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="add"]').click());
+      return;
+    }
+    
+    if(anyShown) { container.innerHTML = html; }
+  }
+
+  function doctorsTableHtml(list){
+    const rows = list.map(doc => {
+      const phone = doc.phone ? `<a class="phone-link" href="tel:${esc(doc.phone)}">${ICONS.phone}${esc(doc.phone)}</a>` : `<span class="cell-dash">—</span>`;
+      const address = doc.address ? esc(doc.address) : `<span class="cell-dash">—</span>`;
+      const times = doc.availableTimes ? esc(doc.availableTimes) : `<span class="cell-dash">—</span>`;
+      const notes = doc.notes ? esc(doc.notes) : `<span class="cell-dash">—</span>`;
+      return `<tr>
+        <td class="name-cell">${esc(doc.name)}</td>
+        <td>${phone}</td>
+        <td>${address}</td>
+        <td>${times}</td>
+        <td class="notes-cell">${notes}</td>
+        <td class="actions-cell">
+          <div class="card-actions">
+            <button class="icon-btn" data-action="edit-doctor" data-id="${esc(doc.id)}" title="تعديل">${ICONS.edit}</button>
+            <button class="icon-btn danger" data-action="delete-doctor" data-id="${esc(doc.id)}" title="حذف">${ICONS.trash}</button>
+          </div>
+        </td>
+      </tr>`;
+    }).join('');
+    return `<div class="table-scroll">
+      <table class="doctor-table">
+        <thead>
+          <tr>
+            <th>الاسم</th>
+            <th>التليفون</th>
+            <th>العنوان</th>
+            <th>المواعيد</th>
+            <th>ملاحظات</th>
+            <th>إجراءات</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  }
+
+  function renderAreasTab(){
+    const container = document.getElementById('areasListContainer');
+    if(areas.length === 0){
+      container.innerHTML = `<div class="empty-msg">لسه مفيش مناطق. ضيف أول منطقة من الفورم اللي فوق.</div>`;
+      return;
+    }
+    container.innerHTML = areas.map((a, idx) => {
+      const count = doctors.filter(d => d.areaId === a.id).length;
+      return `<div class="area-row">
+        <div class="order-no">${idx+1}</div>
+        <div style="flex:1;">
+          <div class="name">${esc(a.name)}</div>
+          <div class="sub">${count} دكتور مسجل</div>
+        </div>
+        <div class="reorder-btns">
+          <button data-action="area-up" data-id="${esc(a.id)}" ${idx===0?'disabled':''} title="حرك لفوق">${ICONS.up}</button>
+          <button data-action="area-down" data-id="${esc(a.id)}" ${idx===areas.length-1?'disabled':''} title="حرك لتحت">${ICONS.down}</button>
+        </div>
+        <button class="icon-btn" data-action="rename-area" data-id="${esc(a.id)}" title="تعديل الاسم">${ICONS.edit}</button>
+        <button class="icon-btn danger" data-action="delete-area" data-id="${esc(a.id)}" title="حذف">${ICONS.trash}</button>
+      </div>`;
+    }).join('');
+  }
+
+  function renderAll(){
+    renderStats();
+    renderAreaSelect();
+    renderRoute();
+    renderAreasTab();
+  }
+
+  // ---------- UI Events ----------
+  document.querySelectorAll('nav.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  document.getElementById('searchInput').addEventListener('input', renderRoute);
+
+  const doctorForm = document.getElementById('doctorForm');
+  const editBanner = document.getElementById('editBanner');
+  const submitDocBtn = document.getElementById('submitDocBtn');
+
+  function resetDoctorForm(){
+    doctorForm.reset();
+    editingId = null;
+    editBanner.style.display = 'none';
+    submitDocBtn.textContent = 'حفظ الدكتور';
+  }
+  document.getElementById('cancelEditBtn').addEventListener('click', resetDoctorForm);
+
+  doctorForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('docName').value.trim();
+    const areaId = document.getElementById('docArea').value;
+    const phone = document.getElementById('docPhone').value.trim();
+    const address = document.getElementById('docAddress').value.trim();
+    const availableTimes = document.getElementById('docTimes').value.trim();
+    const notes = document.getElementById('docNotes').value.trim();
+
+    if(!name){ showToast('لازم تدخل اسم الدكتور'); return; }
+    if(!areaId){ showToast('لازم تختار المنطقة'); return; }
+
+    if(editingId){
+      const docItem = doctors.find(d => d.id === editingId);
+      if(docItem) Object.assign(docItem, { name, areaId, phone, address, availableTimes, notes });
+      await saveDoctors();
+      showToast('تم تحديث بيانات الدكتور');
+      resetDoctorForm();
+      renderAll();
+      document.querySelector('nav.tabs button[data-tab="route"]').click();
+    }else{
+      doctors.push({ id: uid('doc'), name, areaId, phone, address, availableTimes, notes });
+      await saveDoctors();
+      showToast('تم إضافة الدكتور بنجاح');
+      resetDoctorForm();
+      renderAll();
+      document.getElementById('docName').focus();
+    }
+  });
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-action]');
+    if(!btn) return;
+    const action = btn.dataset.action;
+    const id = btn.dataset.id;
+
+    if(action === 'edit-doctor'){
+      const docItem = doctors.find(d => d.id === id);
+      if(!docItem) return;
+      editingId = id;
+      document.getElementById('docName').value = docItem.name || '';
+      document.getElementById('docArea').value = docItem.areaId || '';
+      document.getElementById('docPhone').value = docItem.phone || '';
+      document.getElementById('docAddress').value = docItem.address || '';
+      document.getElementById('docTimes').value = docItem.availableTimes || '';
+      document.getElementById('docNotes').value = docItem.notes || '';
+      editBanner.style.display = 'flex';
+      submitDocBtn.textContent = 'تحديث البيانات';
+      document.querySelector('nav.tabs button[data-tab="add"]').click();
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    if(action === 'delete-doctor'){
+      const docItem = doctors.find(d => d.id === id);
+      if(!docItem) return;
+      if(confirm(`متأكد إنك عايز تمسح "${docItem.name}"؟`)){
+        doctors = doctors.filter(d => d.id !== id);
+        await saveDoctors();
+        showToast('تم حذف الدكتور');
+        renderAll();
+      }
+    }
+
+    if(action === 'area-up' || action === 'area-down'){
+      const idx = areas.findIndex(a => a.id === id);
+      const swapWith = action === 'area-up' ? idx - 1 : idx + 1;
+      if(swapWith < 0 || swapWith >= areas.length) return;
+      [areas[idx], areas[swapWith]] = [areas[swapWith], areas[idx]];
+      await saveAreas();
+      renderAll();
+    }
+
+    if(action === 'rename-area'){
+      const area = areas.find(a => a.id === id);
+      if(!area) return;
+      const newName = prompt('اسم المنطقة:', area.name);
+      if(newName && newName.trim()){
+        area.name = newName.trim();
+        await saveAreas();
+        renderAll();
+        showToast('تم تعديل اسم المنطقة');
+      }
+    }
+
+    if(action === 'delete-area'){
+      const area = areas.find(a => a.id === id);
+      if(!area) return;
+      const count = doctors.filter(d => d.areaId === id).length;
+      const msg = count > 0
+        ? `المنطقة دي فيها ${count} دكتور. لو مسحتها هيبقوا من غير منطقة محددة. متأكد؟`
+        : `متأكد إنك عايز تمسح منطقة "${area.name}"؟`;
+      if(confirm(msg)){
+        areas = areas.filter(a => a.id !== id);
+        await saveAreas();
+        await saveDoctors();
+        showToast('تم حذف المنطقة');
+        renderAll();
+      }
+    }
+  });
+
+  document.getElementById('areaForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const input = document.getElementById('areaNameInput');
+    const name = input.value.trim();
+    if(!name){ showToast('اكتب اسم المنطقة الأول'); return; }
+    if(areas.some(a => a.name.toLowerCase() === name.toLowerCase())){
+      showToast('المنطقة دي موجودة بالفعل');
+      return;
+    }
+    areas.push({ id: uid('area'), name });
+    await saveAreas();
+    input.value = '';
+    showToast('تم إضافة المنطقة');
+    renderAll();
+  });
+
+  document.getElementById('resetAllBtn').addEventListener('click', async () => {
+    if(confirm('هيتم مسح كل المناطق والدكاترة نهائيًا. متأكد؟')){
+      areas = []; doctors = [];
+      await saveAreas(); await saveDoctors();
+      showToast('تم مسح كل البيانات');
+      renderAll();
+    }
+  });
+
+  // ---------- Init ----------
+  (async function init(){
+    await loadAll();
+    renderAll();
+    document.getElementById('loading-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+  })();
+</script>
