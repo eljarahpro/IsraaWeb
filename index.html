@@ -576,6 +576,9 @@
     </div>
   </div>
 
+<!-- Datalist for autocomplete typing -->
+<datalist id="hoursList"></datalist>
+
 <div class="wrap" id="main-content">
   <div>
     <header class="app-head">
@@ -584,7 +587,7 @@
       </div>
       <div>
         <h1>Israa's Website</h1>
-        <p>دليل زيارات الدكاترة بترتيب المناطق</p>
+        <p>دليل زيارات الدكاترة </p>
       </div>
       <div class="stats-line" id="statsLine">0 منطقة · 0 دكتور</div>
     </header>
@@ -656,7 +659,7 @@
 
           <div class="dynamic-section-bg">
             <div class="field" style="margin-bottom:0;">
-              <label>المواعيد المتاحة والعيادات <span class="hint">(اختياري)</span></label>
+              <label>المواعيد المتاحة والعيادات <span class="hint">(الساعات اختياري - يمكن كتابتها أو اختيارها)</span></label>
               <div id="timesContainer"></div>
               <button type="button" class="btn btn-ghost" id="addTimeBtn" style="margin-top:8px; font-size:13px; padding:6px 12px; background:var(--surface);">
                 + أضف ميعاد آخر
@@ -811,17 +814,20 @@
   ];
 
   const TIME_DAYS_LIST = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  
+  // بناء قائمة الخيارات للساعات وتعبئتها في الـ Datalist
   let TIME_HOURS_OPTS = '';
   ['AM', 'PM'].forEach(m => {
     let h = 12;
-    TIME_HOURS_OPTS += `<option value="${h}:00 ${m}">${h}:00 ${m}</option>`;
-    TIME_HOURS_OPTS += `<option value="${h}:30 ${m}">${h}:30 ${m}</option>`;
+    TIME_HOURS_OPTS += `<option value="${h}:00 ${m}"></option>`;
+    TIME_HOURS_OPTS += `<option value="${h}:30 ${m}"></option>`;
     for(let i=1; i<=11; i++){
       let hr = i < 10 ? '0'+i : i;
-      TIME_HOURS_OPTS += `<option value="${hr}:00 ${m}">${hr}:00 ${m}</option>`;
-      TIME_HOURS_OPTS += `<option value="${hr}:30 ${m}">${hr}:30 ${m}</option>`;
+      TIME_HOURS_OPTS += `<option value="${hr}:00 ${m}"></option>`;
+      TIME_HOURS_OPTS += `<option value="${hr}:30 ${m}"></option>`;
     }
   });
+  document.getElementById('hoursList').innerHTML = TIME_HOURS_OPTS;
 
   let areas = []; let doctors = []; let schedule = {}; let processingList = [];
   let editingId = null; let activeCell = null; 
@@ -845,16 +851,16 @@
     setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 2200);
   }
 
-  // تحويل الوقت من AM/PM إلى دقائق لسهولة الترتيب الزمني
+  // دالة تحويل الوقت من AM/PM إلى دقائق لسهولة الترتيب الزمني
   function timeToMinutes(t) {
       if(!t) return 0;
-      const match = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
+      const match = t.match(/(\d{1,2})(?::(\d{1,2}))?\s*(AM|PM|am|pm|ص|م)?/i);
       if(!match) return 0;
       let h = parseInt(match[1]);
-      let m = parseInt(match[2]);
-      let ampm = match[3].toUpperCase();
-      if(h === 12 && ampm === 'AM') h = 0;
-      if(h !== 12 && ampm === 'PM') h += 12;
+      let m = match[2] ? parseInt(match[2]) : 0;
+      let ampm = match[3] ? match[3].toLowerCase() : '';
+      if(h === 12 && (ampm === 'am' || ampm === 'ص')) h = 0;
+      if(h !== 12 && (ampm === 'pm' || ampm === 'م')) h += 12;
       return h * 60 + m;
   }
 
@@ -1031,12 +1037,16 @@
     let selDay = '', selFrom = '', selTo = '', selClinic = '';
     
     if(val) {
-      const match = val.match(/^(.*?)(?:\s*-\s*)?(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة):\s*من\s*(.*?)\s*إلى\s*(.*)$/);
+      // Regex ذكي عشان يقرأ النص حتى لو مفيهوش ساعات أو فيه تفاصيل ناقصة
+      const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)";
+      const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`);
+      const match = val.match(regex);
+      
       if(match) {
           selClinic = match[1] ? match[1].trim() : '';
           selDay = match[2];
-          selFrom = match[3];
-          selTo = match[4];
+          selFrom = match[3] ? match[3].trim() : '';
+          selTo = match[4] ? match[4].trim() : '';
       } else {
           selClinic = val; 
       }
@@ -1047,17 +1057,11 @@
       daysHtml += `<option value="${d}" ${selDay === d ? 'selected' : ''}>${d}</option>`;
     });
 
-    let fromHtml = '<option value="" disabled ' + (!selFrom ? 'selected' : '') + '>من ساعة</option>' + TIME_HOURS_OPTS;
-    if(selFrom) fromHtml = fromHtml.replace(`value="${selFrom}"`, `value="${selFrom}" selected`);
-    
-    let toHtml = '<option value="" disabled ' + (!selTo ? 'selected' : '') + '>إلى ساعة</option>' + TIME_HOURS_OPTS;
-    if(selTo) toHtml = toHtml.replace(`value="${selTo}"`, `value="${selTo}" selected`);
-
     row.innerHTML = `
       <input type="text" class="time-clinic" placeholder="اسم العيادة (اختياري)" value="${esc(selClinic)}" style="flex: 1 1 100%; margin-bottom: 4px;">
       <select class="time-day" style="flex: 1; min-width: 90px;">${daysHtml}</select>
-      <select class="time-from" style="flex: 1; min-width: 90px;">${fromHtml}</select>
-      <select class="time-to" style="flex: 1; min-width: 90px;">${toHtml}</select>
+      <input type="text" class="time-from" list="hoursList" placeholder="من (اختياري)" value="${esc(selFrom)}" style="flex: 1; min-width: 90px;">
+      <input type="text" class="time-to" list="hoursList" placeholder="إلى (اختياري)" value="${esc(selTo)}" style="flex: 1; min-width: 90px;">
       <button type="button" class="icon-btn danger t-remove" title="مسح">${ICONS.trash}</button>
     `;
     container.appendChild(row);
@@ -1146,7 +1150,6 @@
     }
   });
 
-  // التبويب الأول: الدكاترة حسب المنطقة (بترتيب أبجدي)
   function renderRoute(){
     const container = document.getElementById('routeContainer'); const query = document.getElementById('searchInput').value.trim().toLowerCase();
     if(areas.length === 0){
@@ -1163,8 +1166,6 @@
     areas.forEach((area, idx) => {
       const areaDocs = doctors.filter(d => d.areaId === area.id && matches(d)); 
       if(query && areaDocs.length === 0) return; anyShown = true;
-      
-      // الترتيب الأبجدي التلقائي
       areaDocs.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
 
       const expandedClass = query ? 'expanded' : '';
@@ -1188,7 +1189,6 @@
     if(anyShown) { container.innerHTML = html; }
   }
 
-  // التبويب الجديد: الدكاترة حسب المواعيد والأيام (بترتيب زمني)
   function renderTimeRoute(){
     const container = document.getElementById('timeRouteContainer');
     const query = document.getElementById('searchTimeInput').value.trim().toLowerCase();
@@ -1207,16 +1207,17 @@
        if(!matches(doc)) return;
        if(doc.availableTimes && Array.isArray(doc.availableTimes)) {
            doc.availableTimes.forEach(tStr => {
-               // تحليل النص لاستخراج اليوم والساعة
-               const match = tStr.match(/^(.*?)(?:\s*-\s*)?(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة):\s*من\s*(.*?)\s*إلى\s*(.*)$/);
+               const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)";
+               const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`);
+               const match = tStr.match(regex);
                if(match) {
                    const day = match[2];
                    const fromStr = match[3];
-                   const fromMinutes = timeToMinutes(fromStr);
+                   // إذا مفيش ميعاد محدد، بنخليه يظهر في أول اليوم (-1)
+                   const fromMinutes = fromStr ? timeToMinutes(fromStr) : -1; 
                    
                    if(daysMap[day]) {
                        const existing = daysMap[day].get(doc.id);
-                       // لو الدكتور ليه أكتر من ميعاد في نفس اليوم، بنحتفظ بأول ميعاد بيفتح فيه للترتيب
                        if(!existing || fromMinutes < existing.fromMinutes) {
                            daysMap[day].set(doc.id, { doc, fromMinutes });
                        }
@@ -1233,7 +1234,6 @@
         if(!daysMap[day] || daysMap[day].size === 0) return;
         anyShown = true;
         
-        // تحويل الماب لمصفوفة وترتيبها زمنياً
         const dayDocsData = Array.from(daysMap[day].values());
         dayDocsData.sort((a, b) => a.fromMinutes - b.fromMinutes);
         const sortedDocs = dayDocsData.map(item => item.doc);
@@ -1336,15 +1336,23 @@
     const areaId = document.getElementById('docArea').value; const phone = document.getElementById('docPhone').value.trim();
     const address = document.getElementById('docAddress').value.trim(); const notes = document.getElementById('docNotes').value.trim();
     
+    // تجميع المواعيد بشكل ذكي سواء اختار ساعات أو يوم بس
     const timeRows = document.querySelectorAll('#timesContainer .custom-time-row');
     const availableTimes = Array.from(timeRows).map(row => {
       const clinic = row.querySelector('.time-clinic').value.trim();
       const day = row.querySelector('.time-day').value;
-      const from = row.querySelector('.time-from').value;
-      const to = row.querySelector('.time-to').value;
+      const from = row.querySelector('.time-from').value.trim();
+      const to = row.querySelector('.time-to').value.trim();
       
-      if (day && from && to) {
-          let timeStr = `${day}: من ${from} إلى ${to}`;
+      if (day) {
+          let timeStr = day;
+          if (from && to) {
+              timeStr += `: من ${from} إلى ${to}`;
+          } else if (from) {
+              timeStr += `: من ${from}`;
+          } else if (to) {
+              timeStr += `: إلى ${to}`;
+          }
           return clinic ? `${clinic} - ${timeStr}` : timeStr;
       } else if (clinic) {
           return clinic;
