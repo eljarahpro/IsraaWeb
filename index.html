@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Israa — دليل زيارات الدكاترة</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&family=Cairo:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#EEF3FB;
+    --surface:#FFFFFF;
+    --surface-alt:#F4F8FD;
+    --ink:#152238;
+    --ink-soft:#5A6C8A;
+    --line:#D7E2F2;
+    --primary:#2856A6;
+    --primary-dark:#1A3B79;
+    --primary-soft:#E1EAF9;
+    --accent:#2E8FC0;
+    --accent-soft:#DFF1F8;
+    --danger:#B23A34;
+    --danger-soft:#F7E5E3;
+    --radius:14px;
+    --shadow: 0 2px 10px rgba(21,34,56,0.07), 0 1px 2px rgba(21,34,56,0.05);
+    
+    --table-header-bg: var(--primary);
+    --table-header-alt: var(--primary-dark);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0; overflow-x: hidden;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Cairo',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 80px;}
+
+  /* Header */
+  header.app-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:22px 22px;
+    background:linear-gradient(135deg,var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius:var(--radius);
+    color:#fff;
+    box-shadow:var(--shadow);
+    margin-bottom:18px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.app-head::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  header.app-head > * {
+    position: relative;
+    z-index: 1;
+  }
+  .app-head .pin-badge{
+    width:48px;height:48px;flex:none;border-radius:50%;
+    background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  }
+  .app-head .pin-badge svg{width:24px;height:24px;fill:#fff;}
+  .app-head h1{font-family:'Tajawal',sans-serif;font-weight:900;font-size:24px;margin:0;letter-spacing:0.3px;}
+  .app-head p{margin:4px 0 0;font-size:13px;opacity:0.85;font-weight:500;}
+  .stats-line{
+    margin-inline-start:auto;
+    text-align:left;
+    font-family:'Tajawal',sans-serif;
+    font-size:13px;
+    background:rgba(255,255,255,0.15);
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  @media (max-width:560px){
+    header.app-head{flex-wrap:wrap;}
+    .stats-line{margin-inline-start:0;order:3;width:100%;text-align:center;}
+  }
+
+  /* Tabs */
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    background:var(--surface-alt);
+    padding:6px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    margin-bottom:20px;
+    overflow-x: auto;
+  }
+  nav.tabs button{
+    flex:1;
+    min-width: max-content;
+    border:none;
+    background:transparent;
+    padding:11px 8px;
+    font-family:'Tajawal',sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  nav.tabs button:hover{color:var(--ink);}
+  nav.tabs button.active{
+    background:var(--surface);
+    color:var(--primary-dark);
+    box-shadow:var(--shadow);
+  }
+
+  .panel{display:none; animation:fadeIn .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  h2.section-title{
+    font-family:'Tajawal',sans-serif;
+    font-size:18px;
+    font-weight:800;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+
+  /* Search */
+  .search-box{
+    position:relative;
+    margin-bottom:18px;
+  }
+  .search-box svg{
+    position:absolute;
+    inset-inline-start:14px;
+    top:50%;
+    transform:translateY(-50%);
+    width:18px;height:18px;
+    fill:var(--ink-soft);
+  }
+  .search-box input{
+    width:100%;
+    padding:12px 42px 12px 14px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    font-family:'Cairo',sans-serif;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .search-box input:focus{outline:2px solid var(--primary); outline-offset:1px;}
+
+  /* Route list */
+  .route-list{position:relative; padding-inline-start:0;}
+  .route-stop{position:relative; padding-inline-end:52px; margin-bottom:22px;}
+  .route-stop:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    inset-inline-end:19px;
+    top:42px;
+    bottom:-22px;
+    width:2px;
+    background:var(--primary-soft);
+  }
+  .stop-badge{
+    position:absolute;
+    inset-inline-end:0;
+    top:0;
+    width:40px;height:40px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Tajawal',sans-serif;
+    font-weight:800;
+    font-size:15px;
+    box-shadow:0 2px 5px rgba(46,143,192,0.4);
+    flex:none;
+  }
+  .stop-badge.unclassified{background:var(--ink-soft); box-shadow:none;}
+  
+  /* Area Header */
+  .stop-head{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    margin-bottom:14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: var(--shadow);
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .stop-head:hover{
+    background: var(--surface-alt);
+  }
+  .stop-head h3{font-family:'Tajawal',sans-serif;font-size:16.5px;font-weight:800;margin:0;}
+  .stop-head span.count{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .area-chevron {
+    margin-inline-start: auto;
+    width: 22px; height: 22px;
+    fill: var(--ink-soft);
+    transition: transform 0.3s ease;
+  }
+  .route-stop.expanded .area-chevron {
+    transform: rotate(180deg);
+  }
+  
+  .area-docs-container {
+    display: none;
+  }
+  .route-stop.expanded .area-docs-container {
+    display: block;
+    animation: fadeIn 0.3s ease;
+  }
+
+  /* Buttons */
+  .icon-btn{
+    width:30px;height:30px;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--surface-alt);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .icon-btn svg{width:15px;height:15px;fill:var(--ink-soft);}
+  .icon-btn:hover{background:var(--primary-soft);}
+  .icon-btn.danger:hover{background:var(--danger-soft);}
+  .icon-btn.danger:hover svg{fill:var(--danger);}
+
+  /* Doctors List */
+  .doc-list { display: flex; flex-direction: column; gap: 10px; }
+  .doc-card { 
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: var(--shadow); 
+    transition: all 0.2s; 
+  }
+  .doc-card-header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 14px 16px; 
+    cursor: pointer; 
+    background: var(--surface); 
+    user-select: none; 
+  }
+  .doc-card-header:hover { background: var(--surface-alt); }
+  .doc-title-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .doc-name { font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 15.5px; margin: 0; color: var(--ink); }
+  .doc-badge { background: var(--primary-soft); color: var(--primary-dark); font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .chevron { width: 20px; height: 20px; fill: var(--ink-soft); transition: transform 0.3s; flex: none; }
+  .doc-card.expanded .chevron { transform: rotate(180deg); }
+  .doc-card-body { display: none; padding: 0 16px 16px; border-top: 1px dashed var(--line); }
+  .doc-card.expanded .doc-card-body { display: block; animation: fadeIn 0.3s ease; }
+  .doc-details-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; margin-bottom: 18px; }
+  .doc-detail-row { display: flex; align-items: flex-start; gap: 6px; font-size: 14px; color: var(--ink); }
+  .detail-label { font-weight: 700; color: var(--ink-soft); font-size: 13.5px; white-space: nowrap; flex:none; }
+  .detail-value { line-height: 1.5; }
+  .doc-actions-bar { display: flex; gap: 10px; }
+  .doc-actions-bar .btn { flex: 1; padding: 8px; font-size: 13.5px; }
+
+  .phone-link{
+    color:var(--primary-dark); font-weight:700; text-decoration:none; white-space:nowrap;
+    display:inline-flex; align-items:center; gap:5px; direction: ltr;
+  }
+  .phone-link svg{width:13px;height:13px;fill:var(--primary-dark);}
+  .cell-dash{color:var(--line);}
+
+  .empty-msg{
+    background:var(--surface-alt);
+    border:1px dashed var(--line);
+    border-radius:12px;
+    padding:14px 16px;
+    color:var(--ink-soft);
+    font-size:13.5px;
+  }
+
+  .big-empty{
+    text-align:center;
+    padding:50px 20px;
+    background:var(--surface);
+    border-radius:var(--radius);
+    border:1px solid var(--line);
+  }
+  .big-empty svg{width:46px;height:46px;fill:var(--line); margin-bottom:12px;}
+  .big-empty p{color:var(--ink-soft); font-size:14px; margin:0 0 16px;}
+
+  /* Forms */
+  .form-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px;
+    box-shadow:var(--shadow);
+  }
+  .field{margin-bottom:16px;}
+  .field label{
+    display:block;
+    font-size:13.5px;
+    font-weight:700;
+    margin-bottom:6px;
+    color:var(--ink);
+    font-family:'Tajawal',sans-serif;
+  }
+  .field .hint{font-weight:500; color:var(--ink-soft); font-size:12px;}
+  .field input, .field select, .field textarea{
+    width:100%;
+    padding:11px 13px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:var(--surface-alt);
+    font-family:'Cairo',sans-serif;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .field textarea{resize:vertical; min-height:64px;}
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--primary); outline-offset:1px; background:var(--surface);
+  }
+  .field-row{display:flex; gap:12px;}
+  .field-row .field{flex:1;}
+  @media (max-width:560px){.field-row{flex-direction:column; gap:0;}}
+
+  .custom-field-row, .custom-time-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+  .custom-field-row input, .custom-time-row input { flex: 1; min-width: 0; }
+  .cf-remove, .t-remove { flex: none; width: 38px; height: 38px; border-radius: 9px; }
+  .dynamic-section-bg { background: var(--surface-alt); padding: 14px; border-radius: 12px; border: 1px dashed var(--line); margin-bottom:16px;}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:11px 20px;
+    border-radius:10px;
+    border:none;
+    font-family:'Tajawal',sans-serif;
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    transition:transform .1s ease, background .15s ease;
+  }
+  .btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--primary); color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-ghost{background:transparent; color:var(--ink-soft); border:1px solid var(--line);}
+  .btn-ghost:hover{background:var(--surface-alt);}
+  .btn-danger-ghost{background:transparent; color:var(--danger); border:1px solid var(--danger-soft);}
+  .btn-danger-ghost:hover{background:var(--danger-soft);}
+  .form-actions{display:flex; gap:10px; margin-top:4px;}
+  .edit-banner{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--accent-soft); color:var(--primary-dark); border-radius:9px;
+    padding:10px 14px; margin-bottom:16px; font-size:13.5px; font-weight:700;
+  }
+
+  /* Processing Cards */
+  .proc-card { 
+    background: var(--surface); border: 1px solid var(--line); 
+    border-radius: 12px; padding: 16px; margin-bottom: 12px; 
+    box-shadow: var(--shadow); 
+  }
+  .proc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .proc-title { font-weight: 800; font-size: 16.5px; color: var(--ink); margin: 0; font-family: 'Tajawal', sans-serif;}
+  .proc-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+  .proc-badge.Waiting { background: #FFF3CD; color: #856404; }
+  .proc-badge.Pending { background: #CCE5FF; color: #004085; }
+  .proc-badge.Finished { background: #D4EDDA; color: #155724; }
+  .proc-body { font-size: 14px; color: var(--ink); display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  
+  /* Areas tab */
+  .add-area-form{display:flex; gap:10px; margin-bottom:20px;}
+  .add-area-form input{flex:1;}
+  .area-row{
+    display:flex; align-items:center; gap:10px; background:var(--surface);
+    border:1px solid var(--line); border-radius:12px; padding:11px 14px; margin-bottom:9px;
+  }
+  .area-row .order-no{
+    width:26px;height:26px;border-radius:50%; background:var(--primary-soft); color:var(--primary-dark);
+    display:flex;align-items:center;justify-content:center; font-family:'Tajawal',sans-serif; font-weight:800; font-size:12.5px; flex:none;
+  }
+  .area-row .name{flex:1; font-weight:700; font-size:14.5px;}
+  .area-row .sub{font-size:12px; color:var(--ink-soft); font-weight:500;}
+  .area-row .reorder-btns{display:flex; flex-direction:column; gap:2px;}
+  .area-row .reorder-btns button{
+    width:22px;height:18px; border:none; background:var(--surface-alt);
+    border-radius:4px; cursor:pointer; display:flex;align-items:center;justify-content:center;
+  }
+  .area-row .reorder-btns svg{width:10px;height:10px; fill:var(--ink-soft);}
+  .settings-box{ margin-top:26px; padding-top:18px; border-top:1px dashed var(--line); }
+  .settings-box p{font-size:12.5px; color:var(--ink-soft); margin:0 0 10px;}
+
+  /* Schedule Tab */
+  .table-scroll-container {
+    overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow);
+  }
+  .schedule-table { width: 100%; border-collapse: collapse; min-width: 900px; text-align: center; }
+  .schedule-table th, .schedule-table td { border: 1px solid var(--line); padding: 12px 6px; vertical-align: middle; }
+  .schedule-table thead th {
+    background: linear-gradient(135deg, var(--table-header-bg) 0%, var(--primary-dark) 100%);
+    color: #fff; font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 14.5px; position: sticky; top: 0; z-index: 5;
+  }
+  .schedule-table thead th:first-child { background: linear-gradient(135deg, var(--table-header-alt) 0%, var(--ink) 100%); z-index: 10; }
+  .schedule-table tbody th {
+    background: linear-gradient(135deg, var(--table-header-alt) 0%, var(--ink) 100%);
+    color: #fff; font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 14.5px; position: sticky; right: 0; z-index: 5; width: 100px;
+  }
+  .schedule-table td { background: var(--surface); cursor: pointer; transition: background 0.15s ease; height: 70px; min-width: 110px; }
+  .schedule-table td:hover { background: var(--surface-alt); }
+  .cell-content { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+  .cell-doc-name { font-weight: 800; font-size: 13.5px; color: var(--ink); line-height: 1.2; }
+  .cell-area-badge { font-size: 11px; font-weight: 700; background: var(--accent-soft); color: var(--primary-dark); padding: 2px 8px; border-radius: 12px; }
+
+  /* Modal System */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(21,34,56,0.6); backdrop-filter: blur(2px);
+    z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px;
+    opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-card {
+    background: var(--surface); width: 100%; max-width: 420px; max-height: 85vh; border-radius: var(--radius);
+    display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transform: translateY(20px); transition: transform 0.25s ease;
+  }
+  .modal-overlay.active .modal-card { transform: translateY(0); }
+  .modal-header {
+    display: flex; align-items: center; justify-content: space-between; padding: 16px 20px;
+    border-bottom: 1px solid var(--line); background: var(--surface-alt); border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .modal-header h3 { margin: 0; font-family: 'Tajawal', sans-serif; font-size: 17px; font-weight: 800; color: var(--ink); }
+  .modal-close {
+    background: transparent; border: none; width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); transition: background 0.15s ease;
+  }
+  .modal-close:hover { background: var(--line); color: var(--danger); }
+  .modal-close svg { width: 18px; height: 18px; fill: currentColor; }
+  
+  .modal-body { padding: 16px 20px; overflow-y: auto; }
+  .modal-back-btn {
+    display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--primary);
+    font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer; margin-bottom: 16px; padding: 0;
+  }
+  .modal-back-btn svg { width: 14px; height: 14px; fill: currentColor; }
+  
+  .select-list { display: flex; flex-direction: column; gap: 8px; }
+  .select-item {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;
+    background: var(--surface-alt); border: 1px solid var(--line); border-radius: 10px;
+    cursor: pointer; transition: all 0.2s ease; text-align: right; font-family: 'Cairo', sans-serif; font-weight: 600; font-size: 14.5px; color: var(--ink);
+  }
+  .select-item:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); transform: translateX(-4px); }
+  .select-item .doc-spec { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
+
+  /* Toast */
+  #toast-wrap{
+    position:fixed; bottom:20px; right:50%; transform:translateX(50%); z-index:99999; display:flex; flex-direction:column; gap:8px; align-items:center;
+  }
+  .toast{
+    background:var(--ink); color:#fff; padding:11px 20px; border-radius:30px; font-size:13.5px; font-weight:600; box-shadow:0 4px 14px rgba(0,0,0,0.2); animation:toastIn .2s ease;
+  }
+  @keyframes toastIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+  /* --- CREATIVE LOADING SCREEN --- */
+  #loading-screen{
+    display:flex; align-items:center; justify-content:center; min-height:100vh;
+    flex-direction:column; gap:30px; color:var(--ink-soft);
+    background: linear-gradient(135deg, #EEF3FB 0%, #DFF1F8 100%);
+    position: fixed; inset: 0; z-index: 999999;
+    overflow: hidden;
+  }
+  
+  /* LTR forced on brand so "israa" is spelled correctly */
+  .israa-brand {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--primary-dark);
+    display: flex;
+    align-items: flex-end;
+    letter-spacing: 2px;
+    position: relative;
+    text-shadow: 0 4px 15px rgba(26, 59, 121, 0.15);
+    z-index: 10;
+  }
+  .i-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Default bounce state */
+  .heart-dot {
+    position: absolute;
+    top: -24px;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    fill: var(--danger);
+    filter: drop-shadow(0 4px 8px rgba(178, 58, 52, 0.5));
+    animation: bounceHeart 1.5s cubic-bezier(0.28, 0.84, 0.42, 1) infinite;
+    will-change: transform;
+    transform-origin: center;
+  }
+  @keyframes bounceHeart {
+    0%, 100% { transform: translate(-50%, 0) scale(1); }
+    50% { transform: translate(-50%, -30px) scale(1.15) rotate(5deg); }
+  }
+
+  /* Jumping Across Animation ending state */
+  .heart-dot.run-across {
+    animation: bounceAcross 1.5s ease-in-out forwards !important;
+  }
+  @keyframes bounceAcross {
+    0% { transform: translate(-50%, 0) scale(1); }
+    12.5% { transform: translate(calc(-50% + 15px), -35px) scale(1.1) rotate(15deg); }
+    25% { transform: translate(calc(-50% + 30px), 0) scale(1) rotate(30deg); }
+    37.5% { transform: translate(calc(-50% + 45px), -35px) scale(1.1) rotate(60deg); }
+    50% { transform: translate(calc(-50% + 60px), 0) scale(1) rotate(90deg); }
+    62.5% { transform: translate(calc(-50% + 75px), -35px) scale(1.1) rotate(120deg); }
+    75% { transform: translate(calc(-50% + 90px), 0) scale(1) rotate(150deg); }
+    87.5% { transform: translate(calc(-50% + 110px), -35px) scale(1.1) rotate(180deg); }
+    100% { transform: translate(calc(-50% + 130px), 0) scale(0) rotate(220deg); opacity: 0; }
+  }
+
+  /* Quotes styling */
+  #quote-container {
+    height: 80px; display: flex; align-items: center; justify-content: center;
+    width: 90%; max-width: 600px; z-index: 10;
+  }
+  #quote-text {
+    font-size: 17px; font-weight: 700; text-align: center; line-height: 1.6; color: var(--ink);
+    font-family: 'Tajawal', sans-serif; transition: opacity 0.5s ease; opacity: 0;
+  }
+  .quote-author { display: block; font-size: 13px; color: var(--primary); margin-top: 8px; font-weight: 800; }
+  
+  #main-content{display:none;}
+  .app-footer{ text-align:center; margin-top:36px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:12.5px; font-family:'Cairo',sans-serif; }
+  .app-footer .heart{color:var(--danger); margin:0 3px; font-size:13px;}
+</style>
+</head>
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div class="israa-brand" dir="ltr">
+      <span class="i-wrapper">
+        <svg class="heart-dot" viewBox="0 0 32 29.6">
+          <path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
+          c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/>
+        </svg>
+        ı
+      </span>sraa
+    </div>
+    <div id="quote-container">
+      <div id="quote-text"></div>
+    </div>
+  </div>
+
+<!-- Datalist for autocomplete typing -->
+<datalist id="hoursList"></datalist>
+
+<div class="wrap" id="main-content">
+  <div>
+    <header class="app-head">
+      <div class="pin-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>
+      </div>
+      <div>
+        <h1>Israa's Website</h1>
+        <p>دليل زيارات الدكاترة</p>
+      </div>
+      <div class="stats-line" id="statsLine">0 منطقة · 0 دكتور</div>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="route" class="active">الدكاترة(مناطق)</button>
+      <button data-tab="time_route">الدكاترة(بالمواعيد)</button>
+      <button data-tab="add">ضيف دكتور</button>
+      <button data-tab="areas">المناطق</button>
+      <button data-tab="processing">Processing</button>
+      <button data-tab="schedule">الجدول</button>
+    </nav>
+
+    <!-- ROUTE / VIEW TAB (BY AREAS) -->
+    <section class="panel active" id="panel-route">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        <input type="text" id="searchInput" placeholder="دوري باسم الدكتور، التخصص، رقمه، أو عنوانه...">
+      </div>
+      <div id="routeContainer"></div>
+    </section>
+
+    <!-- NEW ROUTE / VIEW TAB (BY TIMES/DAYS) -->
+    <section class="panel" id="panel-time_route">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        <input type="text" id="searchTimeInput" placeholder="بحث في المواعيد والأسماء...">
+      </div>
+      <div id="timeRouteContainer"></div>
+    </section>
+
+    <!-- ADD DOCTOR TAB -->
+    <section class="panel" id="panel-add">
+      <h2 class="section-title">بيانات الدكتور</h2>
+      <div class="form-card">
+        <div id="editBanner" class="edit-banner" style="display:none;">
+          <span>بتعدل بيانات دكتور موجود</span>
+          <button type="button" class="btn btn-ghost" id="cancelEditBtn" style="padding:5px 12px;font-size:12.5px;">إلغاء</button>
+        </div>
+        <form id="doctorForm">
+          <div class="field-row">
+            <div class="field">
+              <label>اسم الدكتور</label>
+              <input type="text" id="docName" placeholder="مثال: د. إسراء عادل الجميلة" required>
+            </div>
+            <div class="field">
+              <label>التخصص <span class="hint">(اختياري)</span></label>
+              <input type="text" id="docSpecialty" placeholder="مثال: باطنة، أطفال، عظام...">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>المنطقة</label>
+              <select id="docArea" required></select>
+            </div>
+            <div class="field">
+              <label>رقم التليفون الأساسي <span class="hint">(اختياري)</span></label>
+              <input type="tel" id="docPhone" placeholder="01xxxxxxxxx">
+            </div>
+          </div>
+          <div class="field">
+            <label>العنوان <span class="hint">(اختياري)</span></label>
+            <textarea id="docAddress" placeholder="اسم العيادة، الشارع، علامة مميزة ..اكتبي العنوان صح ارجوكي"></textarea>
+          </div>
+          <div class="field">
+            <label>ملاحظات إضافية <span class="hint">(اختياري)</span></label>
+            <textarea id="docNotes" placeholder="أي حاجة تحب تفتكرها عن الدكتور ده..."></textarea>
+          </div>
+
+          <div class="dynamic-section-bg">
+            <div class="field" style="margin-bottom:0;">
+              <label>المواعيد المتاحة والعيادات <span class="hint">(الساعات اختياري - يمكن كتابتها أو اختيارها)</span></label>
+              <div id="timesContainer"></div>
+              <button type="button" class="btn btn-ghost" id="addTimeBtn" style="margin-top:8px; font-size:13px; padding:6px 12px; background:var(--surface);">
+                + أضف ميعاد آخر
+              </button>
+            </div>
+          </div>
+
+          <div class="dynamic-section-bg">
+            <div class="field" style="margin-bottom:0;">
+              <label>بيانات وخانات إضافية <span class="hint">(تليفونات تانية، لوكيشن ماب، إلخ)</span></label>
+              <div id="customFieldsContainer"></div>
+              <button type="button" class="btn btn-ghost" id="addCustomFieldBtn" style="margin-top:8px; font-size:13px; padding:6px 12px; background:var(--surface);">
+                + أضف خانة جديدة
+              </button>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitDocBtn">حفظ الدكتور</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- AREAS TAB -->
+    <section class="panel" id="panel-areas">
+      <h2 class="section-title">المناطق الجغرافية</h2>
+      <form class="add-area-form" id="areaForm">
+        <input type="text" id="areaNameInput" placeholder="اسم منطقة جديدة، مثال: السكة الجديدة">
+        <button type="submit" class="btn btn-primary">إضافة</button>
+      </form>
+      <div id="areasListContainer"></div>
+      <div class="settings-box">
+        <p>ترتيب المناطق هنا هو اللي بيحدد ترتيب ظهورهم في شاشة "الدكاترة(مناطق)".</p>
+      </div>
+    </section>
+
+    <!-- PROCESSING TAB -->
+    <section class="panel" id="panel-processing">
+      <h2 class="section-title">إدارة المتابعات (Processing)</h2>
+      
+      <div class="form-card" style="margin-bottom: 20px;">
+        <form id="processingForm">
+          <input type="hidden" id="procEditId">
+          <div class="field-row">
+            <div class="field">
+              <label>نوع المتابعة</label>
+              <input type="text" id="procType" list="procTypeOptions" placeholder="مثال: متابعة أدوية، زيارة، مكالمة..." required>
+              <datalist id="procTypeOptions">
+                <option value="متابعة أدوية">
+                <option value="زيارة عيادة">
+                <option value="مكالمة هاتفية">
+                <option value="توصيل عينات">
+              </datalist>
+            </div>
+            <div class="field">
+              <label>الشخص اللي بتابع معاه</label>
+              <input type="text" id="procPerson" placeholder="اسم الدكتور أو العميل..." required>
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>الرقم</label>
+              <input type="tel" id="procPhone" placeholder="01xxxxxxxxx">
+            </div>
+            <div class="field">
+              <label>الحالة (Status)</label>
+              <select id="procStatus" required>
+                <option value="Waiting">Waiting (في الانتظار)</option>
+                <option value="Pending">Pending (قيد التنفيذ)</option>
+                <option value="Finished">Finished (مكتمل)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>ملاحظات (Notes)</label>
+            <textarea id="procNotes" placeholder="أضف أي تفاصيل أو ملاحظات عن الحالة..."></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitProcBtn">حفظ المتابعة</button>
+            <button type="button" class="btn btn-ghost" id="cancelProcEditBtn" style="display:none;">إلغاء التعديل</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="processingListContainer"></div>
+    </section>
+
+    <!-- SCHEDULE TAB -->
+    <section class="panel" id="panel-schedule">
+      <h2 class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+        جدول الزيارات الأسبوعي
+      </h2>
+      <div id="scheduleContainer"></div>
+      <p style="font-size:12px; color:var(--ink-soft); margin-top:12px; text-align:center;">
+        * اضغط على أي خانة فاضية عشان تختار المنطقة وبعدين تختار الدكتور وتسجله.
+      </p>
+    </section>
+
+    <footer class="app-footer">Made with <span class="heart">♥</span> by Youssef</footer>
+  </div>
+</div>
+
+<!-- Selection Modal for Schedule -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 id="modalTitle">اختر المنطقة</h3>
+      <button class="modal-close" id="closeModalBtn">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast-wrap"></div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC0nIkeCvKqGWggs59FEpvKrorNhjk35_w",
+    authDomain: "israa-app-18357.firebaseapp.com",
+    projectId: "israa-app-18357",
+    storageBucket: "israa-app-18357.firebasestorage.app",
+    messagingSenderId: "836830301295",
+    appId: "1:836830301295:web:5560911cc49d8e6268119a",
+    measurementId: "G-0ECLHX51KK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const ICONS = {
+    phone:'<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>',
+    edit:'<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+    trash:'<svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2zm0 6h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg>',
+    up:'<svg viewBox="0 0 24 24"><path d="M12 6l7 8h-4v6h-6v-6H5z"/></svg>',
+    down:'<svg viewBox="0 0 24 24"><path d="M12 18l-7-8h4V4h6v6h4z"/></svg>',
+    mapEmpty:'<svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>',
+    chevronLeft: '<svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>'
+  };
+
+  const SCHEDULE_DAYS = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  const SCHEDULE_DAYS_AR = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  
+  const SCHEDULE_HOURS = [
+    '10:00 AM - 11:00 AM', '11:00 AM - 12:00 PM', '12:00 PM - 01:00 PM', '01:00 PM - 02:00 PM',
+    '02:00 PM - 03:00 PM', '03:00 PM - 04:00 PM', '04:00 PM - 05:00 PM', '05:00 PM - 06:00 PM',
+    '06:00 PM - 07:00 PM', '07:00 PM - 08:00 PM', '08:00 PM - 09:00 PM', '09:00 PM - 10:00 PM', '10:00 PM - 11:00 PM'
+  ];
+
+  const TIME_DAYS_LIST = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  
+  let TIME_HOURS_OPTS = '';
+  ['AM', 'PM'].forEach(m => {
+    let h = 12;
+    TIME_HOURS_OPTS += `<option value="${h}:00 ${m}"></option>`;
+    TIME_HOURS_OPTS += `<option value="${h}:30 ${m}"></option>`;
+    for(let i=1; i<=11; i++){
+      let hr = i < 10 ? '0'+i : i;
+      TIME_HOURS_OPTS += `<option value="${hr}:00 ${m}"></option>`;
+      TIME_HOURS_OPTS += `<option value="${hr}:30 ${m}"></option>`;
+    }
+  });
+  document.getElementById('hoursList').innerHTML = TIME_HOURS_OPTS;
+
+  let areas = []; let doctors = []; let schedule = {}; let processingList = [];
+  let editingId = null; let activeCell = null; 
+
+  function uid(prefix){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  function esc(str){
+    const d = document.createElement('div');
+    d.textContent = str == null ? '' : String(str);
+    return d.innerHTML;
+  }
+  function linkify(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    return text.replace(urlRegex, function(url) {
+        return `<a href="${url}" target="_blank" style="color:var(--primary);text-decoration:underline;word-break:break-all;">فتح الرابط</a>`;
+    });
+  }
+  function showToast(msg){
+    const wrap = document.getElementById('toast-wrap');
+    const t = document.createElement('div');
+    t.className = 'toast'; t.textContent = msg; wrap.appendChild(t);
+    setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 2200);
+  }
+
+  function timeToMinutes(t) {
+      if(!t) return 0;
+      const match = t.match(/(\d{1,2})(?::(\d{1,2}))?\s*(AM|PM|am|pm|ص|م)?/i);
+      if(!match) return 0;
+      let h = parseInt(match[1]);
+      let m = match[2] ? parseInt(match[2]) : 0;
+      let ampm = match[3] ? match[3].toLowerCase() : '';
+      if(h === 12 && (ampm === 'am' || ampm === 'ص')) h = 0;
+      if(h !== 12 && (ampm === 'pm' || ampm === 'م')) h += 12;
+      return h * 60 + m;
+  }
+
+  async function loadAll(){
+    try{
+      const docRef = doc(db, "israa_app", "main_data");
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        areas = data.areas || []; doctors = data.doctors || []; schedule = data.schedule || {};
+        for(let k in schedule){ if(typeof schedule[k] === 'string'){ schedule[k] = [schedule[k]]; } }
+        processingList = data.processingList || [];
+      } else {
+        areas = []; doctors = []; schedule = {}; processingList = [];
+      }
+    }catch(e){ console.error(e); areas = []; doctors = []; schedule = {}; processingList = []; }
+  }
+
+  async function syncToCloud(){
+    try{ await setDoc(doc(db, "israa_app", "main_data"), { areas, doctors, schedule, processingList }); }
+    catch(e){ console.error(e); showToast('حصل خطأ في حفظ البيانات على السحابة'); }
+  }
+
+  async function saveAreas(){ await syncToCloud(); }
+  async function saveDoctors(){ await syncToCloud(); }
+  async function saveSchedule(){ await syncToCloud(); }
+  async function saveProcessing(){ await syncToCloud(); }
+
+  function renderStats(){ document.getElementById('statsLine').textContent = `${areas.length} منطقة · ${doctors.length} دكتور`; }
+
+  function renderAreaSelect(){
+    const sel = document.getElementById('docArea');
+    const current = sel.value;
+    if(areas.length === 0){
+      sel.innerHTML = '<option value="">لسه مفيش مناطق مضافة</option>';
+      sel.disabled = true; return;
+    }
+    sel.disabled = false;
+    sel.innerHTML = '<option value="" disabled>اختار المنطقة</option>' + areas.map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('');
+    if(current) sel.value = current;
+  }
+
+  function renderProcessing() {
+    const container = document.getElementById('processingListContainer');
+    if(processingList.length === 0) {
+      container.innerHTML = `<div class="big-empty"><p>مفيش أي حالات متابعة متسجلة حالياً.</p></div>`; return;
+    }
+    const sortedList = [...processingList].sort((a, b) => {
+      if(a.status === 'Finished' && b.status !== 'Finished') return 1;
+      if(a.status !== 'Finished' && b.status === 'Finished') return -1;
+      return 0;
+    });
+    container.innerHTML = sortedList.map(item => `
+      <div class="proc-card">
+        <div class="proc-head">
+          <h4 class="proc-title">${esc(item.type)}</h4>
+          <span class="proc-badge ${item.status}">${item.status}</span>
+        </div>
+        <div class="proc-body">
+          <div><span style="font-weight:700; color:var(--ink-soft)">مع:</span> ${esc(item.person)}</div>
+          ${item.phone ? `<div><span style="font-weight:700; color:var(--ink-soft)">الرقم:</span> <a class="phone-link" href="tel:${esc(item.phone)}">${ICONS.phone} ${esc(item.phone)}</a></div>` : ''}
+          ${item.notes ? `<div><span style="font-weight:700; color:var(--ink-soft)">ملاحظات:</span> ${linkify(esc(item.notes))}</div>` : ''}
+        </div>
+        <div class="doc-actions-bar">
+          <button class="btn btn-ghost" data-action="edit-proc" data-id="${esc(item.id)}">${ICONS.edit} تعديل</button>
+          <button class="btn btn-danger-ghost" data-action="delete-proc" data-id="${esc(item.id)}">${ICONS.trash} مسح</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function renderSchedule() {
+    const container = document.getElementById('scheduleContainer');
+    let html = `<div class="table-scroll-container"><table class="schedule-table"><thead><tr><th>اليوم</th>`;
+    SCHEDULE_HOURS.forEach(hour => { html += `<th>${hour}</th>`; });
+    html += `</tr></thead><tbody>`;
+
+    SCHEDULE_DAYS.forEach((day, index) => {
+      html += `<tr><th>${SCHEDULE_DAYS_AR[index]}<br><span style="font-size:11px;opacity:0.8;font-weight:500">${day}</span></th>`;
+      SCHEDULE_HOURS.forEach(hour => {
+        const cellKey = `${day}_${hour}`;
+        const docIds = schedule[cellKey] || [];
+        let cellContent = '';
+        if (docIds.length > 0) {
+          const validIds = [];
+          docIds.forEach(docId => {
+            const doctor = doctors.find(d => d.id === docId);
+            if (doctor) {
+              validIds.push(docId);
+              const area = areas.find(a => a.id === doctor.areaId);
+              const areaName = area ? area.name : 'بدون منطقة';
+              cellContent += `
+                <div class="cell-content" style="background:var(--surface-alt); padding:4px 6px; border-radius:8px; margin-bottom:4px; border:1px solid var(--line); width: 100%; box-sizing: border-box;">
+                  <span class="cell-doc-name" style="font-size:12px;">${esc(doctor.name)}</span>
+                  <span class="cell-area-badge" style="font-size:10px; margin-top:2px;">${esc(areaName)}</span>
+                </div>`;
+            }
+          });
+          schedule[cellKey] = validIds;
+          if (validIds.length === 0) delete schedule[cellKey];
+        }
+        html += `<td data-action="open-cell" data-key="${cellKey}" style="vertical-align: top; padding: 6px;">${cellContent}</td>`;
+      });
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+  }
+
+  const modal = document.getElementById('scheduleModal');
+  const modalBody = document.getElementById('modalBody');
+  const modalTitle = document.getElementById('modalTitle');
+  function openModal() { modal.classList.add('active'); }
+  function closeModal() { modal.classList.remove('active'); activeCell = null; }
+  document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+  function showAreasInModal() {
+    modalTitle.textContent = 'اختر المنطقة';
+    if(areas.length === 0) {
+      modalBody.innerHTML = `<div class="empty-msg" style="text-align:center;">لسه مفيش مناطق متسجلة.<br>ضيف منطقة الاول من تبويب "المناطق".</div>`; return;
+    }
+    let html = '<div class="select-list">';
+    areas.forEach(area => {
+      const docsInArea = doctors.filter(d => d.areaId === area.id).length;
+      html += `<div class="select-item" data-action="select-area" data-id="${esc(area.id)}"><span>${esc(area.name)}</span><span class="doc-spec">(${docsInArea} دكتور)</span></div>`;
+    });
+    html += '</div>'; modalBody.innerHTML = html;
+  }
+
+  function showDoctorsInModal(areaId) {
+    const area = areas.find(a => a.id === areaId);
+    modalTitle.textContent = `دكاترة منطقة: ${area ? area.name : ''}`;
+    let html = `<button class="modal-back-btn" data-action="back-to-areas">${ICONS.chevronLeft} رجوع للمناطق</button>`;
+    const areaDocs = doctors.filter(d => d.areaId === areaId);
+    if(areaDocs.length === 0) {
+      html += `<div class="empty-msg" style="text-align:center;">المنطقة دي مفهاش دكاترة لسه.<br>ضيف دكاترة الأول.</div>`;
+    } else {
+      html += '<div class="select-list">';
+      areaDocs.forEach(doc => {
+        const spec = doc.specialty ? `<span class="doc-spec">${esc(doc.specialty)}</span>` : '';
+        html += `<div class="select-item" data-action="select-doctor" data-id="${esc(doc.id)}"><span>${esc(doc.name)}</span>${spec}</div>`;
+      });
+      html += '</div>';
+    }
+    modalBody.innerHTML = html;
+  }
+
+  function showFilledCellOptions(cellKey) {
+    modalTitle.textContent = 'أطباء هذا الميعاد';
+    const docIds = schedule[cellKey] || [];
+    let html = '<div class="select-list" style="margin-bottom:15px;">';
+    docIds.forEach(docId => {
+      const doctor = doctors.find(d => d.id === docId);
+      if(doctor){
+        const area = areas.find(a => a.id === doctor.areaId);
+        html += `<div class="select-item" style="cursor:default; display:flex; justify-content:space-between; align-items:center;">
+            <div><div style="font-weight:700;">${esc(doctor.name)}</div><div class="doc-spec">${area ? esc(area.name) : ''}</div></div>
+            <button class="icon-btn danger" data-action="remove-doc-from-cell" data-doc-id="${esc(docId)}" style="flex:none;" title="حذف من الميعاد">${ICONS.trash}</button>
+          </div>`;
+      }
+    });
+    html += '</div>';
+    html += `<button class="btn btn-primary" style="width:100%;" data-action="add-another-doc-to-cell"> + إضافة دكتور آخر لهذا الميعاد </button>`;
+    modalBody.innerHTML = html;
+  }
+
+  function addTimeFieldRow(val = '') {
+    const container = document.getElementById('timesContainer');
+    const row = document.createElement('div'); 
+    row.className = 'custom-time-row';
+    row.style.cssText = 'display: flex; gap: 8px; flex-wrap: wrap; align-items: center; background: var(--surface-alt); padding: 10px; border-radius: 9px; border: 1px dashed var(--line); margin-bottom: 8px;';
+    
+    let selDay = '', selFrom = '', selTo = '', selClinic = '';
+    
+    if(val) {
+      const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)";
+      const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`);
+      const match = val.match(regex);
+      
+      if(match) {
+          selClinic = match[1] ? match[1].trim() : '';
+          selDay = match[2];
+          selFrom = match[3] ? match[3].trim() : '';
+          selTo = match[4] ? match[4].trim() : '';
+      } else {
+          selClinic = val; 
+      }
+    }
+
+    let daysHtml = '<option value="" disabled ' + (!selDay ? 'selected' : '') + '>اختر اليوم</option>';
+    TIME_DAYS_LIST.forEach(d => {
+      daysHtml += `<option value="${d}" ${selDay === d ? 'selected' : ''}>${d}</option>`;
+    });
+
+    row.innerHTML = `
+      <input type="text" class="time-clinic" placeholder="اسم العيادة (اختياري)" value="${esc(selClinic)}" style="flex: 1 1 100%; margin-bottom: 4px;">
+      <select class="time-day" style="flex: 1; min-width: 90px;">${daysHtml}</select>
+      <input type="text" class="time-from" list="hoursList" placeholder="من (اختياري)" value="${esc(selFrom)}" style="flex: 1; min-width: 90px;">
+      <input type="text" class="time-to" list="hoursList" placeholder="إلى (اختياري)" value="${esc(selTo)}" style="flex: 1; min-width: 90px;">
+      <button type="button" class="icon-btn danger t-remove" title="مسح">${ICONS.trash}</button>
+    `;
+    container.appendChild(row);
+  }
+
+  addTimeFieldRow();
+
+  document.getElementById('addTimeBtn').addEventListener('click', () => addTimeFieldRow());
+  document.getElementById('timesContainer').addEventListener('click', (e) => { const btn = e.target.closest('.t-remove'); if(btn) btn.parentElement.remove(); });
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-action]'); if(!btn) return;
+    const action = btn.dataset.action; const id = btn.dataset.id; const key = btn.dataset.key;
+
+    if(action === 'toggle-area'){ const stop = btn.closest('.route-stop'); if (stop) stop.classList.toggle('expanded'); }
+    if(action === 'open-cell') { activeCell = key; const docIds = schedule[activeCell] || []; if(docIds.length > 0) { showFilledCellOptions(activeCell); } else { showAreasInModal(); } openModal(); }
+    if(action === 'select-area') { showDoctorsInModal(id); }
+    if(action === 'back-to-areas') { showAreasInModal(); }
+    if(action === 'select-doctor') {
+      const selectedDoc = doctors.find(d => d.id === id);
+      if(!schedule[activeCell]) schedule[activeCell] = [];
+      if(!schedule[activeCell].includes(id)){
+        schedule[activeCell].push(id); await saveSchedule(); renderSchedule(); closeModal();
+        showToast(`تم تسجيل ميعاد لـ د. ${selectedDoc ? selectedDoc.name : ''}`);
+      } else { showToast('الدكتور ده متسجل بالفعل في الميعاد ده'); }
+    }
+    if(action === 'add-another-doc-to-cell') { showAreasInModal(); }
+    if(action === 'remove-doc-from-cell') {
+      const docIdToRemove = btn.dataset.docId;
+      schedule[activeCell] = schedule[activeCell].filter(dId => dId !== docIdToRemove);
+      if(schedule[activeCell].length === 0) delete schedule[activeCell];
+      await saveSchedule(); renderSchedule();
+      if(schedule[activeCell] && schedule[activeCell].length > 0) { showFilledCellOptions(activeCell); } else { closeModal(); }
+      showToast('تم إزالة الدكتور من الميعاد');
+    }
+    if(action === 'toggle-doc'){ const card = btn.closest('.doc-card'); card.classList.toggle('expanded'); }
+    if(action === 'edit-doctor'){
+      const docItem = doctors.find(d => d.id === id); if(!docItem) return; editingId = id;
+      document.getElementById('docName').value = docItem.name || ''; document.getElementById('docSpecialty').value = docItem.specialty || '';
+      document.getElementById('docArea').value = docItem.areaId || ''; document.getElementById('docPhone').value = docItem.phone || '';
+      document.getElementById('docAddress').value = docItem.address || ''; document.getElementById('docNotes').value = docItem.notes || '';
+      const timesCont = document.getElementById('timesContainer'); timesCont.innerHTML = '';
+      if(Array.isArray(docItem.availableTimes) && docItem.availableTimes.length > 0) { docItem.availableTimes.forEach(t => addTimeFieldRow(t)); }
+      else if (typeof docItem.availableTimes === 'string' && docItem.availableTimes.trim() !== '') { addTimeFieldRow(docItem.availableTimes); }
+      else { addTimeFieldRow(); }
+      document.getElementById('customFieldsContainer').innerHTML = '';
+      if(docItem.customFields && docItem.customFields.length > 0){ docItem.customFields.forEach(f => addCustomFieldRow(f.label, f.value)); }
+      document.getElementById('editBanner').style.display = 'flex'; document.getElementById('submitDocBtn').textContent = 'تحديث البيانات';
+      document.querySelector('nav.tabs button[data-tab="add"]').click(); window.scrollTo({top:0, behavior:'smooth'});
+    }
+    if(action === 'delete-doctor'){
+      const docItem = doctors.find(d => d.id === id); if(!docItem) return;
+      if(confirm(`متأكد إنك عايز تمسح "${docItem.name}"؟`)){
+        doctors = doctors.filter(d => d.id !== id);
+        Object.keys(schedule).forEach(k => { if(Array.isArray(schedule[k])) { schedule[k] = schedule[k].filter(dId => dId !== id); if(schedule[k].length === 0) delete schedule[k]; } });
+        await syncToCloud(); showToast(`تم حذف د. ${docItem.name} بالكامل`); renderAll();
+      }
+    }
+    if(action === 'area-up' || action === 'area-down'){
+      const idx = areas.findIndex(a => a.id === id); const swapWith = action === 'area-up' ? idx - 1 : idx + 1;
+      if(swapWith < 0 || swapWith >= areas.length) return;
+      [areas[idx], areas[swapWith]] = [areas[swapWith], areas[idx]]; await saveAreas(); renderAll();
+    }
+    if(action === 'rename-area'){
+      const area = areas.find(a => a.id === id); if(!area) return;
+      const newName = prompt('اسم المنطقة:', area.name);
+      if(newName && newName.trim()){ area.name = newName.trim(); await saveAreas(); renderAll(); showToast(`تم تعديل اسم منطقة ${area.name}`); }
+    }
+    if(action === 'delete-area'){
+      const area = areas.find(a => a.id === id); if(!area) return;
+      const count = doctors.filter(d => d.areaId === id).length;
+      const msg = count > 0 ? `المنطقة دي فيها ${count} دكتور. لو مسحتها هيبقوا من غير منطقة محددة. متأكد؟` : `متأكد إنك عايز تمسح منطقة "${area.name}"؟`;
+      if(confirm(msg)){ areas = areas.filter(a => a.id !== id); await syncToCloud(); showToast(`تم حذف منطقة ${area.name}`); renderAll(); }
+    }
+    if(action === 'delete-proc'){
+      const item = processingList.find(p => p.id === id);
+      if(confirm('متأكد إنك عايز تمسح المتابعة دي؟')){ processingList = processingList.filter(p => p.id !== id); await saveProcessing(); renderProcessing(); showToast(`تم حذف متابعة ${item ? item.person : ''}`); }
+    }
+    if(action === 'edit-proc'){
+      const item = processingList.find(p => p.id === id); if(!item) return;
+      document.getElementById('procEditId').value = item.id; document.getElementById('procType').value = item.type || '';
+      document.getElementById('procPerson').value = item.person || ''; document.getElementById('procPhone').value = item.phone || '';
+      document.getElementById('procStatus').value = item.status || 'Waiting'; document.getElementById('procNotes').value = item.notes || '';
+      document.getElementById('submitProcBtn').textContent = 'تحديث المتابعة'; document.getElementById('cancelProcEditBtn').style.display = 'inline-flex';
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+  });
+
+  function renderRoute(){
+    const container = document.getElementById('routeContainer'); const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    if(areas.length === 0){
+      container.innerHTML = `<div class="big-empty">${ICONS.mapEmpty}<p>لسه مفيش مناطق مضافة. ابدأ بإضافة أول منطقة عشان تقدر تسجل الدكاترة.</p><button class="btn btn-primary" id="goToAreasBtn">روح لتبويب المناطق</button></div>`;
+      const btn = document.getElementById('goToAreasBtn'); if(btn) btn.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="areas"]').click()); return;
+    }
+    function matches(doc){
+      if(!query) return true; let timesStr = '';
+      if(Array.isArray(doc.availableTimes)) timesStr = doc.availableTimes.join(' '); else if(doc.availableTimes) timesStr = doc.availableTimes;
+      const searchable = [doc.name, doc.phone, doc.address, doc.specialty, doc.notes, timesStr, ...(doc.customFields || []).map(f => f.label + ' ' + f.value)].join(' ').toLowerCase();
+      return searchable.includes(query);
+    }
+    let html = '<div class="route-list">'; let anyShown = false;
+    areas.forEach((area, idx) => {
+      const areaDocs = doctors.filter(d => d.areaId === area.id && matches(d)); 
+      if(query && areaDocs.length === 0) return; anyShown = true;
+      areaDocs.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+
+      const expandedClass = query ? 'expanded' : '';
+      html += `<div class="route-stop ${expandedClass}"><div class="stop-badge">${idx+1}</div><div class="stop-head" data-action="toggle-area"><h3>${esc(area.name)}</h3><span class="count">(${areaDocs.length} دكتور)</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">`;
+      if(areaDocs.length === 0){ html += `<div class="empty-msg">لسه مفيش دكاترة في المنطقة دي. ضيف واحد من تبويب "ضيف دكتور".</div>`; }else{ html += doctorsListHtml(areaDocs); }
+      html += `</div></div>`;
+    });
+    const unclassified = doctors.filter(d => !areas.some(a => a.id === d.areaId) && matches(d));
+    if(unclassified.length){
+      anyShown = true; const expandedClass = query ? 'expanded' : '';
+      unclassified.sort((a, b) => a.name.localeCompare(b.name, 'ar'));
+      html += `<div class="route-stop ${expandedClass}"><div class="stop-badge unclassified">؟</div><div class="stop-head" data-action="toggle-area"><h3>دكاترة من غير منطقة محددة</h3><span class="count">(${unclassified.length})</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">`;
+      html += doctorsListHtml(unclassified); html += `</div></div>`;
+    }
+    html += '</div>';
+    if(!anyShown){ html = `<div class="big-empty"><p>مفيش نتائج مطابقة للبحث.</p></div>`; }
+    if(doctors.length === 0 && !query){
+      container.innerHTML = `<div class="big-empty">${ICONS.mapEmpty}<p>لسه مفيش دكاترة مسجلين. يلا نبدأ بإضافة أول دكتور.</p><button class="btn btn-primary" id="goToAddBtn">ضيف دكتور</button></div>`;
+      const btn2 = document.getElementById('goToAddBtn'); if(btn2) btn2.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="add"]').click()); return;
+    }
+    if(anyShown) { container.innerHTML = html; }
+  }
+
+  function renderTimeRoute(){
+    const container = document.getElementById('timeRouteContainer');
+    const query = document.getElementById('searchTimeInput').value.trim().toLowerCase();
+
+    function matches(doc){
+      if(!query) return true; let timesStr = '';
+      if(Array.isArray(doc.availableTimes)) timesStr = doc.availableTimes.join(' '); else if(doc.availableTimes) timesStr = doc.availableTimes;
+      const searchable = [doc.name, doc.phone, doc.address, doc.specialty, doc.notes, timesStr, ...(doc.customFields || []).map(f => f.label + ' ' + f.value)].join(' ').toLowerCase();
+      return searchable.includes(query);
+    }
+
+    const daysMap = {};
+    TIME_DAYS_LIST.forEach(d => daysMap[d] = new Map());
+
+    doctors.forEach(doc => {
+       if(!matches(doc)) return;
+       if(doc.availableTimes && Array.isArray(doc.availableTimes)) {
+           doc.availableTimes.forEach(tStr => {
+               const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)";
+               const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`);
+               const match = tStr.match(regex);
+               if(match) {
+                   const day = match[2];
+                   const fromStr = match[3];
+                   const fromMinutes = fromStr ? timeToMinutes(fromStr) : -1; 
+                   
+                   if(daysMap[day]) {
+                       const existing = daysMap[day].get(doc.id);
+                       if(!existing || fromMinutes < existing.fromMinutes) {
+                           daysMap[day].set(doc.id, { doc, fromMinutes });
+                       }
+                   }
+               }
+           });
+       }
+    });
+
+    let html = '<div class="route-list">'; let anyShown = false;
+    const expandedClass = query ? 'expanded' : '';
+
+    TIME_DAYS_LIST.forEach((day, idx) => {
+        if(!daysMap[day] || daysMap[day].size === 0) return;
+        anyShown = true;
+        
+        const dayDocsData = Array.from(daysMap[day].values());
+        dayDocsData.sort((a, b) => a.fromMinutes - b.fromMinutes);
+        const sortedDocs = dayDocsData.map(item => item.doc);
+
+        html += `<div class="route-stop ${expandedClass}"><div class="stop-badge">${idx + 1}</div><div class="stop-head" data-action="toggle-area"><h3>${day}</h3><span class="count">(${sortedDocs.length} دكتور)</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">`;
+        html += doctorsListHtml(sortedDocs);
+        html += `</div></div>`;
+    });
+    
+    html += '</div>';
+
+    if(!anyShown) {
+        container.innerHTML = `<div class="big-empty"><p>مفيش دكاترة مسجلين بمواعيد مطابقة للبحث.</p></div>`;
+    } else {
+        container.innerHTML = html;
+    }
+  }
+
+  function doctorsListHtml(list){
+    const items = list.map(doc => {
+      const phone = doc.phone ? `<a class="phone-link" href="tel:${esc(doc.phone)}">${ICONS.phone} ${esc(doc.phone)}</a>` : `<span class="cell-dash">—</span>`;
+      const address = doc.address ? esc(doc.address) : `<span class="cell-dash">—</span>`;
+      const notes = doc.notes ? esc(doc.notes) : `<span class="cell-dash">—</span>`;
+      const specialtyBadge = doc.specialty ? `<span class="doc-badge">${esc(doc.specialty)}</span>` : '';
+      let timesHtml = '';
+      if(Array.isArray(doc.availableTimes) && doc.availableTimes.length > 0) { timesHtml = doc.availableTimes.map(t => `<div style="margin-bottom:4px;">- ${esc(t)}</div>`).join(''); }
+      else if(typeof doc.availableTimes === 'string' && doc.availableTimes) { timesHtml = esc(doc.availableTimes); } else { timesHtml = `<span class="cell-dash">—</span>`; }
+      let customHtml = '';
+      if(doc.customFields && doc.customFields.length > 0) {
+        customHtml = doc.customFields.map(f => `<div class="doc-detail-row"><span class="detail-label">${esc(f.label)}:</span><span class="detail-value">${linkify(esc(f.value))}</span></div>`).join('');
+      }
+      return `
+      <div class="doc-card">
+        <div class="doc-card-header" data-action="toggle-doc">
+          <div class="doc-title-wrap"><h4 class="doc-name">${esc(doc.name)}</h4>${specialtyBadge}</div>
+          <svg class="chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg>
+        </div>
+        <div class="doc-card-body">
+          <div class="doc-details-grid">
+            <div class="doc-detail-row"><span class="detail-label">التليفون:</span> <span class="detail-value">${phone}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">العنوان:</span> <span class="detail-value">${address}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">المواعيد:</span> <span class="detail-value">${timesHtml}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">ملاحظات:</span> <span class="detail-value">${notes}</span></div>
+            ${customHtml}
+          </div>
+          <div class="doc-actions-bar">
+            <button class="btn btn-ghost" data-action="edit-doctor" data-id="${esc(doc.id)}">${ICONS.edit} تعديل</button>
+            <button class="btn btn-danger-ghost" data-action="delete-doctor" data-id="${esc(doc.id)}">${ICONS.trash} حذف</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="doc-list">${items}</div>`;
+  }
+
+  function renderAreasTab(){
+    const container = document.getElementById('areasListContainer');
+    if(areas.length === 0){ container.innerHTML = `<div class="empty-msg">لسه مفيش مناطق. ضيف أول منطقة من الفورم اللي فوق.</div>`; return; }
+    container.innerHTML = areas.map((a, idx) => {
+      const count = doctors.filter(d => d.areaId === a.id).length;
+      return `<div class="area-row"><div class="order-no">${idx+1}</div><div style="flex:1;"><div class="name">${esc(a.name)}</div><div class="sub">${count} دكتور مسجل</div></div>
+        <div class="reorder-btns"><button data-action="area-up" data-id="${esc(a.id)}" ${idx===0?'disabled':''} title="حرك لفوق">${ICONS.up}</button><button data-action="area-down" data-id="${esc(a.id)}" ${idx===areas.length-1?'disabled':''} title="حرك لتحت">${ICONS.down}</button></div>
+        <button class="icon-btn" data-action="rename-area" data-id="${esc(a.id)}" title="تعديل الاسم">${ICONS.edit}</button><button class="icon-btn danger" data-action="delete-area" data-id="${esc(a.id)}" title="حذف">${ICONS.trash}</button></div>`;
+    }).join('');
+  }
+
+  function renderAll(){ renderStats(); renderAreaSelect(); renderRoute(); renderTimeRoute(); renderAreasTab(); renderSchedule(); renderProcessing(); }
+
+  function addCustomFieldRow(label = '', value = '') {
+    const container = document.getElementById('customFieldsContainer'); const row = document.createElement('div'); row.className = 'custom-field-row';
+    row.innerHTML = `<input type="text" class="cf-label" placeholder="اسم الخانة (مثال: لوكيشن)" value="${esc(label)}"><input type="text" class="cf-value" placeholder="القيمة أو اللينك" value="${esc(value)}"><button type="button" class="icon-btn danger cf-remove" title="مسح">${ICONS.trash}</button>`;
+    container.appendChild(row);
+  }
+  document.getElementById('addCustomFieldBtn').addEventListener('click', () => addCustomFieldRow());
+  document.getElementById('customFieldsContainer').addEventListener('click', (e) => { const btn = e.target.closest('.cf-remove'); if(btn) btn.parentElement.remove(); });
+
+  document.querySelectorAll('nav.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active'); document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+  
+  document.getElementById('searchInput').addEventListener('input', renderRoute);
+  document.getElementById('searchTimeInput').addEventListener('input', renderTimeRoute);
+
+  const doctorForm = document.getElementById('doctorForm');
+  function resetDoctorForm(){
+    doctorForm.reset(); document.getElementById('customFieldsContainer').innerHTML = '';
+    document.getElementById('timesContainer').innerHTML = '';
+    addTimeFieldRow();
+    editingId = null; document.getElementById('editBanner').style.display = 'none'; document.getElementById('submitDocBtn').textContent = 'حفظ الدكتور';
+  }
+  document.getElementById('cancelEditBtn').addEventListener('click', resetDoctorForm);
+
+  doctorForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('docName').value.trim(); const specialty = document.getElementById('docSpecialty').value.trim();
+    const areaId = document.getElementById('docArea').value; const phone = document.getElementById('docPhone').value.trim();
+    const address = document.getElementById('docAddress').value.trim(); const notes = document.getElementById('docNotes').value.trim();
+    
+    const timeRows = document.querySelectorAll('#timesContainer .custom-time-row');
+    const availableTimes = Array.from(timeRows).map(row => {
+      const clinic = row.querySelector('.time-clinic').value.trim();
+      const day = row.querySelector('.time-day').value;
+      const from = row.querySelector('.time-from').value.trim();
+      const to = row.querySelector('.time-to').value.trim();
+      
+      if (day) {
+          let timeStr = day;
+          if (from && to) {
+              timeStr += `: من ${from} إلى ${to}`;
+          } else if (from) {
+              timeStr += `: من ${from}`;
+          } else if (to) {
+              timeStr += `: إلى ${to}`;
+          }
+          return clinic ? `${clinic} - ${timeStr}` : timeStr;
+      } else if (clinic) {
+          return clinic;
+      }
+      return null;
+    }).filter(v => v);
+
+    const customRows = document.querySelectorAll('.custom-field-row'); const customFields = Array.from(customRows).map(r => ({ label: r.querySelector('.cf-label').value.trim(), value: r.querySelector('.cf-value').value.trim() })).filter(f => f.label || f.value);
+
+    if(!name){ showToast('لازم تدخل اسم الدكتور'); return; } if(!areaId){ showToast('لازم تختار المنطقة'); return; }
+    if(editingId){
+      const docItem = doctors.find(d => d.id === editingId);
+      if(docItem) { Object.assign(docItem, { name, specialty, areaId, phone, address, availableTimes, notes, customFields }); }
+      await saveDoctors(); showToast(`تم تحديث بيانات د. ${name}`); resetDoctorForm(); renderAll(); document.querySelector('nav.tabs button[data-tab="route"]').click();
+    }else{
+      doctors.push({ id: uid('doc'), name, specialty, areaId, phone, address, availableTimes, notes, customFields });
+      await saveDoctors(); showToast(`تم إضافة د. ${name} بنجاح`); resetDoctorForm(); renderAll(); document.getElementById('docName').focus();
+    }
+  });
+
+  const processingForm = document.getElementById('processingForm');
+  function resetProcessingForm(){
+    processingForm.reset(); document.getElementById('procEditId').value = '';
+    document.getElementById('submitProcBtn').textContent = 'حفظ المتابعة'; document.getElementById('cancelProcEditBtn').style.display = 'none';
+  }
+  document.getElementById('cancelProcEditBtn').addEventListener('click', resetProcessingForm);
+  processingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const id = document.getElementById('procEditId').value; const type = document.getElementById('procType').value.trim();
+    const person = document.getElementById('procPerson').value.trim(); const phone = document.getElementById('procPhone').value.trim();
+    const status = document.getElementById('procStatus').value; const notes = document.getElementById('procNotes').value.trim();
+    if(!type || !person) { showToast('يرجى ملء نوع المتابعة واسم الشخص'); return; }
+    if(id){ const item = processingList.find(p => p.id === id); if(item) { Object.assign(item, { type, person, phone, status, notes }); } showToast(`تم تحديث متابعة ${person}`); }
+    else{ processingList.push({ id: uid('proc'), type, person, phone, status, notes }); showToast(`تم إضافة متابعة ${person} بنجاح`); }
+    await saveProcessing(); resetProcessingForm(); renderProcessing();
+  });
+
+  document.getElementById('areaForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); const input = document.getElementById('areaNameInput'); const name = input.value.trim();
+    if(!name){ showToast('اكتب اسم المنطقة الأول'); return; }
+    if(areas.some(a => a.name.toLowerCase() === name.toLowerCase())){ showToast('المنطقة دي موجودة بالفعل'); return; }
+    areas.push({ id: uid('area'), name }); await saveAreas(); input.value = ''; showToast(`تم إضافة منطقة ${name}`); renderAll();
+  });
+
+  // --- QUOTES & API LOGIC ---
+  const arabicQuotes = [
+    { text: "وما نيل المطالب بالتمني ... ولكن تؤخذ الدنيا غلابا", author: "أحمد شوقي" },
+    { text: "أنتَ النعيمُ لقلبي والعذابُ لهُ.. فما أمرّكَ في قلبي وأحلاكَ", author: "الشريف الرضي" },
+    { text: "على قدر أهل العزم تأتي العزائم ... وتأتي على قدر الكرام المكارم", author: "المتنبي" },
+    { text: "لا يأس مع الحياة، ولا حياة مع اليأس.", author: "مصطفى كامل" },
+    { text: "إن الشفاء فن، يستغرق الوقت، ويتطلب الرعاية المستمرة والإيمان.", author: "حكمة طبية" },
+    { text: "وسلامٌ على الذين يزهرون في القلوب، كأنهم الربيع.", author: "جلال الدين الرومي" },
+    { text: "الطريق طويل، لكن الخطوة الأولى نصف المسافة.", author: "مقولة" },
+    { text: "سلامٌ على من ندعوا لهم بالخير غيباً وهم لا يعلمون.", author: "مقولة" },
+    { text: "سنكون يوماً ما نريد، لا الرحلة ابتدأت ولا الدرب انتهى.", author: "محمود درويش" },
+    { text: "الجمال ليس خاصية في ذات الأشياء، بل في العقل الذي يتأملها.", author: "ديفيد هيوم" },
+    { text: "ليس المهم أن تنجح دائماً، المهم ألا تفقد الشغف في المحاولة.", author: "مقولة تحفيزية" }
+  ];
+
+  async function getQuote() {
+    if (Math.random() > 0.5) {
+      try {
+        const res = await fetch('https://dummyjson.com/quotes/random');
+        const data = await res.json();
+        return { text: data.quote, author: data.author };
+      } catch (e) { return arabicQuotes[Math.floor(Math.random() * arabicQuotes.length)]; }
+    } else {
+      return arabicQuotes[Math.floor(Math.random() * arabicQuotes.length)];
+    }
+  }
+
+  async function displayNextQuote(quoteEl) {
+    quoteEl.style.opacity = 0;
+    setTimeout(async () => {
+      const q = await getQuote();
+      quoteEl.innerHTML = `${q.text} <span class="quote-author">- ${q.author}</span>`;
+      quoteEl.style.opacity = 1;
+    }, 500);
+  }
+
+  (async function init(){
+    const quoteEl = document.getElementById('quote-text');
+    displayNextQuote(quoteEl);
+    const quoteInterval = setInterval(() => displayNextQuote(quoteEl), 3500);
+
+    const minDelay = Math.floor(Math.random() * (7000 - 4000 + 1)) + 4000;
+    const delayPromise = new Promise(resolve => setTimeout(resolve, minDelay));
+
+    await Promise.all([loadAll(), delayPromise]);
+    
+    clearInterval(quoteInterval);
+    renderAll();
+    
+    const heart = document.querySelector('.heart-dot');
+    const loader = document.getElementById('loading-screen');
+    const quoteCont = document.getElementById('quote-container');
+    
+    quoteCont.style.opacity = '0'; 
+    heart.classList.add('run-across');
+    
+    setTimeout(() => {
+      loader.style.opacity = '0';
+      loader.style.transition = 'opacity 0.5s ease-out';
+      
+      setTimeout(() => {
+        loader.style.display = 'none';
+        const main = document.getElementById('main-content');
+        main.style.display = 'block';
+        main.style.animation = 'fadeIn 0.8s ease forwards';
+      }, 500);
+    }, 1500);
+  })();
+</script>
+</body>
+</html>
