@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Israa — دليل زيارات الدكاترة</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;800;900&family=Cairo:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg:#EEF3FB;
+    --surface:#FFFFFF;
+    --surface-alt:#F4F8FD;
+    --ink:#152238;
+    --ink-soft:#5A6C8A;
+    --line:#D7E2F2;
+    --primary:#2856A6;
+    --primary-dark:#1A3B79;
+    --primary-soft:#E1EAF9;
+    --accent:#2E8FC0;
+    --accent-soft:#DFF1F8;
+    --danger:#B23A34;
+    --danger-soft:#F7E5E3;
+    --warning:#F59E0B;
+    --warning-soft:#FEF3C7;
+    --radius:14px;
+    --shadow: 0 2px 10px rgba(21,34,56,0.07), 0 1px 2px rgba(21,34,56,0.05);
+    --table-header-bg: var(--primary);
+    --table-header-alt: var(--primary-dark);
+  }
+
+  /* Themes - Adjusted for High Contrast */
+  body.theme-midnight {
+    --bg: #0B0F19; --surface: #111827; --surface-alt: #1F2937;
+    --ink: #FFFFFF; --ink-soft: #CBD5E1; --line: #374151;
+    --primary: #3B82F6; --primary-dark: #93C5FD; --primary-soft: rgba(59, 130, 246, 0.2);
+    --accent: #06B6D4; --accent-soft: rgba(6, 182, 212, 0.2); --shadow: 0 4px 20px rgba(0,0,0,0.5);
+    --warning-soft: rgba(245, 158, 11, 0.15); --warning: #FBBF24;
+  }
+  body.theme-charcoal {
+    --bg: #121212; --surface: #1E1E1E; --surface-alt: #2D2D2D;
+    --ink: #FFFFFF; --ink-soft: #D4D4D4; --line: #404040;
+    --primary: #BB86FC; --primary-dark: #EADDFF; --primary-soft: rgba(187, 134, 252, 0.15);
+    --accent: #03DAC6; --accent-soft: rgba(3, 218, 198, 0.15); --shadow: 0 4px 20px rgba(0,0,0,0.6);
+    --warning-soft: rgba(245, 158, 11, 0.15); --warning: #FBBF24;
+  }
+  body.theme-emerald {
+    --bg: #061A14; --surface: #0E2921; --surface-alt: #163B30;
+    --ink: #FFFFFF; --ink-soft: #A7F3D0; --line: #225444;
+    --primary: #10B981; --primary-dark: #6EE7B7; --primary-soft: rgba(16, 185, 129, 0.2);
+    --accent: #34D399; --accent-soft: rgba(52, 211, 153, 0.2); --shadow: 0 4px 20px rgba(0,0,0,0.5);
+    --warning-soft: rgba(245, 158, 11, 0.15); --warning: #FCD34D;
+  }
+  body.theme-ocean {
+    --bg: #020617; --surface: #0F172A; --surface-alt: #1E293B;
+    --ink: #F8FAFC; --ink-soft: #94A3B8; --line: #334155;
+    --primary: #0EA5E9; --primary-dark: #7DD3FC; --primary-soft: rgba(14, 165, 233, 0.2);
+    --accent: #8B5CF6; --accent-soft: rgba(139, 92, 246, 0.2); --shadow: 0 4px 20px rgba(0,0,0,0.5);
+    --warning-soft: rgba(245, 158, 11, 0.15); --warning: #FDE047;
+  }
+  body.theme-sunset {
+    --bg: #1C1917; --surface: #292524; --surface-alt: #44403C;
+    --ink: #FAFAF9; --ink-soft: #D6D3D1; --line: #57534E;
+    --primary: #F43F5E; --primary-dark: #FDA4AF; --primary-soft: rgba(244, 63, 94, 0.2);
+    --accent: #F59E0B; --accent-soft: rgba(245, 158, 11, 0.2); --shadow: 0 4px 20px rgba(0,0,0,0.5);
+    --warning-soft: rgba(234, 179, 8, 0.15); --warning: #FDE047;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0; overflow-x: hidden;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Cairo',sans-serif;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .wrap{max-width:880px;margin:0 auto;padding:20px 16px 80px;}
+
+  /* Header */
+  header.app-head{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:22px 22px;
+    background:linear-gradient(135deg,var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius:var(--radius);
+    color:var(--bg);
+    box-shadow:var(--shadow);
+    margin-bottom:18px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.app-head::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%), radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  header.app-head > * { position: relative; z-index: 1; }
+  .app-head .pin-badge{
+    width:48px;height:48px;flex:none;border-radius:50%;
+    background:var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  }
+  .app-head .pin-badge svg{width:24px;height:24px;fill:#fff;}
+  .app-head h1{font-family:'Tajawal',sans-serif;font-weight:900;font-size:24px;margin:0;letter-spacing:0.3px; color: #fff;}
+  .app-head p{margin:4px 0 0;font-size:13px;opacity:0.85;font-weight:500; color: #fff;}
+  .stats-line{
+    margin-inline-start:auto;
+    text-align:left;
+    font-family:'Tajawal',sans-serif;
+    font-size:13px;
+    background:rgba(255,255,255,0.15);
+    padding:8px 14px;
+    border-radius:20px;
+    font-weight:700;
+    white-space:nowrap;
+    color: #fff;
+  }
+  
+  @media (max-width:560px){
+    header.app-head{flex-wrap:wrap;}
+    .stats-line{margin-inline-start:0;order:3;width:100%;text-align:center;}
+  }
+
+  /* Tabs */
+  nav.tabs{
+    display:flex;
+    gap:4px;
+    background:var(--surface-alt);
+    padding:6px;
+    border-radius:12px;
+    border:1px solid var(--line);
+    margin-bottom:20px;
+    overflow-x: auto;
+  }
+  nav.tabs button{
+    flex:1;
+    min-width: max-content;
+    border:none;
+    background:transparent;
+    padding:11px 8px;
+    font-family:'Tajawal',sans-serif;
+    font-weight:700;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    border-radius:9px;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  nav.tabs button:hover{color:var(--ink);}
+  nav.tabs button.active{
+    background:var(--surface);
+    color:var(--primary-dark);
+    box-shadow:var(--shadow);
+  }
+
+  .panel{display:none; animation:fadeIn .25s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+
+  h2.section-title{
+    font-family:'Tajawal',sans-serif;
+    font-size:18px;
+    font-weight:800;
+    margin:0 0 14px;
+    color:var(--ink);
+  }
+
+  /* Search */
+  .search-box{ position:relative; margin-bottom:18px; }
+  .search-box svg{ position:absolute; inset-inline-start:14px; top:50%; transform:translateY(-50%); width:18px;height:18px; fill:var(--ink-soft); }
+  .search-box input{
+    width:100%; padding:12px 42px 12px 14px; border-radius:10px;
+    border:1px solid var(--line); background:var(--surface);
+    font-family:'Cairo',sans-serif; font-size:14px; color:var(--ink);
+  }
+  .search-box input:focus{outline:2px solid var(--primary); outline-offset:1px;}
+
+  /* Route list */
+  .route-list{position:relative; padding-inline-start:0;}
+  .route-stop{position:relative; padding-inline-end:52px; margin-bottom:22px;}
+  .route-stop:not(:last-child)::after{
+    content:''; position:absolute; inset-inline-end:19px; top:42px; bottom:-22px; width:2px; background:var(--primary-soft);
+  }
+  .stop-badge{
+    position:absolute; inset-inline-end:0; top:0; width:40px;height:40px; border-radius:50%;
+    background:var(--accent); color:#fff; display:flex;align-items:center;justify-content:center;
+    font-family:'Tajawal',sans-serif; font-weight:800; font-size:15px; box-shadow:0 2px 5px rgba(0,0,0,0.2); flex:none;
+  }
+  .stop-badge.unclassified{background:var(--ink-soft); box-shadow:none;}
+  
+  .stop-head{
+    display:flex; align-items:center; gap:8px; padding:12px 16px; margin-bottom:14px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+    cursor: pointer; user-select: none; box-shadow: var(--shadow); transition: background 0.2s;
+  }
+  .stop-head:hover{ background: var(--surface-alt); }
+  .stop-head h3{font-family:'Tajawal',sans-serif;font-size:16.5px;font-weight:800;margin:0; color:var(--ink);}
+  .stop-head span.count{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .area-chevron { margin-inline-start: auto; width: 22px; height: 22px; fill: var(--ink-soft); transition: transform 0.3s ease; }
+  .route-stop.expanded .area-chevron { transform: rotate(180deg); }
+  .area-docs-container { display: none; }
+  .route-stop.expanded .area-docs-container { display: block; animation: fadeIn 0.3s ease; }
+
+  /* Buttons */
+  .icon-btn{
+    width:30px;height:30px; border-radius:8px; border:1px solid var(--line);
+    background:var(--surface-alt); display:flex;align-items:center;justify-content:center; cursor:pointer; transition:background .15s ease;
+  }
+  .icon-btn svg{width:15px;height:15px;fill:var(--ink-soft);}
+  .icon-btn:hover{background:var(--primary-soft);}
+  .icon-btn.danger:hover{background:var(--danger-soft);}
+  .icon-btn.danger:hover svg{fill:var(--danger);}
+
+  /* Doctors List & Visits */
+  .doc-list { display: flex; flex-direction: column; gap: 10px; }
+  .doc-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); transition: all 0.2s; }
+  .doc-card-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; cursor: pointer; background: var(--surface); user-select: none; }
+  .doc-card-header:hover { background: var(--surface-alt); }
+  .doc-title-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .doc-name { font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 15.5px; margin: 0; color: var(--ink); }
+  .doc-badge { background: var(--primary-soft); color: var(--primary-dark); font-size: 11.5px; font-weight: 700; padding: 3px 8px; border-radius: 20px; }
+  .chevron { width: 20px; height: 20px; fill: var(--ink-soft); transition: transform 0.3s; flex: none; }
+  .doc-card.expanded .chevron { transform: rotate(180deg); }
+  .doc-card-body { display: none; padding: 0 16px 16px; border-top: 1px dashed var(--line); }
+  .doc-card.expanded .doc-card-body { display: block; animation: fadeIn 0.3s ease; }
+  .doc-details-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; margin-bottom: 14px; }
+  .doc-detail-row { display: flex; align-items: flex-start; gap: 6px; font-size: 14px; color: var(--ink); }
+  .detail-label { font-weight: 700; color: var(--ink-soft); font-size: 13.5px; white-space: nowrap; flex:none; }
+  .detail-value { line-height: 1.5; }
+  .doc-actions-bar { display: flex; gap: 10px; flex-wrap: wrap;}
+  .doc-actions-bar .btn { flex: 1; padding: 8px; font-size: 13.5px; min-width: 100px; }
+
+  .doc-inner-section { background: var(--surface-alt); border-radius: 10px; padding: 12px; margin-bottom: 14px; border: 1px solid var(--line); }
+  .doc-inner-title { font-size: 13px; font-weight: 800; color: var(--primary-dark); margin: 0 0 10px 0; display: flex; align-items: center; justify-content: space-between;}
+  
+  .gatekeeper-box { background: var(--warning-soft); border: 1px solid var(--warning); border-radius: 8px; padding: 10px; margin-top: 8px; margin-bottom: 14px; }
+  .gatekeeper-box .sec-title { font-size: 12px; font-weight: 800; color: var(--warning); display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
+  
+  .visit-item { background: var(--surface); border-right: 3px solid var(--accent); padding: 8px 10px; margin-bottom: 8px; border-radius: 6px; font-size: 13px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);}
+  .visit-item:last-child { margin-bottom: 0; }
+  .visit-date { font-weight: 700; color: var(--ink); margin-bottom: 4px; font-size: 12px;}
+  .visit-detail { color: var(--ink-soft); margin-bottom: 2px; }
+  .visit-detail span { font-weight: 600; color: var(--ink); }
+  .doc-image-preview { width: 100%; max-height: 150px; object-fit: contain; border-radius: 8px; margin-bottom: 10px; display: none; background: #fff; border: 1px solid var(--line); }
+
+  .phone-link{ color:var(--primary-dark); font-weight:700; text-decoration:none; white-space:nowrap; display:inline-flex; align-items:center; gap:5px; direction: ltr; }
+  .phone-link svg{width:13px;height:13px;fill:var(--primary-dark);}
+  .cell-dash{color:var(--line);}
+
+  .empty-msg{ background:var(--surface-alt); border:1px dashed var(--line); border-radius:12px; padding:14px 16px; color:var(--ink-soft); font-size:13.5px; }
+  .big-empty{ text-align:center; padding:50px 20px; background:var(--surface); border-radius:var(--radius); border:1px solid var(--line); }
+  .big-empty svg{width:46px;height:46px;fill:var(--line); margin-bottom:12px;}
+  .big-empty p{color:var(--ink-soft); font-size:14px; margin:0 0 16px;}
+
+  /* Forms */
+  .form-card{ background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); }
+  .field{margin-bottom:16px;}
+  .field label{ display:block; font-size:13.5px; font-weight:700; margin-bottom:6px; color:var(--ink); font-family:'Tajawal',sans-serif; }
+  .field .hint{font-weight:500; color:var(--ink-soft); font-size:12px;}
+  .field input, .field select, .field textarea{ width:100%; padding:11px 13px; border-radius:9px; border:1px solid var(--line); background:var(--surface-alt); font-family:'Cairo',sans-serif; font-size:14px; color:var(--ink); }
+  .field textarea{resize:vertical; min-height:64px;}
+  .field input:focus, .field select:focus, .field textarea:focus{ outline:2px solid var(--primary); outline-offset:1px; background:var(--surface); }
+  .field-row{display:flex; gap:12px;}
+  .field-row .field{flex:1;}
+  @media (max-width:560px){.field-row{flex-direction:column; gap:0;}}
+
+  .custom-field-row, .custom-time-row { display: flex; gap: 8px; margin-bottom: 10px; align-items: center; }
+  .custom-field-row input, .custom-time-row input { flex: 1; min-width: 0; }
+  .cf-remove, .t-remove { flex: none; width: 38px; height: 38px; border-radius: 9px; }
+  .dynamic-section-bg { background: var(--surface-alt); padding: 14px; border-radius: 12px; border: 1px dashed var(--line); margin-bottom:16px;}
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:7px; padding:11px 20px; border-radius:10px; border:none; font-family:'Tajawal',sans-serif; font-weight:700; font-size:14.5px; cursor:pointer; transition:transform .1s ease, background .15s ease; color:#fff;}
+  .btn svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--primary); color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-ghost{background:transparent; color:var(--ink-soft); border:1px solid var(--line);}
+  .btn-ghost:hover{background:var(--surface-alt); color:var(--ink);}
+  .btn-danger-ghost{background:transparent; color:var(--danger); border:1px solid var(--danger-soft);}
+  .btn-danger-ghost:hover{background:var(--danger-soft);}
+  .form-actions{display:flex; gap:10px; margin-top:4px;}
+  .edit-banner{ display:flex; align-items:center; justify-content:space-between; background:var(--accent-soft); color:var(--primary-dark); border-radius:9px; padding:10px 14px; margin-bottom:16px; font-size:13.5px; font-weight:700; }
+
+  /* Processing Cards */
+  .proc-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow); }
+  .proc-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .proc-title { font-weight: 800; font-size: 16.5px; color: var(--ink); margin: 0; font-family: 'Tajawal', sans-serif;}
+  .proc-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; color:#000; }
+  .proc-badge.Waiting { background: #FDE047; }
+  .proc-badge.Pending { background: #93C5FD; }
+  .proc-badge.Finished { background: #86EFAC; }
+  .proc-body { font-size: 14px; color: var(--ink); display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  
+  /* Areas tab */
+  .add-area-form{display:flex; gap:10px; margin-bottom:20px;}
+  .add-area-form input{flex:1;}
+  .area-row{ display:flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; margin-bottom:9px; }
+  .area-row .order-no{ width:26px;height:26px;border-radius:50%; background:var(--primary-soft); color:var(--primary-dark); display:flex;align-items:center;justify-content:center; font-family:'Tajawal',sans-serif; font-weight:800; font-size:12.5px; flex:none; }
+  .area-row .name{flex:1; font-weight:700; font-size:14.5px; color:var(--ink);}
+  .area-row .sub{font-size:12px; color:var(--ink-soft); font-weight:500;}
+  .area-row .reorder-btns{display:flex; flex-direction:column; gap:2px;}
+  .area-row .reorder-btns button{ width:22px;height:18px; border:none; background:var(--surface-alt); border-radius:4px; cursor:pointer; display:flex;align-items:center;justify-content:center; }
+  .area-row .reorder-btns svg{width:10px;height:10px; fill:var(--ink-soft);}
+  .settings-box{ margin-top:26px; padding-top:18px; border-top:1px dashed var(--line); }
+  .settings-box p{font-size:12.5px; color:var(--ink-soft); margin:0 0 10px;}
+
+  /* Dashboard Tab */
+  .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .dash-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; }
+  .dash-card-title { font-family: 'Tajawal', sans-serif; font-size: 15px; font-weight: 800; color: var(--ink-soft); margin: 0 0 10px 0; }
+  .dash-card-value { font-size: 32px; font-weight: 900; color: var(--primary-dark); margin: 0; line-height: 1; }
+  .spec-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+  .spec-item { display: flex; justify-content: space-between; align-items: center; background: var(--surface-alt); padding: 8px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 600; color:var(--ink); }
+  .spec-item span.count { background: var(--primary-soft); color: var(--primary-dark); padding: 2px 8px; border-radius: 12px; font-size: 12px; }
+  
+  .neglected-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; }
+  .neglected-item { background: var(--danger-soft); border-right: 3px solid var(--danger); padding: 10px; border-radius: 6px; font-size: 13px; }
+  .neglected-name { font-weight: 700; color: var(--danger); margin-bottom: 2px; }
+  .neglected-sub { color: var(--ink-soft); font-size: 11.5px; }
+
+  /* Schedule Tab */
+  .table-scroll-container { overflow-x: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); }
+  .schedule-table { width: 100%; border-collapse: collapse; min-width: 900px; text-align: center; }
+  .schedule-table th, .schedule-table td { border: 1px solid var(--line); padding: 12px 6px; vertical-align: middle; }
+  .schedule-table thead th { background: linear-gradient(135deg, var(--table-header-bg) 0%, var(--primary-dark) 100%); color: #fff; font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 14.5px; position: sticky; top: 0; z-index: 5; }
+  .schedule-table thead th:first-child { background: linear-gradient(135deg, var(--table-header-alt) 0%, var(--ink) 100%); z-index: 10; color:#fff; }
+  .schedule-table tbody th { background: linear-gradient(135deg, var(--table-header-alt) 0%, var(--ink) 100%); color: #fff; font-family: 'Tajawal', sans-serif; font-weight: 800; font-size: 14.5px; position: sticky; right: 0; z-index: 5; width: 100px; }
+  .schedule-table td { background: var(--surface); cursor: pointer; transition: background 0.15s ease; height: 70px; min-width: 110px; }
+  .schedule-table td:hover { background: var(--surface-alt); }
+  .cell-content { display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+  .cell-doc-name { font-weight: 800; font-size: 13.5px; color: var(--ink); line-height: 1.2; }
+  .cell-area-badge { font-size: 11px; font-weight: 700; background: var(--accent-soft); color: var(--primary-dark); padding: 2px 8px; border-radius: 12px; }
+
+  /* Modal System */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(3px); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+  .modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .modal-card { background: var(--surface); width: 100%; max-width: 420px; max-height: 85vh; border-radius: var(--radius); display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.25); transform: translateY(20px); transition: transform 0.25s ease; }
+  .modal-overlay.active .modal-card { transform: translateY(0); }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); background: var(--surface-alt); border-radius: var(--radius) var(--radius) 0 0; }
+  .modal-header h3 { margin: 0; font-family: 'Tajawal', sans-serif; font-size: 17px; font-weight: 800; color: var(--ink); }
+  .modal-close { background: transparent; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); transition: background 0.15s ease; }
+  .modal-close:hover { background: var(--line); color: var(--danger); }
+  .modal-close svg { width: 18px; height: 18px; fill: currentColor; }
+  .modal-body { padding: 16px 20px; overflow-y: auto; }
+  .modal-back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; color: var(--primary); font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 14.5px; cursor: pointer; margin-bottom: 16px; padding: 0; }
+  .modal-back-btn svg { width: 14px; height: 14px; fill: currentColor; }
+  
+  .select-list { display: flex; flex-direction: column; gap: 8px; }
+  .select-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: var(--surface-alt); border: 1px solid var(--line); border-radius: 10px; cursor: pointer; transition: all 0.2s ease; text-align: right; font-family: 'Cairo', sans-serif; font-weight: 600; font-size: 14.5px; color: var(--ink); }
+  .select-item:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); transform: translateX(-4px); }
+  .select-item .doc-spec { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
+
+  /* History Styles */
+  .history-item { padding: 14px 20px; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; cursor: pointer; transition: background 0.2s; }
+  .history-item:hover { background: var(--surface-alt); }
+  .history-item:last-child { border-bottom: none; }
+  .history-item.empty { text-align: center; color: var(--ink-soft); padding: 30px 20px; cursor: default; }
+  .h-text { font-family: 'Tajawal', sans-serif; font-size: 14.5px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: center;}
+  .h-text svg { width: 14px; height: 14px; fill: var(--ink-soft); transition: transform 0.2s; flex-shrink: 0;}
+  .history-item.open .h-text svg { transform: rotate(180deg); }
+  .h-time { font-size: 12px; color: var(--ink-soft); font-weight: 600; }
+  .h-details { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); font-size: 13px; color: var(--ink); background: var(--accent-soft); padding: 10px; border-radius: 6px;}
+  .history-item.open .h-details { display: block; animation: fadeIn 0.3s ease; }
+  
+  .undo-hist-btn { 
+      background: var(--danger); 
+      color: #fff; 
+      border: none; 
+      padding: 5px 14px; 
+      border-radius: 6px; 
+      font-size: 12px; 
+      font-family: 'Tajawal', sans-serif; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(178,58,52,0.3);
+  }
+  .undo-hist-btn:hover { background: #8e2e29; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(178,58,52,0.4); }
+  .undo-hist-btn:active { transform: translateY(0); }
+
+  .redo-hist-btn {
+      background: var(--primary); 
+      color: #fff; 
+      border: none; 
+      padding: 5px 14px; 
+      border-radius: 6px; 
+      font-size: 12px; 
+      font-family: 'Tajawal', sans-serif; 
+      font-weight: 800; 
+      cursor: pointer; 
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(40,86,166,0.3);
+  }
+  .redo-hist-btn:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(40,86,166,0.4); }
+  .redo-hist-btn:active { transform: translateY(0); }
+
+  .delete-hist-btn {
+      background: transparent;
+      border: none;
+      color: var(--danger);
+      font-size: 18px;
+      font-weight: bold;
+      padding: 0 5px;
+      margin-right: 5px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+  }
+  .delete-hist-btn:hover {
+      transform: scale(1.2);
+  }
+
+  /* Floating Icons */
+  .floating-btns { position: fixed; bottom: 24px; left: 24px; display:flex; flex-direction:column; gap:12px; z-index: 990;}
+  .float-btn { width: 54px; height: 54px; border-radius: 50%; color: #fff; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transition: transform 0.2s ease, background 0.2s ease; }
+  .float-btn:hover { transform: translateY(-4px) scale(1.05); }
+  .float-btn svg { width: 24px; height: 24px; fill: currentColor; }
+  #historyIconBtn { background: var(--primary); }
+  #historyIconBtn:hover { background: var(--primary-dark); }
+  #quickAddFab { background: var(--accent); }
+  #quickAddFab:hover { background: var(--accent-soft); color: var(--primary-dark); }
+
+  /* Floating Theme Selector (Bottom Right) */
+  .theme-selector-wrap { position: fixed; bottom: 24px; right: 24px; z-index: 990; }
+  #themeToggleBtn { width: 54px; height: 54px; border-radius: 50%; background: var(--ink); color: var(--surface); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); transition: transform 0.2s ease, background 0.2s ease; }
+  #themeToggleBtn:hover { transform: translateY(-4px) scale(1.05); }
+  #themeToggleBtn svg { width: 24px; height: 24px; fill: currentColor; }
+  .theme-menu { position: absolute; bottom: 65px; right: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); display: none; flex-direction: column; gap: 6px; width: 170px; }
+  .theme-menu.active { display: flex; animation: fadeIn 0.2s ease; }
+  .theme-option { background: var(--surface-alt); border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 13.5px; color: var(--ink); cursor: pointer; text-align: right; transition: background 0.15s; }
+  .theme-option:hover { background: var(--primary-soft); color: var(--primary-dark); }
+
+  /* Toast */
+  #toast-wrap{ position:fixed; bottom:20px; right:50%; transform:translateX(50%); z-index:99999; display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .toast{ background:var(--ink); color:var(--bg); padding:11px 20px; border-radius:30px; font-size:13.5px; font-weight:600; box-shadow:0 4px 14px rgba(0,0,0,0.4); animation:toastIn .2s ease; display:flex; align-items:center; gap:12px; }
+  @keyframes toastIn{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);}}
+
+  /* --- CREATIVE LOADING SCREEN --- */
+  #loading-screen{ display:flex; align-items:center; justify-content:center; min-height:100vh; flex-direction:column; gap:30px; color:var(--ink-soft); background: linear-gradient(135deg, #EEF3FB 0%, #DFF1F8 100%); position: fixed; inset: 0; z-index: 999999; overflow: hidden; }
+  .israa-brand { font-family: 'Tajawal', sans-serif; font-size: 56px; font-weight: 900; color: #1A3B79; display: flex; align-items: flex-end; letter-spacing: 2px; position: relative; text-shadow: 0 4px 15px rgba(26, 59, 121, 0.15); z-index: 10; }
+  .i-wrapper { position: relative; display: inline-block; }
+  .heart-dot { position: absolute; top: -24px; left: 50%; width: 26px; height: 26px; fill: #B23A34; filter: drop-shadow(0 4px 8px rgba(178, 58, 52, 0.5)); animation: bounceHeart 1.5s cubic-bezier(0.28, 0.84, 0.42, 1) infinite; will-change: transform; transform-origin: center; }
+  @keyframes bounceHeart { 0%, 100% { transform: translate(-50%, 0) scale(1); } 50% { transform: translate(-50%, -30px) scale(1.15) rotate(5deg); } }
+  .heart-dot.run-across { animation: bounceAcross 1.5s ease-in-out forwards !important; }
+  @keyframes bounceAcross { 0% { transform: translate(-50%, 0) scale(1); } 12.5% { transform: translate(calc(-50% + 15px), -35px) scale(1.1) rotate(15deg); } 25% { transform: translate(calc(-50% + 30px), 0) scale(1) rotate(30deg); } 37.5% { transform: translate(calc(-50% + 45px), -35px) scale(1.1) rotate(60deg); } 50% { transform: translate(calc(-50% + 60px), 0) scale(1) rotate(90deg); } 62.5% { transform: translate(calc(-50% + 75px), -35px) scale(1.1) rotate(120deg); } 75% { transform: translate(calc(-50% + 90px), 0) scale(1) rotate(150deg); } 87.5% { transform: translate(calc(-50% + 110px), -35px) scale(1.1) rotate(180deg); } 100% { transform: translate(calc(-50% + 130px), 0) scale(0) rotate(220deg); opacity: 0; } }
+  #quote-container { height: 80px; display: flex; align-items: center; justify-content: center; width: 90%; max-width: 600px; z-index: 10; }
+  #quote-text { font-size: 17px; font-weight: 700; text-align: center; line-height: 1.6; color: #152238; font-family: 'Tajawal', sans-serif; transition: opacity 0.5s ease; opacity: 0; }
+  .quote-author { display: block; font-size: 13px; color: #2856A6; margin-top: 8px; font-weight: 800; }
+  #main-content{display:none;}
+  .app-footer{ text-align:center; margin-top:36px; padding-top:16px; border-top:1px solid var(--line); color:var(--ink-soft); font-size:12.5px; font-family:'Cairo',sans-serif; }
+  .app-footer .heart{color:var(--danger); margin:0 3px; font-size:13px;}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div id="loading-screen">
+    <div class="israa-brand" dir="ltr">
+      <span class="i-wrapper"><svg class="heart-dot" viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg>ı</span>sraa
+    </div>
+    <div id="quote-container"><div id="quote-text"></div></div>
+  </div>
+
+<datalist id="hoursList"></datalist>
+<input type="file" id="imageUploadInput" accept="image/*" style="display:none;">
+<input type="file" id="excelUploadInput" accept=".xlsx, .xls" style="display:none;">
+
+<div class="wrap" id="main-content">
+  <div>
+    <header class="app-head">
+      <div class="pin-badge"><svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg></div>
+      <div>
+        <h1>Israa's Website</h1>
+        <p>دليل زيارات الدكاترة</p>
+      </div>
+      <div class="stats-line" id="statsLine">0 منطقة · 0 دكتور</div>
+    </header>
+
+    <nav class="tabs">
+      <button data-tab="route" class="active">الدكاترة(مناطق)</button>
+      <button data-tab="time_route">الدكاترة(بالمواعيد)</button>
+      <button data-tab="add">ضيف دكتور</button>
+      <button data-tab="areas">المناطق</button>
+      <button data-tab="processing">Processing</button>
+      <button data-tab="schedule">الجدول</button>
+      <button data-tab="dashboard">متابعة الزيارات</button>
+    </nav>
+
+    <!-- ROUTE / VIEW TAB (BY AREAS) -->
+    <section class="panel active" id="panel-route">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        <input type="text" id="searchInput" placeholder="دوري باسم الدكتور، التخصص، رقمه، أو عنوانه...">
+      </div>
+      <div style="display: flex; gap: 10px; margin-bottom: 18px;">
+        <button class="btn btn-primary" style="flex:1;" onclick="window.exportExcel('routeContainer', 'دكاترة_مناطق')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;margin-inline-end:5px;"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg> تصدير Excel</button>
+        <button class="btn btn-danger-ghost" style="flex:1;" onclick="window.exportPDF('routeContainer', 'دكاترة_مناطق')"><svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;margin-inline-end:5px;"><path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z"/></svg> تصدير PDF</button>
+      </div>
+      <div id="routeContainer"></div>
+    </section>
+
+    <!-- NEW ROUTE / VIEW TAB (BY TIMES/DAYS) -->
+    <section class="panel" id="panel-time_route">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 5L20.49 19l-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+        <input type="text" id="searchTimeInput" placeholder="بحث في المواعيد والأسماء...">
+      </div>
+      <div id="timeRouteContainer"></div>
+    </section>
+
+    <!-- ADD DOCTOR TAB -->
+    <section class="panel" id="panel-add">
+      <h2 class="section-title">بيانات الدكتور</h2>
+      <div class="form-card">
+        <div id="editBanner" class="edit-banner" style="display:none;">
+          <span>بتعدل بيانات دكتور موجود</span>
+          <button type="button" class="btn btn-ghost" id="cancelEditBtn" style="padding:5px 12px;font-size:12.5px;">إلغاء</button>
+        </div>
+        <form id="doctorForm">
+          <div class="field-row">
+            <div class="field"><label>اسم الدكتور</label><input type="text" id="docName" placeholder="مثال: د. إسراء عادل الجميلة" required></div>
+            <div class="field"><label>التخصص <span class="hint">(اختياري)</span></label><input type="text" id="docSpecialty" placeholder="مثال: باطنة، أطفال، عظام..."></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>المنطقة</label><select id="docArea" required></select></div>
+            <div class="field"><label>رقم التليفون الأساسي <span class="hint">(اختياري)</span></label><input type="tel" id="docPhone" placeholder="01xxxxxxxxx"></div>
+          </div>
+          <div class="field"><label>العنوان <span class="hint">(اختياري)</span></label><textarea id="docAddress" placeholder="اسم العيادة، الشارع، علامة مميزة ..اكتبي العنوان صح ارجوكي"></textarea></div>
+          
+          <!-- Notes Section Formatted to look native -->
+          <div class="field">
+            <label style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <span>ملاحظات إضافية عن الدكتور</span>
+                <span style="display:flex; gap:6px;">
+                    <button type="button" id="docAiFormatBtn" class="btn btn-ghost" style="padding:4px 8px; font-size:11px; height:auto; min-width:auto;">تنسيق 🪄</button>
+                    <button type="button" id="docMicBtn" class="btn btn-ghost" style="padding:4px 8px; font-size:11px; height:auto; min-width:auto;">صوت 🎤</button>
+                </span>
+            </label>
+            <textarea id="docNotes" placeholder="اكتب أو اتكلم عن أي حاجة تحب تفتكرها عن الدكتور ده..." style="min-height:90px;"></textarea>
+          </div>
+
+          <!-- Gatekeeper Details -->
+          <div class="dynamic-section-bg" style="background:var(--warning-soft); border-color:var(--warning);">
+            <div class="field-row">
+                <div class="field"><label style="color:var(--warning);">اسم السكرتير/ة 🔑</label><input type="text" id="docSecName" placeholder="اسم السكرتير لتسهيل الدخول"></div>
+                <div class="field"><label style="color:var(--warning);">الطباع والمزاج</label><input type="text" id="docSecTraits" placeholder="عصبي، بيحب الهزار، عايز عينات..."></div>
+            </div>
+            <div class="field" style="margin-bottom:0;">
+                <label style="color:var(--warning);">رقم التواصل (للحجز أو الاستفسار) 📞</label>
+                <input type="tel" id="docSecPhone" placeholder="رقم تليفون السكرتير أو العيادة للحجز (اختياري)">
+            </div>
+          </div>
+
+          <div class="dynamic-section-bg">
+            <div class="field" style="margin-bottom:0;">
+              <label>المواعيد المتاحة والعيادات <span class="hint">(الساعات اختياري)</span></label>
+              <div id="timesContainer"></div>
+              <button type="button" class="btn btn-ghost" id="addTimeBtn" style="margin-top:8px; font-size:13px; padding:6px 12px; background:var(--surface);">+ أضف ميعاد آخر</button>
+            </div>
+          </div>
+
+          <div class="dynamic-section-bg">
+            <div class="field" style="margin-bottom:0;">
+              <label>بيانات وخانات إضافية <span class="hint">(تليفونات تانية، لوكيشن، إلخ)</span></label>
+              <div id="customFieldsContainer"></div>
+              <button type="button" class="btn btn-ghost" id="addCustomFieldBtn" style="margin-top:8px; font-size:13px; padding:6px 12px; background:var(--surface);">+ أضف خانة جديدة</button>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitDocBtn" style="width: 100%;">حفظ الدكتور</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- AREAS TAB -->
+    <section class="panel" id="panel-areas">
+      <h2 class="section-title" style="display:flex; justify-content:space-between; align-items:center;">
+        المناطق الجغرافية
+        <button type="button" class="btn btn-primary" id="importExcelBtn" style="font-size:13px; padding:6px 14px;">📂 استيراد دكاترة من Excel</button>
+      </h2>
+      <form class="add-area-form" id="areaForm">
+        <input type="text" id="areaNameInput" placeholder="اسم منطقة جديدة، مثال: السكة الجديدة">
+        <button type="submit" class="btn btn-primary">إضافة</button>
+      </form>
+      <div id="areasListContainer"></div>
+    </section>
+
+    <!-- PROCESSING TAB -->
+    <section class="panel" id="panel-processing">
+      <h2 class="section-title">إدارة المتابعات (Processing)</h2>
+      <div class="form-card" style="margin-bottom: 20px;">
+        <form id="processingForm">
+          <input type="hidden" id="procEditId">
+          <div class="field-row">
+            <div class="field"><label>نوع المتابعة</label><input type="text" id="procType" list="procTypeOptions" placeholder="مثال: متابعة أدوية..." required><datalist id="procTypeOptions"><option value="متابعة أدوية"><option value="زيارة عيادة"><option value="مكالمة هاتفية"><option value="توصيل عينات"></datalist></div>
+            <div class="field"><label>الشخص اللي بتابع معاه</label><input type="text" id="procPerson" placeholder="اسم الدكتور أو العميل..." required></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>الرقم</label><input type="tel" id="procPhone" placeholder="01xxxxxxxxx"></div>
+            <div class="field"><label>الحالة (Status)</label><select id="procStatus" required><option value="Waiting">Waiting (في الانتظار)</option><option value="Pending">Pending (قيد التنفيذ)</option><option value="Finished">Finished (مكتمل)</option></select></div>
+          </div>
+          <div class="field"><label>ملاحظات (Notes)</label><textarea id="procNotes" placeholder="أضف أي تفاصيل..."></textarea></div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="submitProcBtn">حفظ المتابعة</button>
+            <button type="button" class="btn btn-ghost" id="cancelProcEditBtn" style="display:none;">إلغاء التعديل</button>
+          </div>
+        </form>
+      </div>
+      <div id="processingListContainer"></div>
+    </section>
+
+    <!-- SCHEDULE TAB -->
+    <section class="panel" id="panel-schedule">
+      <h2 class="section-title">جدول الزيارات الأسبوعي</h2>
+      <div id="scheduleContainer"></div>
+      <p style="font-size:12px; color:var(--ink-soft); margin-top:12px; text-align:center;">* اضغط على أي خانة فاضية عشان تختار المنطقة وبعدين تختار الدكتور وتسجله.</p>
+    </section>
+
+    <!-- DASHBOARD TAB -->
+    <section class="panel" id="panel-dashboard">
+      <h2 class="section-title">لوحة إحصائيات المتابعة والزيارات</h2>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <h3 class="dash-card-title">زيارات آخر 7 أيام</h3>
+          <p class="dash-card-value" id="dashWeeklyVisits">0</p>
+        </div>
+        <div class="dash-card">
+          <h3 class="dash-card-title">إجمالي الدكاترة</h3>
+          <p class="dash-card-value" id="dashTotalDocs">0</p>
+        </div>
+      </div>
+      
+      <!-- New Added Section For All Visits -->
+      <div class="field" style="margin-top: 30px; margin-bottom: 30px;">
+        <h2 class="section-title">ألقِ نظرة على زياراتك 👁️ <span style="font-size:12px; font-weight:500; color:var(--ink-soft);">(جميع الزيارات المسجلة)</span></h2>
+        <div class="form-card" style="padding: 16px;">
+          <div id="dashAllVisits" class="doc-list"></div>
+        </div>
+      </div>
+
+      <div class="field" style="margin-bottom: 20px;">
+        <h2 class="section-title">دكاترة مطلوب زيارتهم النهاردة <span style="font-size:12px; font-weight:500; color:var(--primary)">(بناءً على موعد زيارتك المخطط)</span></h2>
+        <div class="form-card" style="padding: 16px;">
+          <ul class="neglected-list" id="dashTodayVisits" style="border-color:var(--primary); background:var(--accent-soft);"></ul>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field" style="flex:1;">
+          <h2 class="section-title">توزيع التخصصات</h2>
+          <div class="form-card" style="padding: 16px;">
+            <ul class="spec-list" id="dashSpecialties"></ul>
+          </div>
+        </div>
+        <div class="field" style="flex:1;">
+          <h2 class="section-title">دكاترة تحتاج لزيارة <span style="font-size:12px; font-weight:500; color:var(--danger)">(عدى 30 يوم أو لم يزاروا)</span></h2>
+          <div class="form-card" style="padding: 16px;">
+            <ul class="neglected-list" id="dashNeglected"></ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chart Section -->
+      <div class="field" style="margin-top: 30px;">
+        <h2 class="section-title">تطور الزيارات (آخر 7 أيام)</h2>
+        <div class="form-card" style="padding: 16px; position: relative; height: 300px; width: 100%;">
+          <canvas id="visitsChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <footer class="app-footer">Made with <span class="heart">♥</span> by Youssef</footer>
+  </div>
+</div>
+
+<!-- Floating Icons -->
+<div class="floating-btns">
+  <button class="float-btn" id="historyIconBtn" title="سجل التعديلات الدائم والتراجع (Undo)"><svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></button>
+  <button class="float-btn" id="quickAddFab" title="إضافة سريعة"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+</div>
+
+<!-- Floating Theme Selector Button & Menu -->
+<div class="theme-selector-wrap">
+  <div class="theme-menu" id="themeMenu">
+    <button class="theme-option" data-theme="light">☀️ الوضع العادي</button>
+    <button class="theme-option" data-theme="midnight">🌙 منتصف الليل</button>
+    <button class="theme-option" data-theme="charcoal">🖤 الفحمي الداكن</button>
+    <button class="theme-option" data-theme="emerald">🌿 الزمردي الليلي</button>
+    <button class="theme-option" data-theme="ocean">🌊 المحيط العميق</button>
+    <button class="theme-option" data-theme="sunset">🌅 غروب الشمس</button>
+  </div>
+  <button id="themeToggleBtn" title="تغيير الثيم (Dark Mode)"><svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg></button>
+</div>
+
+<!-- Modals -->
+<div class="modal-overlay" id="scheduleModal">
+  <div class="modal-card">
+    <div class="modal-header"><h3 id="modalTitle">اختر</h3><button class="modal-close" id="closeModalBtn"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="historyModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 style="display:flex; align-items:center; gap:8px;"><svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:currentColor;"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>سجل التعديلات والتراجع</h3>
+      <button class="modal-close" id="closeHistoryBtn"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+    </div>
+    <div class="modal-body" id="historyModalBody" style="max-height: 400px; padding: 0;"></div>
+  </div>
+</div>
+
+<!-- Modal for Recording Visit with Next Visit & Voice Dictation -->
+<div class="modal-overlay" id="visitModal">
+  <div class="modal-card">
+    <div class="modal-header"><h3 id="visitModalTitle">تسجيل زيارة جديدة</h3><button class="modal-close" id="closeVisitBtn"><svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button></div>
+    <div class="modal-body">
+      <form id="visitForm">
+        <input type="hidden" id="visitDocId">
+        <input type="hidden" id="visitId"> <!-- New: For Editing -->
+        <div class="field"><label>تاريخ الزيارة</label><input type="date" id="visitDate" required></div>
+        <div class="field"><label>تاريخ الزيارة القادمة المخطط لها <span class="hint">(اختياري)</span></label><input type="date" id="visitNextDate"></div>
+        <div class="field"><label>المنتجات / الأدوية اللي تم مناقشتها</label><input type="text" id="visitProducts" placeholder="مثال: منتج X، منتج Y..."></div>
+        <div class="field"><label>العينات (Samples) اللي اتسابت</label><input type="text" id="visitSamples" placeholder="مثال: 2 علبة من X"></div>
+        
+        <!-- Visit Notes Section Modified for better UI/UX -->
+        <div class="dynamic-section-bg" style="border-color: var(--primary); background: var(--surface);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+                <label style="margin:0; font-size:13.5px; font-weight:800; color:var(--primary-dark);">ملاحظات الزيارة والتلخيص 🪄</label>
+                <div style="display:flex; gap:6px;">
+                    <button type="button" id="aiFormatBtn" class="btn btn-primary" style="padding:6px 10px; font-size:12px; background:var(--accent); height:32px; min-width:max-content;">
+                        <svg style="width:14px; height:14px; margin-left:4px; fill:currentColor;" viewBox="0 0 24 24"><path d="M7.5 5.6L10 7 8.6 4.5 10 2 7.5 3.4 5 2l1.4 2.5L5 7zm12 9.8L17 14l1.4 2.5L17 19l2.5-1.4L22 19l-1.4-2.5L22 14zM22 2l-2.5 1.4L17 2l1.4 2.5L17 7l2.5-1.4L22 7l-1.4-2.5zm-7.6 3.2c-.4-.4-1-.4-1.4 0l-9.8 9.8c-.4.4-.4 1 0 1.4l4.2 4.2c.4.4 1 .4 1.4 0l9.8-9.8c.4-.4.4-1 0-1.4l-4.2-4.2zM8.3 19.3L4.7 15.7l8.4-8.4 3.6 3.6-8.4 8.4z"/></svg>
+                        تلخيص
+                    </button>
+                    <button type="button" id="micBtn" class="btn btn-primary" style="padding:6px 10px; font-size:12px; height:32px; min-width:max-content;">
+                        <svg style="width:14px; height:14px; margin-left:4px; fill:currentColor;" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                        صوت
+                    </button>
+                </div>
+            </div>
+            <textarea id="visitNotes" placeholder="اكتب براحتك أو استخدم المايك، وبعدين دوس تلخيص ذكي عشان يترتب في نقط..." style="min-height:140px; border: 1px solid var(--line); font-size:14px; line-height:1.6;"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" id="submitVisitBtn" style="width: 100%; margin-top:10px;">حفظ الزيارة</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast-wrap"></div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getFirestore, doc, setDoc, getDoc, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC0nIkeCvKqGWggs59FEpvKrorNhjk35_w",
+    authDomain: "israa-app-18357.firebaseapp.com",
+    projectId: "israa-app-18357",
+    storageBucket: "israa-app-18357.firebasestorage.app",
+    messagingSenderId: "836830301295",
+    appId: "1:836830301295:web:5560911cc49d8e6268119a",
+    measurementId: "G-0ECLHX51KK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  
+  enableIndexedDbPersistence(db).catch((err) => {
+      if (err.code == 'failed-precondition') {
+          console.log('Multiple tabs open, persistence can only be enabled in one tab at a time.');
+      } else if (err.code == 'unimplemented') {
+          console.log('The current browser does not support all of the features required to enable persistence');
+      }
+  });
+
+  const ICONS = {
+    phone:'<svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1L6.6 10.8z"/></svg>',
+    edit:'<svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.8 9.94l-3.75-3.75L3 17.25zM20.7 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>',
+    trash:'<svg viewBox="0 0 24 24"><path d="M6 7h12l-1 14H7L6 7zm3-4h6l1 2h4v2H4V5h4l1-2zm0 6h2v9H9v-9zm4 0h2v9h-2v-9z"/></svg>',
+    up:'<svg viewBox="0 0 24 24"><path d="M12 6l7 8h-4v6h-6v-6H5z"/></svg>',
+    down:'<svg viewBox="0 0 24 24"><path d="M12 18l-7-8h4V4h6v6h4z"/></svg>',
+    mapEmpty:'<svg viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.6 4 10c0 5.4 7 11.5 7.3 11.8.2.1.4.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>',
+    chevronLeft: '<svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>',
+    image: '<svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>',
+    visit: '<svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>',
+    chevronDown: '<svg viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg>',
+    whatsapp: '<svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>'
+  };
+
+  const SCHEDULE_DAYS = ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  const SCHEDULE_DAYS_AR = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  const SCHEDULE_HOURS = ['10:00 AM - 11:00 AM', '11:00 AM - 12:00 PM', '12:00 PM - 01:00 PM', '01:00 PM - 02:00 PM', '02:00 PM - 03:00 PM', '03:00 PM - 04:00 PM', '04:00 PM - 05:00 PM', '05:00 PM - 06:00 PM', '06:00 PM - 07:00 PM', '07:00 PM - 08:00 PM', '08:00 PM - 09:00 PM', '09:00 PM - 10:00 PM', '10:00 PM - 11:00 PM'];
+  const TIME_DAYS_LIST = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'];
+  
+  let TIME_HOURS_OPTS = '';
+  ['AM', 'PM'].forEach(m => { let h = 12; TIME_HOURS_OPTS += `<option value="${h}:00 ${m}"></option><option value="${h}:30 ${m}"></option>`; for(let i=1; i<=11; i++){ let hr = i < 10 ? '0'+i : i; TIME_HOURS_OPTS += `<option value="${hr}:00 ${m}"></option><option value="${hr}:30 ${m}"></option>`; } });
+  document.getElementById('hoursList').innerHTML = TIME_HOURS_OPTS;
+
+  let areas = []; let doctors = []; let schedule = {}; let processingList = []; let historyLog = []; let docImages = {};
+  let editingId = null; let activeCell = null; let activeUploadDocId = null;
+  let chartInstance = null;
+
+  function uid(prefix){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,8); }
+  function esc(str){ const d = document.createElement('div'); d.textContent = str == null ? '' : String(str); return d.innerHTML; }
+  function linkify(text) { const urlRegex = /(https?:\/\/[^\s]+)/g; return text.replace(urlRegex, function(url) { return `<a href="${url}" target="_blank" style="color:var(--primary-dark);text-decoration:underline;word-break:break-all;">فتح الرابط</a>`; }); }
+  
+  function showToast(msg){ 
+      const wrap = document.getElementById('toast-wrap'); 
+      const t = document.createElement('div'); 
+      t.className = 'toast'; 
+      t.innerHTML = `<span style="color:var(--bg);">${msg}</span>`;
+      wrap.appendChild(t); 
+      setTimeout(()=>{ if(t.parentNode) { t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); } }, 2500);
+  }
+
+  function timeToMinutes(t) {
+      if(!t) return 0; const match = t.match(/(\d{1,2})(?::(\d{1,2}))?\s*(AM|PM|am|pm|ص|م)?/i); if(!match) return 0;
+      let h = parseInt(match[1]); let m = match[2] ? parseInt(match[2]) : 0; let ampm = match[3] ? match[3].toLowerCase() : '';
+      if(h === 12 && (ampm === 'am' || ampm === 'ص')) h = 0; if(h !== 12 && (ampm === 'pm' || ampm === 'م')) h += 12; return h * 60 + m;
+  }
+
+  function logAction(msg, details = "", undoData = null) {
+    const now = new Date(); const timeStr = now.toLocaleDateString('ar-EG') + ' ' + now.toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+    historyLog.unshift({ id: uid('hist'), msg: msg, details: details, time: timeStr, ts: now.getTime(), undoData: undoData, undone: false });
+    if (historyLog.length > 50) historyLog.length = 50; syncToCloud(); 
+  }
+
+  async function loadAll(){
+    try{
+      const docRef = doc(db, "israa_app", "main_data"); const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        areas = data.areas || []; doctors = data.doctors || []; schedule = data.schedule || {};
+        for(let k in schedule){ if(typeof schedule[k] === 'string'){ schedule[k] = [schedule[k]]; } }
+        processingList = data.processingList || []; historyLog = data.historyLog || [];
+        
+        // Auto-Clean History older than 30 days
+        const thirtyDaysMs = 30 * 24 * 60 * 60 * 1000;
+        const nowMs = Date.now();
+        const initialLen = historyLog.length;
+        historyLog = historyLog.filter(log => (nowMs - log.ts) <= thirtyDaysMs);
+        if (historyLog.length !== initialLen) { syncToCloud(); }
+      }
+      const imgRef = doc(db, "israa_app", "images_data"); const imgSnap = await getDoc(imgRef);
+      if (imgSnap.exists()) { docImages = imgSnap.data() || {}; }
+    }catch(e){ console.error(e); }
+  }
+
+  async function syncToCloud(){ try{ await setDoc(doc(db, "israa_app", "main_data"), { areas, doctors, schedule, processingList, historyLog }); } catch(e){ console.error(e); } }
+  async function saveImagesToCloud(){ try{ await setDoc(doc(db, "israa_app", "images_data"), docImages); } catch(e){ console.error(e); } }
+  async function saveAreas(){ await syncToCloud(); }
+  async function saveDoctors(){ await syncToCloud(); renderDashboard(); }
+  async function saveSchedule(){ await syncToCloud(); }
+  async function saveProcessing(){ await syncToCloud(); }
+
+  function renderStats(){ document.getElementById('statsLine').textContent = `${areas.length} منطقة · ${doctors.length} دكتور`; }
+
+  function renderAreaSelect(){
+    const sel = document.getElementById('docArea'); const current = sel.value;
+    if(areas.length === 0){ sel.innerHTML = '<option value="">لسه مفيش مناطق مضافة</option>'; sel.disabled = true; return; }
+    sel.disabled = false; sel.innerHTML = '<option value="" disabled>اختار المنطقة</option>' + areas.map(a => `<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('');
+    if(current) sel.value = current;
+  }
+
+  function compressImageAndSave(file, docId) {
+    showToast('جاري حفظ الصورة...');
+    const reader = new FileReader(); reader.readAsDataURL(file);
+    reader.onload = event => {
+        const img = new Image(); img.src = event.target.result;
+        img.onload = async () => {
+            const canvas = document.createElement('canvas'); const MAX_WIDTH = 500;
+            const scaleSize = MAX_WIDTH / img.width; canvas.width = MAX_WIDTH; canvas.height = img.height * scaleSize;
+            const ctx = canvas.getContext('2d'); ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            const base64Str = canvas.toDataURL('image/jpeg', 0.6);
+            docImages[docId] = base64Str; await saveImagesToCloud();
+            logAction(`تم إرفاق صورة لملف الدكتور`, `الدكتور: ${doctors.find(d=>d.id===docId)?.name}`);
+            showToast('تم حفظ الصورة بنجاح'); renderAll();
+        }
+    }
+  }
+
+  document.getElementById('imageUploadInput').addEventListener('change', function(e) { if(e.target.files && e.target.files[0] && activeUploadDocId) { compressImageAndSave(e.target.files[0], activeUploadDocId); } });
+
+  document.getElementById('importExcelBtn').addEventListener('click', () => { document.getElementById('excelUploadInput').click(); });
+  document.getElementById('excelUploadInput').addEventListener('change', function(e) {
+    const file = e.target.files[0]; if(!file) return; const reader = new FileReader();
+    reader.onload = async function(evt) {
+      try {
+        const data = new Uint8Array(evt.target.result); const workbook = XLSX.read(data, {type: 'array'});
+        const firstSheetName = workbook.SheetNames[0]; const worksheet = workbook.Sheets[firstSheetName];
+        const json = XLSX.utils.sheet_to_json(worksheet);
+        if(json.length === 0) { showToast('الملف فارغ أو غير متوافق'); return; }
+        let addedCount = 0;
+        json.forEach(row => {
+          const areaName = row["القسم/اليوم"] || row["المنطقة"] || "منطقة مستوردة"; const docName = row["اسم الدكتور"] || row["الاسم"] || "دكتور بدون اسم";
+          const specialty = row["التخصص"] || ""; const phone = row["التليفون"] || row["رقم التليفون"] || "";
+          const address = row["العنوان"] || ""; const timesStr = row["المواعيد"] || ""; const notes = row["ملاحظات"] || "";
+          let area = areas.find(a => a.name.trim().toLowerCase() === String(areaName).trim().toLowerCase());
+          if(!area) { const newAreaId = uid('area'); area = { id: newAreaId, name: String(areaName).trim() }; areas.push(area); }
+          if(!doctors.some(d => d.name.trim().toLowerCase() === String(docName).trim().toLowerCase())) {
+             const availableTimes = timesStr ? String(timesStr).split(' | ').map(t => t.trim()) : [];
+             doctors.push({ id: uid('doc'), name: String(docName).trim(), specialty: String(specialty).trim(), areaId: area.id, phone: String(phone).trim(), address: String(address).trim(), availableTimes: availableTimes, notes: String(notes).trim(), customFields: [], visits: [] }); addedCount++;
+          }
+        });
+        await saveAreas(); await saveDoctors(); logAction(`تم استيراد بيانات من ملف Excel`, `تم إضافة ${addedCount} دكتور جديد بنجاح.`); showToast(`تم استيراد ${addedCount} دكتور بنجاح!`); renderAll();
+      } catch(err) { console.error(err); showToast('حدث خطأ أثناء قراءة ملف الإكسيل'); }
+      e.target.value = '';
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  // --- Dashboard Logic & Chart ---
+  function renderDashboard() {
+    const dashWeekly = document.getElementById('dashWeeklyVisits'); const dashTotal = document.getElementById('dashTotalDocs');
+    const dashSpec = document.getElementById('dashSpecialties'); const dashNeg = document.getElementById('dashNeglected'); const dashToday = document.getElementById('dashTodayVisits');
+    const dashAllVisits = document.getElementById('dashAllVisits');
+    
+    dashTotal.textContent = doctors.length;
+    let weeklyVisits = 0;
+    const sevenDaysAgo = Date.now() - (7 * 24 * 60 * 60 * 1000); const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+    const specsCount = {}; const neglectedDocs = []; const todayStr = new Date().toISOString().split('T')[0]; const todayVisitsDocs = [];
+    
+    const visitsPerDay = {};
+    let allVisitsFlat = []; // To hold all visits for the new section
+
+    for(let i=6; i>=0; i--) { const d = new Date(Date.now() - (i * 24 * 60 * 60 * 1000)); visitsPerDay[d.toISOString().split('T')[0]] = 0; }
+
+    doctors.forEach(doc => {
+      let spec = doc.specialty ? doc.specialty.trim() : 'غير محدد'; if(!spec) spec = 'غير محدد';
+      specsCount[spec] = (specsCount[spec] || 0) + 1;
+
+      let lastVisitTime = 0;
+      if(doc.visits && doc.visits.length > 0) {
+        doc.visits.forEach(v => {
+           allVisitsFlat.push({ doc: doc, visit: v });
+           
+           const vDate = new Date(v.date).getTime(); const vDateStr = v.date;
+           if(visitsPerDay[vDateStr] !== undefined) { visitsPerDay[vDateStr]++; }
+           if(vDate > lastVisitTime) lastVisitTime = vDate;
+           if(vDate >= sevenDaysAgo) weeklyVisits++;
+           if(v.nextDate === todayStr) { if(!todayVisitsDocs.some(d => d.id === doc.id)) { todayVisitsDocs.push({ name: doc.name, area: areas.find(a => a.id === doc.areaId)?.name || 'بدون منطقة' }); } }
+        });
+      }
+      if(lastVisitTime === 0 || lastVisitTime < thirtyDaysAgo) {
+        const area = areas.find(a => a.id === doc.areaId); neglectedDocs.push({ name: doc.name, area: area ? area.name : 'بدون منطقة', days: lastVisitTime === 0 ? 'لم يزار أبداً' : 'منذ أكثر من 30 يوم' });
+      }
+    });
+
+    dashWeekly.textContent = weeklyVisits;
+    if(todayVisitsDocs.length === 0) { dashToday.innerHTML = `<li class="neglected-item" style="background:var(--surface); border-color:var(--primary); color:var(--ink);">لا توجد زيارات مخطط لها اليوم. استمتع بيومك!</li>`; } 
+    else { dashToday.innerHTML = todayVisitsDocs.map(d => `<li class="neglected-item" style="background:var(--surface); border-color:var(--primary);"><div class="neglected-name" style="color:var(--primary);">${esc(d.name)}</div><div class="neglected-sub">المنطقة: ${esc(d.area)} - ميعاد زيارة مخطط له اليوم</div></li>`).join(''); }
+
+    dashSpec.innerHTML = Object.keys(specsCount).sort((a,b) => specsCount[b] - specsCount[a]).map(s => `<li class="spec-item"><span>${esc(s)}</span> <span class="count">${specsCount[s]}</span></li>`).join('');
+
+    if(neglectedDocs.length === 0) { dashNeg.innerHTML = `<li class="neglected-item" style="background:var(--surface-alt); border-color:var(--primary); color:var(--ink);">كل الدكاترة تمت زيارتهم مؤخراً! أداء ممتاز.</li>`; } 
+    else { dashNeg.innerHTML = neglectedDocs.map(d => `<li class="neglected-item"><div class="neglected-name">${esc(d.name)}</div><div class="neglected-sub">${esc(d.area)} - ${d.days}</div></li>`).join(''); }
+
+    // Render "All Visits" section
+    allVisitsFlat.sort((a,b) => new Date(b.visit.date) - new Date(a.visit.date));
+    if(allVisitsFlat.length === 0) {
+        dashAllVisits.innerHTML = `<div class="empty-msg" style="text-align:center;">لم تقم بتسجيل أي زيارات حتى الآن.</div>`;
+    } else {
+        dashAllVisits.innerHTML = allVisitsFlat.map(item => {
+            const v = item.visit;
+            const d = item.doc;
+            return `
+            <div class="doc-card">
+              <div class="doc-card-header" data-action="toggle-doc">
+                <div class="doc-title-wrap">
+                  <h4 class="doc-name">د. ${esc(d.name)}</h4>
+                  <span class="doc-badge" style="background:var(--accent-soft); color:var(--primary-dark); font-size:12px;">📅 ${esc(v.date)}</span>
+                </div>
+                <svg class="chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg>
+              </div>
+              <div class="doc-card-body">
+                <div style="font-size:13.5px; margin-bottom:14px;">
+                    ${v.nextDate ? `<div class="visit-detail" style="margin-bottom:6px;"><span style="font-weight:700; color:var(--primary-dark);">الزيارة القادمة:</span> ${esc(v.nextDate)}</div>` : ''}
+                    ${v.products ? `<div class="visit-detail" style="margin-bottom:6px;"><span style="font-weight:700;">المنتجات:</span> ${esc(v.products)}</div>` : ''}
+                    ${v.samples ? `<div class="visit-detail" style="margin-bottom:6px;"><span style="font-weight:700;">العينات:</span> ${esc(v.samples)}</div>` : ''}
+                    ${v.notes ? `<div class="visit-detail" style="margin-top:8px; white-space:pre-wrap;"><span style="font-weight:700; color:var(--ink-soft);">ملاحظات:</span><br>${esc(v.notes)}</div>` : ''}
+                </div>
+                <div class="doc-actions-bar" style="border-top:1px dashed var(--line); padding-top:12px;">
+                  <button class="btn btn-ghost" data-action="edit-visit" data-visit-id="${esc(v.id)}" data-doc-id="${esc(d.id)}" style="padding:6px; font-size:12.5px;">${ICONS.edit} تعديل الزيارة</button>
+                  <button class="btn btn-danger-ghost" data-action="delete-visit" data-visit-id="${esc(v.id)}" data-doc-id="${esc(d.id)}" style="padding:6px; font-size:12.5px;">${ICONS.trash} حذف الزيارة</button>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+    }
+
+    renderChart(visitsPerDay);
+  }
+
+  function renderChart(dataObj) {
+      const ctx = document.getElementById('visitsChart').getContext('2d');
+      if(chartInstance) { chartInstance.destroy(); }
+      const labels = Object.keys(dataObj).map(d => d.slice(5)); const data = Object.values(dataObj);
+      
+      chartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: labels,
+              datasets: [{ label: 'عدد الزيارات', data: data, borderColor: '#2856A6', backgroundColor: 'rgba(40, 86, 166, 0.2)', borderWidth: 3, fill: true, tension: 0.4 }]
+          },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { stepSize: 1, color: '#5A6C8A' } }, x: { ticks: { color: '#5A6C8A' } } } }
+      });
+  }
+
+  function renderProcessing() {
+    const container = document.getElementById('processingListContainer');
+    if(processingList.length === 0) { container.innerHTML = `<div class="big-empty"><p>مفيش أي حالات متابعة متسجلة حالياً.</p></div>`; return; }
+    const sortedList = [...processingList].sort((a, b) => { if(a.status === 'Finished' && b.status !== 'Finished') return 1; if(a.status !== 'Finished' && b.status === 'Finished') return -1; return 0; });
+    container.innerHTML = sortedList.map(item => `
+      <div class="proc-card">
+        <div class="proc-head"><h4 class="proc-title">${esc(item.type)}</h4><span class="proc-badge ${item.status}">${item.status}</span></div>
+        <div class="proc-body">
+          <div><span style="font-weight:700; color:var(--ink-soft)">مع:</span> ${esc(item.person)}</div>
+          ${item.phone ? `<div><span style="font-weight:700; color:var(--ink-soft)">الرقم:</span> <a class="phone-link" href="tel:${esc(item.phone)}">${ICONS.phone} ${esc(item.phone)}</a></div>` : ''}
+          ${item.notes ? `<div><span style="font-weight:700; color:var(--ink-soft)">ملاحظات:</span> ${linkify(esc(item.notes))}</div>` : ''}
+        </div>
+        <div class="doc-actions-bar"><button class="btn btn-ghost" data-action="edit-proc" data-id="${esc(item.id)}">${ICONS.edit} تعديل</button><button class="btn btn-danger-ghost" data-action="delete-proc" data-id="${esc(item.id)}">${ICONS.trash} مسح</button></div>
+      </div>
+    `).join('');
+  }
+
+  function renderSchedule() {
+    const container = document.getElementById('scheduleContainer');
+    let html = `<div class="table-scroll-container"><table class="schedule-table"><thead><tr><th>اليوم</th>`;
+    SCHEDULE_HOURS.forEach(hour => { html += `<th>${hour}</th>`; }); html += `</tr></thead><tbody>`;
+    SCHEDULE_DAYS.forEach((day, index) => {
+      html += `<tr><th>${SCHEDULE_DAYS_AR[index]}<br><span style="font-size:11px;opacity:0.8;font-weight:500">${day}</span></th>`;
+      SCHEDULE_HOURS.forEach(hour => {
+        const cellKey = `${day}_${hour}`; const docIds = schedule[cellKey] || []; let cellContent = '';
+        if (docIds.length > 0) {
+          const validIds = [];
+          docIds.forEach(docId => {
+            const doctor = doctors.find(d => d.id === docId);
+            if (doctor) {
+              validIds.push(docId); const area = areas.find(a => a.id === doctor.areaId); const areaName = area ? area.name : 'بدون منطقة';
+              cellContent += `<div class="cell-content" style="background:var(--surface-alt); padding:4px 6px; border-radius:8px; margin-bottom:4px; border:1px solid var(--line); width: 100%; box-sizing: border-box;"><span class="cell-doc-name" style="font-size:12px;">${esc(doctor.name)}</span><span class="cell-area-badge" style="font-size:10px; margin-top:2px; color:var(--primary-dark);">${esc(areaName)}</span></div>`;
+            }
+          });
+          schedule[cellKey] = validIds; if (validIds.length === 0) delete schedule[cellKey];
+        }
+        html += `<td data-action="open-cell" data-key="${cellKey}" style="vertical-align: top; padding: 6px;">${cellContent}</td>`;
+      });
+      html += `</tr>`;
+    });
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+  }
+
+  const modal = document.getElementById('scheduleModal'); const modalBody = document.getElementById('modalBody'); const modalTitle = document.getElementById('modalTitle');
+  function openModal() { modal.classList.add('active'); } function closeModal() { modal.classList.remove('active'); activeCell = null; }
+  document.getElementById('closeModalBtn').addEventListener('click', closeModal); modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+
+  const histModal = document.getElementById('historyModal'); const histModalBody = document.getElementById('historyModalBody');
+  document.getElementById('historyIconBtn').addEventListener('click', openHistoryModal); document.getElementById('closeHistoryBtn').addEventListener('click', () => histModal.classList.remove('active')); histModal.addEventListener('click', (e) => { if(e.target === histModal) histModal.classList.remove('active'); });
+
+  function openHistoryModal() {
+    if(historyLog.length === 0) { histModalBody.innerHTML = `<div class="history-item empty">مفيش أي تعديلات اتسجلت لسه.</div>`; } 
+    else {
+      histModalBody.innerHTML = historyLog.map(log => `
+        <div class="history-item" onclick="if(!event.target.closest('button')) this.classList.toggle('open')">
+          <div class="h-text">
+            <div style="display:flex; align-items:center; gap:8px; flex:1;">
+               <span style="${log.undone ? 'text-decoration:line-through; opacity:0.6;' : ''}">${esc(log.msg)}</span>
+               ${(log.undoData && !log.undone) ? `<button class="undo-hist-btn" data-id="${log.id}">تراجع ↺</button>` : 
+                 (log.undoData && log.undone ? `<button class="redo-hist-btn" data-id="${log.id}">إعادة ↻</button>` : '')}
+            </div>
+            <button class="delete-hist-btn" data-id="${log.id}" title="حذف الإشعار">&times;</button>
+            ${ICONS.chevronDown}
+          </div>
+          <span class="h-time">${esc(log.time)}</span>
+          ${log.details ? `<div class="h-details">${esc(log.details)}</div>` : ''}
+        </div>
+      `).join('');
+    }
+    histModal.classList.add('active');
+  }
+
+  // --- نظام التراجع المركزي ---
+  async function handleUndo(logId) {
+    const log = historyLog.find(l => l.id === logId);
+    if(!log || !log.undoData || log.undone) return;
+
+    const { action, data } = log.undoData;
+
+    if (action === 'add_doc') {
+        doctors = doctors.filter(d => d.id !== data.doc.id);
+        Object.keys(schedule).forEach(k => { schedule[k] = schedule[k].filter(id => id !== data.doc.id); if(schedule[k].length === 0) delete schedule[k]; });
+    } else if (action === 'edit_doc') {
+        const idx = doctors.findIndex(d => d.id === data.oldDoc.id);
+        if(idx !== -1) doctors[idx] = data.oldDoc;
+    } else if (action === 'delete_doc') {
+        doctors.push(data.doc);
+        if(data.scheduleBackup) schedule = data.scheduleBackup;
+    } else if (action === 'add_area') {
+        areas = areas.filter(a => a.id !== data.area.id);
+    } else if (action === 'edit_area') {
+        const area = areas.find(a => a.id === data.areaId);
+        if(area) area.name = data.oldName;
+    } else if (action === 'delete_area') {
+        areas.push(data.area);
+    } else if (action === 'add_proc') {
+        processingList = processingList.filter(p => p.id !== data.proc.id);
+    } else if (action === 'edit_proc') {
+        const idx = processingList.findIndex(p => p.id === data.oldProc.id);
+        if(idx !== -1) processingList[idx] = data.oldProc;
+    } else if (action === 'delete_proc') {
+        processingList.push(data.proc);
+    } else if (action === 'edit_schedule') {
+        schedule = data.scheduleBackup;
+    } else if (action === 'add_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) doc.visits = data.oldVisits;
+    } else if (action === 'delete_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) {
+            if(!doc.visits) doc.visits = [];
+            doc.visits.push(data.visit);
+            doc.visits.sort((a,b) => new Date(b.date) - new Date(a.date));
+        }
+    } else if (action === 'edit_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) {
+            const vIndex = doc.visits.findIndex(v => v.id === data.oldVisit.id);
+            if(vIndex > -1) { 
+                doc.visits[vIndex] = data.oldVisit; 
+                doc.visits.sort((a,b) => new Date(b.date) - new Date(a.date)); 
+            }
+        }
+    }
+
+    log.undone = true;
+    log.msg = "🔄 تم التراجع: " + log.msg.replace('🔄 تم التراجع: ', '');
+    await syncToCloud();
+    renderAll();
+    openHistoryModal(); 
+    showToast('تم التراجع بنجاح!');
+  }
+
+  // --- نظام الإعادة المركزي (Redo) ---
+  async function handleRedo(logId) {
+    const log = historyLog.find(l => l.id === logId);
+    if(!log || !log.undoData || !log.undone) return;
+
+    const { action, data } = log.undoData;
+
+    if (action === 'add_doc') {
+        doctors.push(data.doc);
+    } else if (action === 'edit_doc') {
+        const idx = doctors.findIndex(d => d.id === data.newDoc.id);
+        if(idx !== -1) doctors[idx] = data.newDoc;
+    } else if (action === 'delete_doc') {
+        doctors = doctors.filter(d => d.id !== data.doc.id);
+        if(data.newSchedule) schedule = data.newSchedule;
+    } else if (action === 'add_area') {
+        areas.push(data.area);
+    } else if (action === 'edit_area') {
+        const area = areas.find(a => a.id === data.areaId);
+        if(area) area.name = data.newName;
+    } else if (action === 'delete_area') {
+        areas = areas.filter(a => a.id !== data.area.id);
+    } else if (action === 'add_proc') {
+        processingList.push(data.proc);
+    } else if (action === 'edit_proc') {
+        const idx = processingList.findIndex(p => p.id === data.newProc.id);
+        if(idx !== -1) processingList[idx] = data.newProc;
+    } else if (action === 'delete_proc') {
+        processingList = processingList.filter(p => p.id !== data.proc.id);
+    } else if (action === 'edit_schedule') {
+        schedule = data.newSchedule;
+    } else if (action === 'add_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) doc.visits = data.newVisits;
+    } else if (action === 'delete_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) {
+            doc.visits = doc.visits.filter(v => v.id !== data.visit.id);
+        }
+    } else if (action === 'edit_visit') {
+        const doc = doctors.find(d => d.id === data.docId);
+        if(doc) {
+            const vIndex = doc.visits.findIndex(v => v.id === data.newVisit.id);
+            if(vIndex > -1) { 
+                doc.visits[vIndex] = data.newVisit; 
+                doc.visits.sort((a,b) => new Date(b.date) - new Date(a.date)); 
+            }
+        }
+    }
+
+    log.undone = false;
+    log.msg = log.msg.replace('🔄 تم التراجع: ', '');
+    await syncToCloud();
+    renderAll();
+    openHistoryModal(); 
+    showToast('تمت إعادة الإجراء بنجاح!');
+  }
+
+  // الاستماع لنقرات التراجع والإعادة والحذف داخل السجل
+  histModalBody.addEventListener('click', (e) => {
+    const undoBtn = e.target.closest('.undo-hist-btn');
+    const redoBtn = e.target.closest('.redo-hist-btn');
+    const delBtn = e.target.closest('.delete-hist-btn');
+
+    if(undoBtn) {
+        e.stopPropagation(); 
+        handleUndo(undoBtn.dataset.id);
+    } else if (redoBtn) {
+        e.stopPropagation(); 
+        handleRedo(redoBtn.dataset.id);
+    } else if (delBtn) {
+        e.stopPropagation();
+        const id = delBtn.dataset.id;
+        historyLog = historyLog.filter(l => l.id !== id);
+        syncToCloud();
+        openHistoryModal();
+        showToast('تم مسح الإشعار من السجل');
+    }
+  });
+
+  // --- Theme Menu Toggle ---
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeMenu = document.getElementById('themeMenu');
+  themeToggleBtn.addEventListener('click', () => { themeMenu.classList.toggle('active'); });
+  document.addEventListener('click', (e) => { if(!e.target.closest('.theme-selector-wrap')) { themeMenu.classList.remove('active'); } });
+
+  document.querySelectorAll('.theme-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const theme = opt.dataset.theme; document.body.className = theme === 'light' ? '' : `theme-${theme}`; localStorage.setItem('israa_theme', theme); themeMenu.classList.remove('active'); showToast('تم تغيير مظهر الموقع بنجاح');
+    });
+  });
+  const savedTheme = localStorage.getItem('israa_theme'); if(savedTheme && savedTheme !== 'light') { document.body.className = `theme-${savedTheme}`; }
+
+  // Quick Add FAB
+  document.getElementById('quickAddFab').addEventListener('click', () => {
+      document.querySelector('nav.tabs button[data-tab="add"]').click(); window.scrollTo({top:0, behavior:'smooth'}); document.getElementById('docName').focus();
+  });
+
+  function setupVoice(btnId, textAreaId) {
+      const micBtn = document.getElementById(btnId); const textArea = document.getElementById(textAreaId);
+      if (!micBtn || !textArea) return;
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+          const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition; 
+          const recognition = new SpeechRecognition();
+          recognition.lang = 'ar-EG'; recognition.continuous = false; recognition.interimResults = false;
+          
+          micBtn.addEventListener('click', () => { 
+              try { recognition.start(); showToast('جاري الاستماع... تحدث الآن'); micBtn.style.background = 'var(--danger)'; micBtn.style.color = '#fff'; } catch(err) { console.error(err); } 
+          });
+          recognition.onresult = (event) => { 
+              textArea.value += (textArea.value ? ' ' : '') + event.results[0][0].transcript; 
+              micBtn.style.background = ''; micBtn.style.color = ''; showToast('تم إدخال النص بنجاح'); 
+          };
+          recognition.onerror = () => { micBtn.style.background = ''; micBtn.style.color = ''; showToast('تعذر التعرف على الصوت، حاول مرة أخرى'); };
+          recognition.onend = () => { micBtn.style.background = ''; micBtn.style.color = ''; };
+      } else {
+          micBtn.addEventListener('click', () => { showToast('عفواً، متصفحك الحالي لا يدعم ميزة الإدخال الصوتي (Speech API). جرب متصفح Chrome.'); });
+      }
+  }
+
+  function setupAISummarizer(btnId, textAreaId) {
+      const aiBtn = document.getElementById(btnId); const textArea = document.getElementById(textAreaId);
+      if (!aiBtn || !textArea) return;
+      aiBtn.addEventListener('click', () => {
+          const text = textArea.value.trim();
+          if(!text) { showToast('اكتب ملاحظات الأول عشان الخصها!'); return; }
+          showToast('جاري التلخيص والتنسيق 🪄...');
+          let formatted = text.replace(/(وكمان|وبعدين|بالإضافة لكده|طلب|قال|ولاحظت|سأل)/g, '\n- $1')
+                              .replace(/(\.)/g, '.\n')
+                              .split('\n').map(line => line.trim()).filter(line => line.length > 0);
+          formatted = formatted.map(line => line.startsWith('-') ? line : `- ${line}`);
+          textArea.value = "تمت مناقشة النقاط التالية:\n" + formatted.join('\n');
+      });
+  }
+
+  setupVoice('micBtn', 'visitNotes'); 
+  setupVoice('docMicBtn', 'docNotes');
+  setupAISummarizer('aiFormatBtn', 'visitNotes'); 
+  setupAISummarizer('docAiFormatBtn', 'docNotes');
+
+  const visitModal = document.getElementById('visitModal');
+  document.getElementById('closeVisitBtn').addEventListener('click', () => visitModal.classList.remove('active'));
+  visitModal.addEventListener('click', (e) => { if(e.target === visitModal) visitModal.classList.remove('active'); });
+
+  // حفظ الزيارة (إضافة جديدة أو تعديل)
+  document.getElementById('visitForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const docId = document.getElementById('visitDocId').value;
+    const visitId = document.getElementById('visitId').value;
+    const vDate = document.getElementById('visitDate').value; 
+    const vNextDate = document.getElementById('visitNextDate').value; 
+    const vProds = document.getElementById('visitProducts').value.trim(); 
+    const vSamps = document.getElementById('visitSamples').value.trim(); 
+    const vNotes = document.getElementById('visitNotes').value.trim();
+    
+    const doctor = doctors.find(d => d.id === docId);
+    if(doctor) {
+        if(!doctor.visits) doctor.visits = [];
+        
+        if (visitId) {
+            // Edit existing visit
+            const vIndex = doctor.visits.findIndex(v => v.id === visitId);
+            if (vIndex > -1) {
+                const oldVisit = JSON.parse(JSON.stringify(doctor.visits[vIndex]));
+                doctor.visits[vIndex] = { id: visitId, date: vDate, nextDate: vNextDate, products: vProds, samples: vSamps, notes: vNotes };
+                doctor.visits.sort((a,b) => new Date(b.date) - new Date(a.date));
+                const newVisit = JSON.parse(JSON.stringify(doctor.visits[vIndex]));
+                logAction(`تم تعديل زيارة للدكتور: ${doctor.name}`, `التاريخ: ${vDate}`, { action: 'edit_visit', data: { docId: doctor.id, oldVisit, newVisit } });
+                showToast('تم تحديث الزيارة بنجاح');
+            }
+        } else {
+            // Add new visit
+            const oldVisits = JSON.parse(JSON.stringify(doctor.visits));
+            doctor.visits.push({ id: uid('v'), date: vDate, nextDate: vNextDate, products: vProds, samples: vSamps, notes: vNotes });
+            doctor.visits.sort((a,b) => new Date(b.date) - new Date(a.date));
+            const newVisits = JSON.parse(JSON.stringify(doctor.visits));
+            logAction(`تم تسجيل زيارة للدكتور: ${doctor.name}`, `التاريخ: ${vDate} | المنتجات: ${vProds || '-'}`, { action: 'add_visit', data: { docId: doctor.id, oldVisits, newVisits } });
+            showToast('تم حفظ الزيارة بنجاح');
+        }
+        
+        await saveDoctors(); 
+        visitModal.classList.remove('active'); 
+        renderAll();
+    }
+  });
+
+  function showAreasInModal() {
+    modalTitle.textContent = 'اختر المنطقة';
+    if(areas.length === 0) { modalBody.innerHTML = `<div class="empty-msg" style="text-align:center;">لسه مفيش مناطق متسجلة.</div>`; return; }
+    let html = '<div class="select-list">'; areas.forEach(area => { const docsInArea = doctors.filter(d => d.areaId === area.id).length; html += `<div class="select-item" data-action="select-area" data-id="${esc(area.id)}"><span>${esc(area.name)}</span><span class="doc-spec">(${docsInArea} دكتور)</span></div>`; });
+    html += '</div>'; modalBody.innerHTML = html;
+  }
+
+  function showDoctorsInModal(areaId) {
+    const area = areas.find(a => a.id === areaId); modalTitle.textContent = `دكاترة منطقة: ${area ? area.name : ''}`;
+    let html = `<button class="modal-back-btn" data-action="back-to-areas">${ICONS.chevronLeft} رجوع للمناطق</button>`;
+    const areaDocs = doctors.filter(d => d.areaId === areaId);
+    if(areaDocs.length === 0) { html += `<div class="empty-msg" style="text-align:center;">المنطقة دي مفهاش دكاترة لسه.</div>`; } 
+    else { html += '<div class="select-list">'; areaDocs.forEach(doc => { const spec = doc.specialty ? `<span class="doc-spec">${esc(doc.specialty)}</span>` : ''; html += `<div class="select-item" data-action="select-doctor" data-id="${esc(doc.id)}"><span>${esc(doc.name)}</span>${spec}</div>`; }); html += '</div>'; }
+    modalBody.innerHTML = html;
+  }
+
+  function showFilledCellOptions(cellKey) {
+    modalTitle.textContent = 'أطباء هذا الميعاد'; const docIds = schedule[cellKey] || []; let html = '<div class="select-list" style="margin-bottom:15px;">';
+    docIds.forEach(docId => {
+      const doctor = doctors.find(d => d.id === docId);
+      if(doctor){ const area = areas.find(a => a.id === doctor.areaId); html += `<div class="select-item" style="cursor:default; display:flex; justify-content:space-between; align-items:center;"><div><div style="font-weight:700;">${esc(doctor.name)}</div><div class="doc-spec">${area ? esc(area.name) : ''}</div></div><button class="icon-btn danger" data-action="remove-doc-from-cell" data-doc-id="${esc(docId)}" style="flex:none;" title="حذف من الميعاد">${ICONS.trash}</button></div>`; }
+    });
+    html += '</div><button class="btn btn-primary" style="width:100%;" data-action="add-another-doc-to-cell"> + إضافة دكتور آخر لهذا الميعاد </button>'; modalBody.innerHTML = html;
+  }
+
+  function addTimeFieldRow(val = '') {
+    const container = document.getElementById('timesContainer'); const row = document.createElement('div'); row.className = 'custom-time-row';
+    row.style.cssText = 'display: flex; gap: 8px; flex-wrap: wrap; align-items: center; background: var(--surface-alt); padding: 10px; border-radius: 9px; border: 1px dashed var(--line); margin-bottom: 8px;';
+    let selDay = '', selFrom = '', selTo = '', selClinic = '';
+    if(val) {
+      const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)"; const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`);
+      const match = val.match(regex);
+      if(match) { selClinic = match[1] ? match[1].trim() : ''; selDay = match[2]; selFrom = match[3] ? match[3].trim() : ''; selTo = match[4] ? match[4].trim() : ''; } else { selClinic = val; }
+    }
+    let daysHtml = '<option value="" disabled ' + (!selDay ? 'selected' : '') + '>اختر اليوم</option>'; TIME_DAYS_LIST.forEach(d => { daysHtml += `<option value="${d}" ${selDay === d ? 'selected' : ''}>${d}</option>`; });
+    row.innerHTML = `<input type="text" class="time-clinic" placeholder="اسم العيادة (اختياري)" value="${esc(selClinic)}" style="flex: 1 1 100%; margin-bottom: 4px;"><select class="time-day" style="flex: 1; min-width: 90px;">${daysHtml}</select><input type="text" class="time-from" list="hoursList" placeholder="من (اختياري)" value="${esc(selFrom)}" style="flex: 1; min-width: 90px;"><input type="text" class="time-to" list="hoursList" placeholder="إلى (اختياري)" value="${esc(selTo)}" style="flex: 1; min-width: 90px;"><button type="button" class="icon-btn danger t-remove" title="مسح">${ICONS.trash}</button>`;
+    container.appendChild(row);
+  }
+
+  addTimeFieldRow(); document.getElementById('addTimeBtn').addEventListener('click', () => addTimeFieldRow()); document.getElementById('timesContainer').addEventListener('click', (e) => { const btn = e.target.closest('.t-remove'); if(btn) btn.parentElement.remove(); });
+
+  document.addEventListener('click', async (e) => {
+    const btn = e.target.closest('[data-action]'); if(!btn) return;
+    const action = btn.dataset.action; const id = btn.dataset.id; const key = btn.dataset.key;
+
+    if(action === 'toggle-area'){ const stop = btn.closest('.route-stop'); if (stop) stop.classList.toggle('expanded'); }
+    if(action === 'open-cell') { activeCell = key; const docIds = schedule[activeCell] || []; if(docIds.length > 0) { showFilledCellOptions(activeCell); } else { showAreasInModal(); } openModal(); }
+    if(action === 'select-area') { showDoctorsInModal(id); }
+    if(action === 'back-to-areas') { showAreasInModal(); }
+    if(action === 'select-doctor') {
+      const selectedDoc = doctors.find(d => d.id === id);
+      if(!schedule[activeCell]) schedule[activeCell] = [];
+      if(!schedule[activeCell].includes(id)){ 
+          const schedBackup = JSON.parse(JSON.stringify(schedule));
+          schedule[activeCell].push(id);
+          const newSched = JSON.parse(JSON.stringify(schedule)); 
+          await saveSchedule(); renderSchedule(); closeModal(); 
+          logAction(`تم إضافة ميعاد لـ ${selectedDoc ? selectedDoc.name : ''}`, `الميعاد: ${activeCell.replace('_', ' ')}`, { action: 'edit_schedule', data: { scheduleBackup: schedBackup, newSchedule: newSched }}); 
+          showToast(`تم تسجيل ميعاد لـ د. ${selectedDoc ? selectedDoc.name : ''}`); 
+      } else { showToast('الدكتور متسجل بالفعل في الميعاد ده'); }
+    }
+    if(action === 'add-another-doc-to-cell') { showAreasInModal(); }
+    if(action === 'remove-doc-from-cell') {
+      const docIdToRemove = btn.dataset.docId; const removedDoc = doctors.find(d => d.id === docIdToRemove);
+      const schedBackup = JSON.parse(JSON.stringify(schedule));
+      schedule[activeCell] = schedule[activeCell].filter(dId => dId !== docIdToRemove);
+      if(schedule[activeCell].length === 0) delete schedule[activeCell];
+      const newSched = JSON.parse(JSON.stringify(schedule));
+      await saveSchedule(); renderSchedule(); if(schedule[activeCell] && schedule[activeCell].length > 0) { showFilledCellOptions(activeCell); } else { closeModal(); }
+      logAction(`تم إزالة ميعاد دكتور (${removedDoc ? removedDoc.name : 'محذوف'})`, `الميعاد: ${activeCell.replace('_', ' ')}`, { action: 'edit_schedule', data: { scheduleBackup: schedBackup, newSchedule: newSched }}); 
+      showToast('تم إزالة الدكتور من الميعاد');
+    }
+    if(action === 'toggle-doc'){ const card = btn.closest('.doc-card'); card.classList.toggle('expanded'); }
+    
+    // التعامل مع إضافة الزيارة الجديدة
+    if(action === 'add-visit') { 
+        document.getElementById('visitDocId').value = id; 
+        document.getElementById('visitId').value = ''; // تأكيد تفريغ ال ID
+        document.getElementById('visitForm').reset(); 
+        document.getElementById('visitDate').valueAsDate = new Date(); 
+        document.getElementById('visitModalTitle').textContent = 'تسجيل زيارة جديدة';
+        document.getElementById('submitVisitBtn').textContent = 'حفظ الزيارة';
+        visitModal.classList.add('active'); 
+    }
+
+    // التعامل مع تعديل الزيارة
+    if (action === 'edit-visit') {
+        const docId = btn.dataset.docId;
+        const visitId = btn.dataset.visitId;
+        const doctor = doctors.find(d => d.id === docId);
+        if (doctor) {
+            const v = doctor.visits.find(visit => visit.id === visitId);
+            if (v) {
+                document.getElementById('visitDocId').value = docId;
+                document.getElementById('visitId').value = visitId;
+                document.getElementById('visitDate').value = v.date || '';
+                document.getElementById('visitNextDate').value = v.nextDate || '';
+                document.getElementById('visitProducts').value = v.products || '';
+                document.getElementById('visitSamples').value = v.samples || '';
+                document.getElementById('visitNotes').value = v.notes || '';
+                
+                document.getElementById('visitModalTitle').textContent = 'تعديل بيانات الزيارة';
+                document.getElementById('submitVisitBtn').textContent = 'تحديث الزيارة';
+                visitModal.classList.add('active');
+            }
+        }
+    }
+
+    // التعامل مع حذف الزيارة
+    if (action === 'delete-visit') {
+        if (confirm('هل أنت متأكد أنك تريد حذف هذه الزيارة؟')) {
+            const docId = btn.dataset.docId;
+            const visitId = btn.dataset.visitId;
+            const doctor = doctors.find(d => d.id === docId);
+            if (doctor && doctor.visits) {
+                const visitIndex = doctor.visits.findIndex(v => v.id === visitId);
+                if (visitIndex > -1) {
+                    const deletedVisit = doctor.visits[visitIndex];
+                    doctor.visits.splice(visitIndex, 1);
+                    logAction(`تم حذف زيارة لـ د. ${doctor.name}`, `التاريخ: ${deletedVisit.date}`, { action: 'delete_visit', data: { docId: doctor.id, visit: deletedVisit } });
+                    await saveDoctors();
+                    renderAll();
+                    showToast('تم حذف الزيارة بنجاح');
+                }
+            }
+        }
+    }
+
+    if(action === 'upload-image') { activeUploadDocId = id; document.getElementById('imageUploadInput').click(); }
+    
+    if(action === 'edit-doctor'){
+      const docItem = doctors.find(d => d.id === id); if(!docItem) return; editingId = id;
+      document.getElementById('docName').value = docItem.name || ''; document.getElementById('docSpecialty').value = docItem.specialty || '';
+      document.getElementById('docArea').value = docItem.areaId || ''; document.getElementById('docPhone').value = docItem.phone || '';
+      document.getElementById('docAddress').value = docItem.address || ''; document.getElementById('docNotes').value = docItem.notes || '';
+      document.getElementById('docSecName').value = docItem.secName || ''; document.getElementById('docSecTraits').value = docItem.secTraits || '';
+      document.getElementById('docSecPhone').value = docItem.secPhone || '';
+      const timesCont = document.getElementById('timesContainer'); timesCont.innerHTML = '';
+      if(Array.isArray(docItem.availableTimes) && docItem.availableTimes.length > 0) { docItem.availableTimes.forEach(t => addTimeFieldRow(t)); }
+      else if (typeof docItem.availableTimes === 'string' && docItem.availableTimes.trim() !== '') { addTimeFieldRow(docItem.availableTimes); } else { addTimeFieldRow(); }
+      document.getElementById('customFieldsContainer').innerHTML = ''; if(docItem.customFields && docItem.customFields.length > 0){ docItem.customFields.forEach(f => addCustomFieldRow(f.label, f.value)); }
+      document.getElementById('editBanner').style.display = 'flex'; document.getElementById('submitDocBtn').textContent = 'تحديث البيانات'; document.querySelector('nav.tabs button[data-tab="add"]').click(); window.scrollTo({top:0, behavior:'smooth'});
+    }
+    
+    if(action === 'delete-doctor'){
+      const docItem = Object.assign({}, doctors.find(d => d.id === id)); if(!docItem) return;
+      if(confirm(`متأكد إنك عايز تمسح "${docItem.name}"؟`)){
+        const scheduleBackup = JSON.parse(JSON.stringify(schedule));
+        doctors = doctors.filter(d => d.id !== id);
+        Object.keys(schedule).forEach(k => { if(Array.isArray(schedule[k])) { schedule[k] = schedule[k].filter(dId => dId !== id); if(schedule[k].length === 0) delete schedule[k]; } });
+        const newSchedule = JSON.parse(JSON.stringify(schedule));
+        logAction(`تم حذف دكتور: ${docItem.name}`, `المنطقة: ${areas.find(a=>a.id===docItem.areaId)?.name || ''}`, { action: 'delete_doc', data: { doc: docItem, scheduleBackup, newSchedule } });
+        await syncToCloud(); renderAll(); showToast(`تم حذف د. ${docItem.name}`);
+      }
+    }
+    
+    if(action === 'area-up' || action === 'area-down'){ const idx = areas.findIndex(a => a.id === id); const swapWith = action === 'area-up' ? idx - 1 : idx + 1; if(swapWith < 0 || swapWith >= areas.length) return; [areas[idx], areas[swapWith]] = [areas[swapWith], areas[idx]]; await saveAreas(); renderAll(); }
+    if(action === 'rename-area'){ 
+        const area = areas.find(a => a.id === id); if(!area) return; 
+        const newName = prompt('اسم المنطقة:', area.name); 
+        if(newName && newName.trim()){ 
+            const oldName = area.name; area.name = newName.trim(); 
+            logAction(`تم تعديل اسم المنطقة`, `من "${oldName}" إلى "${area.name}"`, { action: 'edit_area', data: { areaId: area.id, oldName: oldName, newName: area.name } }); 
+            await saveAreas(); renderAll(); showToast(`تم تعديل اسم منطقة ${area.name}`); 
+        } 
+    }
+    if(action === 'delete-area'){
+      const area = Object.assign({}, areas.find(a => a.id === id)); if(!area) return;
+      const count = doctors.filter(d => d.areaId === id).length;
+      const msg = count > 0 ? `المنطقة دي فيها ${count} دكتور. لو مسحتها هيبقوا من غير منطقة محددة. متأكد؟` : `متأكد إنك عايز تمسح منطقة "${area.name}"؟`;
+      if(confirm(msg)){ 
+        areas = areas.filter(a => a.id !== id); 
+        logAction(`تم مسح منطقة: ${area.name}`, `عدد الدكاترة: ${count}`, { action: 'delete_area', data: { area: area } });
+        await syncToCloud(); renderAll(); showToast(`تم حذف منطقة ${area.name}`);
+      }
+    }
+    if(action === 'delete-proc'){ 
+        const item = processingList.find(p => p.id === id); 
+        if(confirm('متأكد إنك عايز تمسح المتابعة دي؟')){ 
+            processingList = processingList.filter(p => p.id !== id); 
+            logAction(`تم حذف المتابعة مع: ${item ? item.person : ''}`, `النوع: ${item ? item.type : ''}`, { action: 'delete_proc', data: { proc: item } }); 
+            await saveProcessing(); renderProcessing(); showToast(`تم حذف متابعة ${item ? item.person : ''}`); 
+        } 
+    }
+    if(action === 'edit-proc'){ const item = processingList.find(p => p.id === id); if(!item) return; document.getElementById('procEditId').value = item.id; document.getElementById('procType').value = item.type || ''; document.getElementById('procPerson').value = item.person || ''; document.getElementById('procPhone').value = item.phone || ''; document.getElementById('procStatus').value = item.status || 'Waiting'; document.getElementById('procNotes').value = item.notes || ''; document.getElementById('submitProcBtn').textContent = 'تحديث المتابعة'; document.getElementById('cancelProcEditBtn').style.display = 'inline-flex'; window.scrollTo({top:0, behavior:'smooth'}); }
+  });
+
+  function renderRoute(){
+    const container = document.getElementById('routeContainer'); const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    if(areas.length === 0){ container.innerHTML = `<div class="big-empty">${ICONS.mapEmpty}<p>لسه مفيش مناطق مضافة.</p><button class="btn btn-primary" id="goToAreasBtn">روح لتبويب المناطق</button></div>`; document.getElementById('goToAreasBtn')?.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="areas"]').click()); return; }
+    function matches(doc){
+      if(!query) return true; let timesStr = '';
+      if(Array.isArray(doc.availableTimes)) timesStr = doc.availableTimes.join(' '); else if(doc.availableTimes) timesStr = doc.availableTimes;
+      const searchable = [doc.name, doc.phone, doc.address, doc.specialty, doc.notes, doc.secName, doc.secTraits, doc.secPhone, timesStr, ...(doc.customFields || []).map(f => f.label + ' ' + f.value)].join(' ').toLowerCase();
+      return searchable.includes(query);
+    }
+    let html = '<div class="route-list">'; let anyShown = false;
+    areas.forEach((area, idx) => {
+      const areaDocs = doctors.filter(d => d.areaId === area.id && matches(d)); 
+      if(query && areaDocs.length === 0) return; anyShown = true; areaDocs.sort((a, b) => a.name.localeCompare(b.name, 'ar')); const expandedClass = query ? 'expanded' : '';
+      html += `<div class="route-stop ${expandedClass}"><div class="stop-badge">${idx+1}</div><div class="stop-head" data-action="toggle-area"><h3>${esc(area.name)}</h3><span class="count">(${areaDocs.length} دكتور)</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">`;
+      if(areaDocs.length === 0){ html += `<div class="empty-msg">لسه مفيش دكاترة هنا.</div>`; }else{ html += doctorsListHtml(areaDocs); }
+      html += `</div></div>`;
+    });
+    const unclassified = doctors.filter(d => !areas.some(a => a.id === d.areaId) && matches(d));
+    if(unclassified.length){ anyShown = true; const expandedClass = query ? 'expanded' : ''; unclassified.sort((a, b) => a.name.localeCompare(b.name, 'ar')); html += `<div class="route-stop ${expandedClass}"><div class="stop-badge unclassified">؟</div><div class="stop-head" data-action="toggle-area"><h3>دكاترة من غير منطقة</h3><span class="count">(${unclassified.length})</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">${doctorsListHtml(unclassified)}</div></div>`; }
+    html += '</div>';
+    if(!anyShown){ html = `<div class="big-empty"><p>مفيش نتائج مطابقة للبحث.</p></div>`; }
+    if(doctors.length === 0 && !query){ container.innerHTML = `<div class="big-empty">${ICONS.mapEmpty}<p>لسه مفيش دكاترة مسجلين.</p><button class="btn btn-primary" id="goToAddBtn">ضيف دكتور</button></div>`; document.getElementById('goToAddBtn')?.addEventListener('click', () => document.querySelector('nav.tabs button[data-tab="add"]').click()); return; }
+    if(anyShown) { container.innerHTML = html; }
+  }
+
+  function renderTimeRoute(){
+    const container = document.getElementById('timeRouteContainer'); const query = document.getElementById('searchTimeInput').value.trim().toLowerCase();
+    function matches(doc){
+      if(!query) return true; let timesStr = ''; if(Array.isArray(doc.availableTimes)) timesStr = doc.availableTimes.join(' '); else if(doc.availableTimes) timesStr = doc.availableTimes; const searchable = [doc.name, doc.phone, doc.address, doc.specialty, doc.notes, doc.secPhone, timesStr, ...(doc.customFields || []).map(f => f.label + ' ' + f.value)].join(' ').toLowerCase(); return searchable.includes(query);
+    }
+    const daysMap = {}; TIME_DAYS_LIST.forEach(d => daysMap[d] = new Map());
+    doctors.forEach(doc => {
+       if(!matches(doc)) return;
+       if(doc.availableTimes && Array.isArray(doc.availableTimes)) {
+           doc.availableTimes.forEach(tStr => { const daysRegexStr = "(السبت|الأحد|الإثنين|الثلاثاء|الأربعاء|الخميس|الجمعة)"; const regex = new RegExp(`^(.*?)(?:\\s*-\\s*)?${daysRegexStr}(?::\\s*(?:من\\s*(.*?))?(?:\\s*إلى\\s*(.*))?)?$`); const match = tStr.match(regex);
+               if(match) { const day = match[2]; const fromStr = match[3]; const fromMinutes = fromStr ? timeToMinutes(fromStr) : -1; if(daysMap[day]) { const existing = daysMap[day].get(doc.id); if(!existing || fromMinutes < existing.fromMinutes) { daysMap[day].set(doc.id, { doc, fromMinutes }); } } }
+           });
+       }
+    });
+    let html = '<div class="route-list">'; let anyShown = false; const expandedClass = query ? 'expanded' : '';
+    TIME_DAYS_LIST.forEach((day, idx) => {
+        if(!daysMap[day] || daysMap[day].size === 0) return; anyShown = true; const dayDocsData = Array.from(daysMap[day].values()); dayDocsData.sort((a, b) => a.fromMinutes - b.fromMinutes); const sortedDocs = dayDocsData.map(item => item.doc);
+        html += `<div class="route-stop ${expandedClass}"><div class="stop-badge">${idx + 1}</div><div class="stop-head" data-action="toggle-area"><h3>${day}</h3><span class="count">(${sortedDocs.length} دكتور)</span><svg class="area-chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div><div class="area-docs-container">${doctorsListHtml(sortedDocs)}</div></div>`;
+    });
+    html += '</div>';
+    if(!anyShown) { container.innerHTML = `<div class="big-empty"><p>مفيش دكاترة مسجلين بمواعيد مطابقة للبحث.</p></div>`; } else { container.innerHTML = html; }
+  }
+
+  function doctorsListHtml(list){
+    const items = list.map(doc => {
+      const phone = doc.phone ? `<a class="phone-link" href="tel:${esc(doc.phone)}">${ICONS.phone} ${esc(doc.phone)}</a>` : `<span class="cell-dash">—</span>`;
+      const whatsappBtn = doc.phone ? `<a class="phone-link" href="https://wa.me/2${esc(doc.phone).replace(/\D/g,'')}" target="_blank" title="مراسلة واتساب" style="background: #25D366; color:#fff; padding:3px 8px; border-radius:6px; font-size:12px; margin-inline-start:6px;">${ICONS.whatsapp} واتساب</a>` : '';
+      const address = doc.address ? esc(doc.address) : `<span class="cell-dash">—</span>`; const notes = doc.notes ? esc(doc.notes) : `<span class="cell-dash">—</span>`;
+      const specialtyBadge = doc.specialty ? `<span class="doc-badge">${esc(doc.specialty)}</span>` : '';
+      
+      let secHtml = '';
+      if(doc.secName || doc.secTraits || doc.secPhone) {
+          const secWhatsapp = doc.secPhone ? `<a class="phone-link" href="https://wa.me/2${esc(doc.secPhone).replace(/\D/g,'')}" target="_blank" style="background: #25D366; color:#fff; padding:2px 6px; border-radius:4px; font-size:11px; margin-inline-start:4px;">${ICONS.whatsapp}</a>` : '';
+          secHtml = `<div class="gatekeeper-box">
+              <div class="sec-title">🔑 بيانات السكرتير/ة</div>
+              ${doc.secName ? `<div style="font-size:13px; margin-bottom:4px; color:var(--ink);"><b>الاسم:</b> ${esc(doc.secName)}</div>` : ''}
+              ${doc.secTraits ? `<div style="font-size:13px; margin-bottom:4px; color:var(--ink);"><b>الطباع:</b> ${esc(doc.secTraits)}</div>` : ''}
+              ${doc.secPhone ? `<div style="font-size:13px; margin-top:4px;"><b>رقم التواصل:</b> <a class="phone-link" style="color:var(--warning);" href="tel:${esc(doc.secPhone)}">${ICONS.phone} ${esc(doc.secPhone)}</a> ${secWhatsapp}</div>` : ''}
+          </div>`;
+      }
+
+      let timesHtml = ''; if(Array.isArray(doc.availableTimes) && doc.availableTimes.length > 0) { timesHtml = doc.availableTimes.map(t => `<div style="margin-bottom:4px;">- ${esc(t)}</div>`).join(''); } else if(typeof doc.availableTimes === 'string' && doc.availableTimes) { timesHtml = esc(doc.availableTimes); } else { timesHtml = `<span class="cell-dash">—</span>`; }
+      let customHtml = ''; if(doc.customFields && doc.customFields.length > 0) { customHtml = doc.customFields.map(f => `<div class="doc-detail-row"><span class="detail-label">${esc(f.label)}:</span><span class="detail-value">${linkify(esc(f.value))}</span></div>`).join(''); }
+      let imgHtml = ''; if(docImages[doc.id]) { imgHtml = `<img src="${docImages[doc.id]}" class="doc-image-preview" style="display:block;">`; }
+      
+      let visitsHtml = '<div class="empty-msg" style="padding: 10px; font-size:12px;">لم يتم تسجيل زيارات بعد.</div>';
+      if(doc.visits && doc.visits.length > 0) {
+          visitsHtml = doc.visits.map(v => `
+          <div class="visit-item" style="display:flex; flex-direction:column; gap:4px;">
+            <div class="visit-date">📅 ${esc(v.date)} ${v.nextDate ? `<span style="color:var(--primary-dark); font-weight:800; margin-inline-start:10px;">| القادمة: ${esc(v.nextDate)}</span>` : ''}</div>
+            ${v.products ? `<div class="visit-detail"><span>المنتجات:</span> ${esc(v.products)}</div>` : ''}
+            ${v.samples ? `<div class="visit-detail"><span>العينات:</span> ${esc(v.samples)}</div>` : ''}
+            ${v.notes ? `<div class="visit-detail" style="margin-top:4px; font-size:12px; white-space:pre-wrap;">📝 ${esc(v.notes)}</div>` : ''}
+            <div style="display:flex; gap:6px; margin-top:8px; border-top:1px dashed var(--line); padding-top:8px;">
+               <button class="btn btn-ghost" data-action="edit-visit" data-visit-id="${esc(v.id)}" data-doc-id="${esc(doc.id)}" style="flex:1; padding:4px; font-size:11.5px;">تعديل الزيارة</button>
+               <button class="btn btn-danger-ghost" data-action="delete-visit" data-visit-id="${esc(v.id)}" data-doc-id="${esc(doc.id)}" style="flex:1; padding:4px; font-size:11.5px;">حذف</button>
+            </div>
+          </div>`).join('');
+      }
+
+      return `
+      <div class="doc-card">
+        <div class="doc-card-header" data-action="toggle-doc"><div class="doc-title-wrap"><h4 class="doc-name">${esc(doc.name)}</h4>${specialtyBadge}</div><svg class="chevron" viewBox="0 0 24 24"><path d="M7.4 8.6L12 13.2l4.6-4.6L18 10l-6 6-6-6 1.4-1.4z"/></svg></div>
+        <div class="doc-card-body">
+          <div class="doc-details-grid">
+            <div class="doc-detail-row"><span class="detail-label">التليفون:</span> <span class="detail-value">${phone} ${whatsappBtn}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">العنوان:</span> <span class="detail-value">${address}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">المواعيد:</span> <span class="detail-value">${timesHtml}</span></div>
+            <div class="doc-detail-row"><span class="detail-label">ملاحظات:</span> <span class="detail-value" style="white-space:pre-wrap;">${notes}</span></div>
+            ${customHtml}
+          </div>
+          ${secHtml}
+          <div class="doc-inner-section" style="margin-top:14px;">
+            <h5 class="doc-inner-title">المرفقات والصور</h5>
+            ${imgHtml}
+            <button class="btn btn-ghost" style="width:100%; font-size:13px; padding:6px;" data-action="upload-image" data-id="${esc(doc.id)}">${ICONS.image} ${docImages[doc.id] ? 'تغيير الصورة' : 'إرفاق صورة (كارت / روشتة)'}</button>
+          </div>
+          <div class="doc-inner-section">
+            <h5 class="doc-inner-title">سجل الزيارات <button class="btn btn-primary" style="padding:4px 10px; font-size:12px;" data-action="add-visit" data-id="${esc(doc.id)}">${ICONS.visit} إضافة</button></h5>
+            <div class="visits-container">${visitsHtml}</div>
+          </div>
+          <div class="doc-actions-bar">
+            <button class="btn btn-ghost" data-action="edit-doctor" data-id="${esc(doc.id)}">${ICONS.edit} تعديل الدكتور</button>
+            <button class="btn btn-danger-ghost" data-action="delete-doctor" data-id="${esc(doc.id)}">${ICONS.trash} حذف</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="doc-list">${items}</div>`;
+  }
+
+  function renderAreasTab(){
+    const container = document.getElementById('areasListContainer');
+    if(areas.length === 0){ container.innerHTML = `<div class="empty-msg">لسه مفيش مناطق. ضيف أول منطقة من الفورم اللي فوق.</div>`; return; }
+    container.innerHTML = areas.map((a, idx) => {
+      const count = doctors.filter(d => d.areaId === a.id).length;
+      return `<div class="area-row"><div class="order-no">${idx+1}</div><div style="flex:1;"><div class="name">${esc(a.name)}</div><div class="sub">${count} دكتور مسجل</div></div>
+        <div class="reorder-btns"><button data-action="area-up" data-id="${esc(a.id)}" ${idx===0?'disabled':''} title="حرك لفوق">${ICONS.up}</button><button data-action="area-down" data-id="${esc(a.id)}" ${idx===areas.length-1?'disabled':''} title="حرك لتحت">${ICONS.down}</button></div>
+        <button class="icon-btn" data-action="rename-area" data-id="${esc(a.id)}" title="تعديل الاسم">${ICONS.edit}</button><button class="icon-btn danger" data-action="delete-area" data-id="${esc(a.id)}" title="حذف">${ICONS.trash}</button></div>`;
+    }).join('');
+  }
+
+  function renderAll(){ renderStats(); renderAreaSelect(); renderRoute(); renderTimeRoute(); renderAreasTab(); renderSchedule(); renderProcessing(); renderDashboard(); }
+
+  function addCustomFieldRow(label = '', value = '') {
+    const container = document.getElementById('customFieldsContainer'); const row = document.createElement('div'); row.className = 'custom-field-row';
+    row.innerHTML = `<input type="text" class="cf-label" placeholder="اسم الخانة" value="${esc(label)}"><input type="text" class="cf-value" placeholder="القيمة" value="${esc(value)}"><button type="button" class="icon-btn danger cf-remove" title="مسح">${ICONS.trash}</button>`;
+    container.appendChild(row);
+  }
+  document.getElementById('addCustomFieldBtn').addEventListener('click', () => addCustomFieldRow());
+  document.getElementById('customFieldsContainer').addEventListener('click', (e) => { const btn = e.target.closest('.cf-remove'); if(btn) btn.parentElement.remove(); });
+
+  document.querySelectorAll('nav.tabs button').forEach(btn => {
+    btn.addEventListener('click', () => { document.querySelectorAll('nav.tabs button').forEach(b => b.classList.remove('active')); document.querySelectorAll('.panel').forEach(p => p.classList.remove('active')); btn.classList.add('active'); document.getElementById('panel-' + btn.dataset.tab).classList.add('active'); });
+  });
+  
+  document.getElementById('searchInput').addEventListener('input', renderRoute); document.getElementById('searchTimeInput').addEventListener('input', renderTimeRoute);
+
+  const doctorForm = document.getElementById('doctorForm');
+  function resetDoctorForm(){
+    doctorForm.reset(); document.getElementById('customFieldsContainer').innerHTML = ''; document.getElementById('timesContainer').innerHTML = ''; addTimeFieldRow();
+    editingId = null; document.getElementById('editBanner').style.display = 'none'; document.getElementById('submitDocBtn').textContent = 'حفظ الدكتور';
+  }
+  document.getElementById('cancelEditBtn').addEventListener('click', resetDoctorForm);
+
+  doctorForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('docName').value.trim(); const specialty = document.getElementById('docSpecialty').value.trim();
+    const areaId = document.getElementById('docArea').value; const phone = document.getElementById('docPhone').value.trim();
+    const address = document.getElementById('docAddress').value.trim(); const notes = document.getElementById('docNotes').value.trim();
+    const secName = document.getElementById('docSecName').value.trim(); const secTraits = document.getElementById('docSecTraits').value.trim();
+    const secPhone = document.getElementById('docSecPhone').value.trim();
+    
+    const existingDoc = doctors.find(d => (d.name === name || (phone && d.phone === phone)) && d.id !== editingId);
+    if(existingDoc) { const areaName = areas.find(a => a.id === existingDoc.areaId)?.name || 'غير محددة'; if(!confirm(`انتباه ⚠️: يوجد دكتور مسجل مسبقاً بنفس الاسم أو الرقم (${existingDoc.name}) في منطقة (${areaName}).\n\nهل تريد المتابعة وحفظ هذا الدكتور أيضاً؟`)) { return; } }
+
+    const timeRows = document.querySelectorAll('#timesContainer .custom-time-row');
+    const availableTimes = Array.from(timeRows).map(row => { const clinic = row.querySelector('.time-clinic').value.trim(); const day = row.querySelector('.time-day').value; const from = row.querySelector('.time-from').value.trim(); const to = row.querySelector('.time-to').value.trim(); if (day) { let timeStr = day; if (from && to) { timeStr += `: من ${from} إلى ${to}`; } else if (from) { timeStr += `: من ${from}`; } else if (to) { timeStr += `: إلى ${to}`; } return clinic ? `${clinic} - ${timeStr}` : timeStr; } else if (clinic) { return clinic; } return null; }).filter(v => v);
+    const customRows = document.querySelectorAll('.custom-field-row'); const customFields = Array.from(customRows).map(r => ({ label: r.querySelector('.cf-label').value.trim(), value: r.querySelector('.cf-value').value.trim() })).filter(f => f.label || f.value);
+
+    if(!name){ showToast('لازم تدخل اسم الدكتور'); return; } if(!areaId){ showToast('لازم تختار المنطقة'); return; }
+    if(editingId){
+      const docItem = doctors.find(d => d.id === editingId);
+      if(docItem) { 
+          const oldDoc = JSON.parse(JSON.stringify(docItem));
+          Object.assign(docItem, { name, specialty, areaId, phone, address, secName, secTraits, secPhone, availableTimes, notes, customFields }); 
+          const newDoc = JSON.parse(JSON.stringify(docItem));
+          logAction(`تم تحديث بيانات دكتور`, `دكتور: ${name}`, { action: 'edit_doc', data: { oldDoc, newDoc } }); 
+      }
+      await saveDoctors(); showToast(`تم تحديث بيانات د. ${name}`); resetDoctorForm(); renderAll(); document.querySelector('nav.tabs button[data-tab="route"]').click();
+    }else{
+      const newId = uid('doc');
+      const newDocObj = { id: newId, name, specialty, areaId, phone, address, secName, secTraits, secPhone, availableTimes, notes, customFields, visits: [] };
+      doctors.push(newDocObj);
+      logAction(`تم إضافة دكتور جديد`, `الاسم: ${name} | المنطقة: ${areas.find(a=>a.id===areaId)?.name}`, { action: 'add_doc', data: { doc: newDocObj } });
+      await saveDoctors(); showToast(`تم إضافة د. ${name} بنجاح`); resetDoctorForm(); renderAll(); document.getElementById('docName').focus();
+    }
+  });
+
+  const processingForm = document.getElementById('processingForm');
+  function resetProcessingForm(){ processingForm.reset(); document.getElementById('procEditId').value = ''; document.getElementById('submitProcBtn').textContent = 'حفظ المتابعة'; document.getElementById('cancelProcEditBtn').style.display = 'none'; }
+  document.getElementById('cancelProcEditBtn').addEventListener('click', resetProcessingForm);
+  processingForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); const id = document.getElementById('procEditId').value; const type = document.getElementById('procType').value.trim(); const person = document.getElementById('procPerson').value.trim(); const phone = document.getElementById('procPhone').value.trim(); const status = document.getElementById('procStatus').value; const notes = document.getElementById('procNotes').value.trim();
+    if(!type || !person) { showToast('يرجى ملء نوع المتابعة واسم الشخص'); return; }
+    if(id){ 
+        const item = processingList.find(p => p.id === id); 
+        if(item) { 
+            const oldProc = JSON.parse(JSON.stringify(item));
+            Object.assign(item, { type, person, phone, status, notes }); 
+            const newProc = JSON.parse(JSON.stringify(item));
+            logAction(`تم تحديث متابعة (${person})`, "", { action: 'edit_proc', data: { oldProc, newProc }}); 
+        } 
+        showToast(`تم تحديث متابعة ${person}`); 
+    }
+    else{ 
+        const newProcId = uid('proc');
+        const newProcObj = { id: newProcId, type, person, phone, status, notes };
+        processingList.push(newProcObj); 
+        logAction(`تم إضافة متابعة جديدة`, `مع: ${person}`, { action: 'add_proc', data: { proc: newProcObj } }); 
+        showToast(`تم إضافة متابعة ${person} بنجاح`); 
+    }
+    await saveProcessing(); resetProcessingForm(); renderProcessing();
+  });
+
+  document.getElementById('areaForm').addEventListener('submit', async (e) => {
+    e.preventDefault(); const input = document.getElementById('areaNameInput'); const name = input.value.trim();
+    if(!name){ showToast('اكتب اسم المنطقة الأول'); return; } if(areas.some(a => a.name.toLowerCase() === name.toLowerCase())){ showToast('المنطقة دي موجودة بالفعل'); return; }
+    const newAreaId = uid('area');
+    const newAreaObj = { id: newAreaId, name };
+    areas.push(newAreaObj); 
+    logAction(`تم إضافة منطقة جديدة`, `الاسم: ${name}`, { action: 'add_area', data: { area: newAreaObj } }); 
+    await saveAreas(); input.value = ''; showToast(`تم إضافة منطقة ${name}`); renderAll();
+  });
+
+  const mixedQuotes = [ { text: "كل إنجاز عظيم بدأ بقرار المحاولة.. استمري في تألقكِ.", author: "حكمة اليوم" }, { text: "الطريق طويل، لكن الخطوة الأولى نصف المسافة.. وأنتِ قادرة.", author: "رسالة تشجيع" }, { text: "تذكري دائمًا أنكِ أقوى مما تعتقدين، وأجمل مما تتخيلين.", author: "رسالة من القلب" }, { text: "لو أن الحب كلمات تكتب لانتهت أقلامي، لكن الحب أرواح توهب.", author: "نزار قباني" }, { text: "سنكون يوماً ما نريد، لا الرحلة ابتدأت ولا الدرب انتهى.", author: "محمود درويش" }, { text: "وما نيل المطالب بالتمني ... ولكن تؤخذ الدنيا غلابا", author: "أحمد شوقي" } ];
+  async function getQuote() { return mixedQuotes[Math.floor(Math.random() * mixedQuotes.length)]; }
+  async function displayNextQuote(quoteEl) { quoteEl.style.opacity = 0; setTimeout(async () => { const q = await getQuote(); quoteEl.innerHTML = `${q.text} <span class="quote-author">- ${q.author}</span>`; quoteEl.style.opacity = 1; }, 500); }
+
+  window.exportExcel = function(containerId, filename) {
+    const container = document.getElementById(containerId); if (!container || container.innerText.trim() === '' || container.querySelector('.big-empty')) { showToast('لا يوجد بيانات للتصدير'); return; }
+    const stops = container.querySelectorAll('.route-stop'); let data = [];
+    stops.forEach(stop => {
+      const areaName = stop.querySelector('h3').textContent; const docs = stop.querySelectorAll('.doc-card');
+      docs.forEach(doc => {
+        const name = doc.querySelector('.doc-name').textContent; const specialty = doc.querySelector('.doc-badge') ? doc.querySelector('.doc-badge').textContent : ''; const details = doc.querySelectorAll('.doc-detail-row');
+        let phone='', address='', times='', notes='';
+        details.forEach(d => { const label = d.querySelector('.detail-label').textContent; const val = d.querySelector('.detail-value').textContent; if(label.includes('التليفون')) phone = val; if(label.includes('العنوان')) address = val; if(label.includes('المواعيد')) times = val; if(label.includes('ملاحظات')) notes = val; });
+        data.push({ "القسم/اليوم": areaName, "اسم الدكتور": name, "التخصص": specialty, "التليفون": phone.replace('—', '').trim(), "العنوان": address.replace('—', '').trim(), "المواعيد": times.replace('—', '').replace(/[\n\r]+/g, ' | ').trim(), "ملاحظات": notes.replace('—', '').trim() });
+      });
+    });
+    if(data.length === 0) { showToast('مفيش داتا للتصدير'); return; }
+    const ws = XLSX.utils.json_to_sheet(data); ws['!dir'] = 'rtl'; ws['!cols'] = [{wch:15}, {wch:25}, {wch:15}, {wch:15}, {wch:30}, {wch:35}, {wch:25}];
+    const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "دليل الأطباء"); XLSX.writeFile(wb, filename + ".xlsx"); showToast('تم تحميل ملف Excel بنجاح');
+  };
+
+  window.exportPDF = function(containerId, filename) {
+    const container = document.getElementById(containerId); if (!container || container.innerText.trim() === '' || container.querySelector('.big-empty')) { showToast('لا يوجد بيانات للتصدير'); return; }
+    showToast('جاري تجهيز الـ PDF... انتظر لحظات'); const expandedDocs = container.querySelectorAll('.doc-card:not(.expanded)'); const expandedStops = container.querySelectorAll('.route-stop:not(.expanded)'); expandedDocs.forEach(c => c.classList.add('expanded')); expandedStops.forEach(s => s.classList.add('expanded'));
+    const opt = { margin: [10, 10, 10, 10], filename: filename + '.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, scrollY: 0 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+    setTimeout(() => { html2pdf().set(opt).from(container).save().then(() => { expandedDocs.forEach(c => c.classList.remove('expanded')); expandedStops.forEach(s => s.classList.remove('expanded')); showToast('تم تحميل ملف PDF بنجاح'); }); }, 500);
+  };
+
+  (async function init(){
+    const quoteEl = document.getElementById('quote-text'); displayNextQuote(quoteEl); const quoteInterval = setInterval(() => displayNextQuote(quoteEl), 3500);
+    const minDelay = Math.floor(Math.random() * (7000 - 4000 + 1)) + 4000; const delayPromise = new Promise(resolve => setTimeout(resolve, minDelay));
+    await Promise.all([loadAll(), delayPromise]); clearInterval(quoteInterval); renderAll();
+    const heart = document.querySelector('.heart-dot'); const loader = document.getElementById('loading-screen'); const quoteCont = document.getElementById('quote-text').parentElement;
+    quoteCont.style.opacity = '0'; heart.classList.add('run-across');
+    setTimeout(() => { loader.style.opacity = '0'; loader.style.transition = 'opacity 0.5s ease-out'; setTimeout(() => { loader.style.display = 'none'; const main = document.getElementById('main-content'); main.style.display = 'block'; main.style.animation = 'fadeIn 0.8s ease forwards'; }, 500); }, 1500);
+  })();
+</script>
+</body>
+</html>
